@@ -27,6 +27,14 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1.View {
             srBinTextBox.Text = sr.ToBinString();
         }
 
+        public char GetCharacter() {
+            return bufferTextBox.Text.DefaultIfEmpty((char)0).Last();
+        }
+
+        public void ClearBuffer() {
+            bufferTextBox.Text = "";
+        }
+
         private void readyButton_Click(object sender, EventArgs e) {
             _output.ReadyButtonClicked();
         }
@@ -36,7 +44,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1.View {
         }
 
         private void bufferTextBox_TextChanged(object sender, EventArgs e) {
-            _output.CharacterEntered(bufferTextBox.Text.DefaultIfEmpty((char) 0).Last());
+            _output.CharacterEntered(GetCharacter());
         }
 
         private void Keyboard1Form_FormClosed(object sender, FormClosedEventArgs e) {

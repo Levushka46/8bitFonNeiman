@@ -20,6 +20,8 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
 
         private ExtendedBitArray _sr = new ExtendedBitArray();
 
+        private readonly Encoding cp1251 = Encoding.GetEncoding("Windows-1251");
+
         public Keyboard1Controller(IDeviceOutput output) {
             _output = output;
         }
@@ -28,7 +30,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             if (_form == null) {
                 _form = new Keyboard1Form(this);
             }
-            _form.ShowRegisters(_dr, _cr, _sr);
+            UpdateForm();
             _form.Show();
         }
 
@@ -37,10 +39,14 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             if (_form == null) {
                 _form = new Keyboard1Form(this);
                 _form.Show();
-                _form.ShowRegisters(_dr, _cr, _sr);
+                UpdateForm();
             } else {
                 _form.Close();
             }
+        }
+
+        private void UpdateForm() {
+            _form.ShowRegisters(_dr, _cr, _sr);
         }
 
         public bool HasMemory(int address) {
@@ -59,12 +65,14 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
                     _sr = memory;
                     break;
             }
-            _form.ShowRegisters(_dr, _cr, _sr);
+            UpdateForm();
         }
 
         public ExtendedBitArray GetMemory(int address) {
             switch (address - _baseAddress) {
                 case 0:
+                    SetReadyFlag(false);
+                    UpdateForm();
                     return _dr;
                 case 1:
                     return _cr;
@@ -75,7 +83,21 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
         }
 
         public void CharacterEntered(char character) {
-            // todo implement
+            if (!IsEnabled()) return;
+
+            byte[] bs = cp1251.GetBytes(new char[] { character });
+            byte b = bs[0];
+
+            if (!ReadyOnButtonClick()) {
+                _dr = new ExtendedBitArray(b);
+                SetReadyFlag(true);
+
+                if (IsInterruptionEnabled()) {
+                    MakeInterruption();
+                }
+            }
+
+            UpdateForm();
         }
 
         public void FormClosed() {
@@ -85,11 +107,54 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
         }
 
         public void ReadyButtonClicked() {
-            // todo implement
+            if (!IsEnabled()) return;
+
+            char character = _form.GetCharacter();
+            byte[] bs = cp1251.GetBytes(new char[] { character });
+            byte b = bs[0];
+
+            _dr = new ExtendedBitArray(b);
+            SetReadyFlag(true);
+
+            if (IsInterruptionEnabled()) {
+                MakeInterruption();
+            }
+
+            UpdateForm();
         }
 
         public void ResetButtonClicked() {
-            // todo implement
+            _form.ClearBuffer();
+
+            _dr = new ExtendedBitArray();
+            _cr = new ExtendedBitArray();
+            _sr = new ExtendedBitArray();
+
+            UpdateForm();
+        }
+
+        private bool IsEnabled() {
+            return _cr[0];
+        }
+
+        private bool IsInterruptionEnabled() {
+            return _cr[1];
+        }
+
+        private bool ReadyOnButtonClick() {
+            return _cr[2];
+        }
+
+        private void SetReadyFlag(bool ready) {
+            _sr[1] = ready;
+        }
+
+        private void SetErrorFlag(bool error) {
+            _sr[0] = error;
+        }
+
+        private void MakeInterruption() {
+            // todo INT
         }
     }
 }
