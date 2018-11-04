@@ -17,7 +17,7 @@ namespace _8bitVonNeiman.Debug {
             _lowCommand = lowCommand;
             _highCommand = highCommand;
 
-            Command = new string(lowCommand.ToBinString().Reverse().ToArray()) + ' ' + new string(highCommand.ToBinString().Reverse().ToArray());
+            Command = new string(highCommand.ToBinString().ToArray()) + ' ' + new string(lowCommand.ToBinString().ToArray());
             Name = GetCommandName(lowCommand, highCommand);
         }
 
