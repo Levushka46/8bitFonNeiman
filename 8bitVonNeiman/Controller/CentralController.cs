@@ -7,6 +7,7 @@ using _8bitVonNeiman.Controller.View;
 using _8bitVonNeiman.Cpu;
 using _8bitVonNeiman.Debug;
 using _8bitVonNeiman.Memory;
+using _8bitVonNeiman.ExternalDevicesManager;
 
 namespace _8bitVonNeiman.Controller {
     public class CentralController: ApplicationContext, IComponentsFormOutput, ICompilerControllerOutput, ICpuModelOutput, IDebugModuleOutput {
@@ -16,6 +17,7 @@ namespace _8bitVonNeiman.Controller {
         private readonly CompilerController _compilerController;
         private readonly IDebugModuleInput _debugController;
         private readonly ICpuModelInput _cpu;
+		private readonly IExternalDevicesControllerInput _externalDevicesController;
 
         private int _lastPcl;
         private int _lastCs;
@@ -28,6 +30,7 @@ namespace _8bitVonNeiman.Controller {
             _debugController = Assembly.GetDebugController(this);
             // Важно, чтобы CPU создавался после debug'a
             _cpu = Assembly.GetCpu(this);
+			_externalDevicesController = Assembly.GetExternalDevicesController();
         }
 
         public void FormClosed() {
@@ -55,7 +58,11 @@ namespace _8bitVonNeiman.Controller {
             _debugController.ChangeFormState();
         }
 
-        public ExtendedBitArray GetMemory(int address) {
+		public void ExternalDevicesManagerClicked() {
+			_externalDevicesController.ChangeFormState();
+		}
+
+		public ExtendedBitArray GetMemory(int address) {
             return _memoryController.GetMemory(address);
         }
 
@@ -72,5 +79,5 @@ namespace _8bitVonNeiman.Controller {
             _lastCs = cs;
             _debugController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
         }
-    }
+	}
 }

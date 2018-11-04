@@ -4,6 +4,7 @@ using _8bitVonNeiman.Cpu;
 using _8bitVonNeiman.Cpu.View;
 using _8bitVonNeiman.Debug;
 using _8bitVonNeiman.Memory;
+using _8bitVonNeiman.ExternalDevicesManager;
 
 namespace _8bitVonNeiman.Controller {
     public static class Assembly {
@@ -27,6 +28,10 @@ namespace _8bitVonNeiman.Controller {
 
         public static IDebugModuleInput GetDebugController(IDebugModuleOutput output) {
             return new DebugController(output);
+        }
+
+        public static IExternalDevicesControllerInput GetExternalDevicesController() {
+            return new ExternalDevicesController();
         }
     }
 }

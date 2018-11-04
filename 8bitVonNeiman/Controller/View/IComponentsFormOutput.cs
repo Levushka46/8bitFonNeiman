@@ -5,5 +5,6 @@
         void MemoryButtonClicked();
         void CpuButtonClicked();
         void DebugButtonClicked();
+        void ExternalDevicesManagerClicked();
     }
 }
