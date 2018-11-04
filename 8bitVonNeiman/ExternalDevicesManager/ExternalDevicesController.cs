@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using _8bitVonNeiman.ExternalDevicesManager.View;
 using _8bitVonNeiman.ExternalDevices;
-
-using _8bitVonNeiman.ExternalDevices.Keyboard1;
+using _8bitVonNeiman.Common;
 
 namespace _8bitVonNeiman.ExternalDevicesManager {
-	public class ExternalDevicesController : IExternalDevicesControllerInput, IDeviceManagerFormOutput {
+	public class ExternalDevicesController : IExternalDevicesControllerInput, IDeviceManagerFormOutput, IDeviceOutput {
 
 		private DeviceManagerForm _form;
 
-        private readonly DevicesFactory _devicesFactory = new DevicesFactory();
-        // todo make list of devices
-        private IKeyboard1Input _keyboard1;
+        private readonly DevicesFactory _devicesFactory;
+        private ISet<IDeviceInput> _devices = new HashSet<IDeviceInput>();
 
-		public ExternalDevicesController() { }
+		public ExternalDevicesController() {
+            _devicesFactory = new DevicesFactory(this);
+        }
 
 		/// Открывает форму, если она закрыта или закрывает, если открыта
 		public void ChangeFormState() {
@@ -31,12 +31,37 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 		}
 
 		public void AddExternalDevice() {
-            _keyboard1 = _devicesFactory.GetKeyboard1();
-            _keyboard1.OpenForm();
+            // todo select proper device
+            IDeviceInput input = _devicesFactory.GetKeyboard1();
+            _devices.Add(input);
+
+            input.OpenForm();
 		}
 
 		public void FormClosed() {
 			_form = null;
 		}
-	}
+
+        public void DeviceFormClosed(IDeviceInput device) {
+            _devices.Remove(device);
+        }
+
+        public ExtendedBitArray GetExternalMemory(int address) {
+            foreach (var device in _devices) {
+                if (device.HasMemory(address)) {
+                    return device.GetMemory(address);
+                }
+            }
+            return new ExtendedBitArray();
+        }
+
+        public void SetExternalMemory(ExtendedBitArray memory, int address) {
+            foreach (var device in _devices) {
+                if (device.HasMemory(address)) {
+                    device.SetMemory(memory, address);
+                    break;
+                }
+            }
+        }
+    }
 }

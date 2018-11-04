@@ -7,9 +7,10 @@ using _8bitVonNeiman.Common;
 using _8bitVonNeiman.ExternalDevices.Keyboard1.View;
 
 namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
-    public class Keyboard1Controller : IKeyboard1Input, IKeyboard1FormOutput {
+    public class Keyboard1Controller : IDeviceInput, IKeyboard1FormOutput {
 
         private Keyboard1Form _form;
+        private readonly IDeviceOutput _output;
 
         private int _baseAddress;
 
@@ -19,7 +20,9 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
 
         private ExtendedBitArray _sr = new ExtendedBitArray();
 
-        public Keyboard1Controller() { }
+        public Keyboard1Controller(IDeviceOutput output) {
+            _output = output;
+        }
 
         public void OpenForm() {
             if (_form == null) {
@@ -38,6 +41,10 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             } else {
                 _form.Close();
             }
+        }
+
+        public bool HasMemory(int address) {
+            return _baseAddress <= address && address <= _baseAddress + 2;
         }
 
         public void SetMemory(ExtendedBitArray memory, int address) {
@@ -60,9 +67,9 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
                 case 0:
                     return _dr;
                 case 1:
-                    return _sr;
-                case 2:
                     return _cr;
+                case 2:
+                    return _sr;
             }
             return new ExtendedBitArray();
         }
@@ -73,6 +80,8 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
 
         public void FormClosed() {
             _form = null;
+
+            _output.DeviceFormClosed(this);
         }
 
         public void ReadyButtonClicked() {

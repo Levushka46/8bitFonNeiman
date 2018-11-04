@@ -191,18 +191,31 @@ namespace _8bitVonNeiman.Cpu {
             };
             _output.CommandHasRun(_pcl, _cs, false);
         }
-        
+
         /// Возвращает значение памяти по выбранному адресу.
         /// <param name="address">Адрес, из которого получается память.</param>
         private ExtendedBitArray GetMemory(int address) {
             return _output.GetMemory(address);
         }
-        
+
         /// Устанавливает значение памяти по выбранному адресу.
         /// <param name="data">Значение устанавливаемой памяти.</param>
         /// <param name="address">Адрес, по которому записывается память.</param>
         private void SetMemory(ExtendedBitArray data, int address) {
             _output.SetMemory(data, address);
+        }
+
+        /// Возвращает значение памяти по выбранному адресу ВУ.
+        /// <param name="address">Адрес, из которого получается память.</param>
+        private ExtendedBitArray GetExternalMemory(int address) {
+            return _output.GetExternalMemory(address);
+        }
+
+        /// Устанавливает значение памяти по выбранному адресу ВУ.
+        /// <param name="data">Значение устанавливаемой памяти.</param>
+        /// <param name="address">Адрес, по которому записывается память.</param>
+        private void SetExternalMemory(ExtendedBitArray data, int address) {
+            _output.SetExternalMemory(data, address);
         }
 
         /// Формирует объект класса CpuState с текущим состоянием процессора
@@ -252,6 +265,11 @@ namespace _8bitVonNeiman.Cpu {
             //Битовые команды 
             if (highBin.StartsWith("1000") || highBin.StartsWith("1001")) {
                 ProcessBitCommands(highBin, highHex, lowBin, lowHex);
+            }
+
+            //Команды ввода/вывода
+            if (highBin.StartsWith("1100")) {
+                ProcessIOCommand(highBin, highHex, lowBin, lowHex);
             }
 
             if (_cr[0].NumValue() == 0 && _cr[1].NumValue() == 0) {
@@ -844,6 +862,22 @@ namespace _8bitVonNeiman.Cpu {
             }
         }
 
+        private void ProcessIOCommand(string highBin, string highHex, string lowBin, string lowHex) {
+            // IN IOaddress
+            if (highHex.EndsWith("0")) {
+                _y48();
+                _y3();
+                _y8();
+            }
+
+            // OUT IOadress
+            if (highHex.EndsWith("1")) {
+                _y48();
+                _y49();
+                _y6();
+            }
+        }
+
         private void LoadRegister(string lowBin) {
             _y47();
             _y2();
@@ -909,7 +943,7 @@ namespace _8bitVonNeiman.Cpu {
         }
 
         private void _y3() {
-            //Not implemented
+            _rdb = GetExternalMemory(_rab);
         }
 
         private void _y4() {
@@ -921,7 +955,7 @@ namespace _8bitVonNeiman.Cpu {
         }
 
         private void _y6() {
-            //Not implemented
+            SetExternalMemory(_rdb, _rab);
         }
 
         private void _y8() {
@@ -1145,8 +1179,8 @@ namespace _8bitVonNeiman.Cpu {
 
         private void _y48() {
             _rab = 0;
-            for (int i = 0; i < 6; i++) {
-                _rab += _cr[0][i] ? 1 << i - 4 : 0;
+            for (int i = 0; i < 7; i++) {
+                _rab += _cr[0][i] ? 1 << i : 0;
             }
         }
 

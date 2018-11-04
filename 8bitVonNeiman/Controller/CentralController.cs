@@ -70,6 +70,14 @@ namespace _8bitVonNeiman.Controller {
             _memoryController.SetMemory(memory, address);
         }
 
+        public ExtendedBitArray GetExternalMemory(int address) {
+            return _externalDevicesController.GetExternalMemory(address);
+        }
+
+        public void SetExternalMemory(ExtendedBitArray memory, int address) {
+            _externalDevicesController.SetExternalMemory(memory, address);
+        }
+
         public void StopExecution() {
             _cpu.Stop();
         }

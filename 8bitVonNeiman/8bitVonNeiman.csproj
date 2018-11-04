@@ -124,7 +124,8 @@
     </Compile>
     <Compile Include="ExternalDevicesManager\View\IDeviceManagerFormOutput.cs" />
     <Compile Include="ExternalDevices\DevicesFactory.cs" />
-    <Compile Include="ExternalDevices\Keyboard1\IKeyboard1Input.cs" />
+    <Compile Include="ExternalDevices\IDeviceInput.cs" />
+    <Compile Include="ExternalDevices\IDeviceOutput.cs" />
     <Compile Include="ExternalDevices\Keyboard1\Keyboard1Controller.cs" />
     <Compile Include="ExternalDevices\Keyboard1\View\IKeyboard1FormOutput.cs" />
     <Compile Include="ExternalDevices\Keyboard1\View\Keyboard1Form.cs">

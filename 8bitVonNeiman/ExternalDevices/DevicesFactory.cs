@@ -8,8 +8,14 @@ using _8bitVonNeiman.ExternalDevices.Keyboard1;
 namespace _8bitVonNeiman.ExternalDevices {
     public class DevicesFactory {
 
-        public IKeyboard1Input GetKeyboard1() {
-            return new Keyboard1Controller();
+        private readonly IDeviceOutput _output;
+
+        public DevicesFactory(IDeviceOutput output) {
+            _output = output;
+        }
+
+        public IDeviceInput GetKeyboard1() {
+            return new Keyboard1Controller(_output);
         }
     }
 }

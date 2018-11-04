@@ -23,5 +23,19 @@ namespace _8bitVonNeiman.Cpu {
         /// <param name="cs">Новый сегмент памяти</param>
         /// <param name="isAutomatic">true если команда выполнена в автоматическом режиме, false - если через "шаг"</param>
         void CommandHasRun(int pcl, int cs, bool isAutomatic);
+
+        /// <summary>
+        /// Возвращает память, содержащуюся по переданному адресу внешнего устройства.
+        /// </summary>
+        /// <param name="address">Адрес внешнего устройства, по которому запрашивается память.</param>
+        /// <returns>Память, содержащаяся по переданному адресу.</returns>
+        ExtendedBitArray GetExternalMemory(int address);
+
+        /// <summary>
+        /// Устанавливает значение конкретной ячейки памяти.
+        /// </summary>
+        /// <param name="memory">Значение ячейки памяти.</param>
+        /// <param name="address">Адрес ячейки памяти внешнего устройства.</param>
+        void SetExternalMemory(ExtendedBitArray memory, int address);
     }
 }

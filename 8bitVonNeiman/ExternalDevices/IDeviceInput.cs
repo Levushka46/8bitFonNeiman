@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using _8bitVonNeiman.Common;
 
-namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
-    public interface IKeyboard1Input {
+namespace _8bitVonNeiman.ExternalDevices {
+    public interface IDeviceInput {
         void OpenForm();
+        bool HasMemory(int address);
         void SetMemory(ExtendedBitArray memory, int address);
         ExtendedBitArray GetMemory(int address);
     }
