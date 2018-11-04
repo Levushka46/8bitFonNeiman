@@ -4,11 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _8bitVonNeiman.ExternalDevicesManager.View;
+using _8bitVonNeiman.ExternalDevices;
+
+using _8bitVonNeiman.ExternalDevices.Keyboard1;
 
 namespace _8bitVonNeiman.ExternalDevicesManager {
 	public class ExternalDevicesController : IExternalDevicesControllerInput, IDeviceManagerFormOutput {
 
 		private DeviceManagerForm _form;
+
+        private readonly DevicesFactory _devicesFactory = new DevicesFactory();
+        // todo make list of devices
+        private IKeyboard1Input _keyboard1;
 
 		public ExternalDevicesController() { }
 
@@ -24,7 +31,8 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 		}
 
 		public void AddExternalDevice() {
-			throw new NotImplementedException();
+            _keyboard1 = _devicesFactory.GetKeyboard1();
+            _keyboard1.OpenForm();
 		}
 
 		public void FormClosed() {
