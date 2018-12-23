@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Threading;
 using _8bitVonNeiman.Common;
 using _8bitVonNeiman.Cpu.View;
 
@@ -60,9 +61,16 @@ namespace _8bitVonNeiman.Cpu {
 
         private bool _shouldStopRunning = true;
 
+        private Thread _runThread;
+        private UpdateStateDelegate _updateStateDelegate;
+
+        private delegate void UpdateStateDelegate();
+
         public CpuModel(ICpuModelOutput output) {
             _output = output;
             Reset();
+
+            _updateStateDelegate = new UpdateStateDelegate(UpdateState);
         }
 
         /// Вызывается при нажатии кнопки сброса на форме. Сбрасывает состояние и обновляет состояние формы
@@ -90,6 +98,34 @@ namespace _8bitVonNeiman.Cpu {
             RunCommand();
             _view?.ShowState(MakeState());
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
+        }
+
+        public void TickAsync() {
+            _y43();
+            _y1();
+            _y26();
+            _y31();
+            _y43();
+            _y1();
+            _y27();
+            _y31();
+            RunCommand();
+            _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
+        }
+
+        private void RunLoop() {
+            var i = 0;
+            while (!_shouldStopRunning) {
+                TickAsync();
+                if (_view.InvokeRequired) {
+                    _view.Invoke(_updateStateDelegate);
+                }
+                Console.WriteLine("Tick " + i++);
+            }
+        }
+
+        private void UpdateState() {
+            _view?.ShowState(MakeState());
         }
 
         public void Stop() {
@@ -148,10 +184,11 @@ namespace _8bitVonNeiman.Cpu {
         }
 
         public void RunButtonClicked() {
+            if (_runThread?.IsAlive ?? false) return;
+
             _shouldStopRunning = false;
-            while (!_shouldStopRunning) {
-                Tick();
-            }
+            _runThread = new Thread(RunLoop);
+            _runThread.Start();
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
 
