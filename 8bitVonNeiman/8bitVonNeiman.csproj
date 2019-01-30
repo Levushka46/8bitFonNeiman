@@ -124,6 +124,14 @@
     </Compile>
     <Compile Include="ExternalDevicesManager\View\IDeviceManagerFormOutput.cs" />
     <Compile Include="ExternalDevices\DevicesFactory.cs" />
+    <Compile Include="ExternalDevices\Display\DisplayController.cs" />
+    <Compile Include="ExternalDevices\Display\View\DisplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\Display\View\DisplayForm.Designer.cs">
+      <DependentUpon>DisplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalDevices\Display\View\IDisplayFormOutput.cs" />
     <Compile Include="ExternalDevices\IDeviceInput.cs" />
     <Compile Include="ExternalDevices\IDeviceOutput.cs" />
     <Compile Include="ExternalDevices\Keyboard1\Keyboard1Controller.cs" />
@@ -160,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevicesManager\View\DeviceManagerForm.resx">
       <DependentUpon>DeviceManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\Display\View\DisplayForm.resx">
+      <DependentUpon>DisplayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Keyboard1\View\Keyboard1Form.resx">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>

@@ -27,5 +27,9 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
 		private void DeviceManagerForm_FormClosed(object sender, FormClosedEventArgs e) {
 			_output.FormClosed();
 		}
-	}
+
+        private void addDisplayButton_Click(object sender, EventArgs e) {
+            _output.AddDisplay();
+        }
+    }
 }

@@ -45,6 +45,7 @@
             this.addDisplayButton.TabIndex = 1;
             this.addDisplayButton.Text = "Дисплей";
             this.addDisplayButton.UseVisualStyleBackColor = true;
+            this.addDisplayButton.Click += new System.EventHandler(this.addDisplayButton_Click);
             // 
             // DeviceManagerForm
             // 

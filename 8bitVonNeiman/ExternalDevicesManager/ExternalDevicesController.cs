@@ -38,6 +38,13 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             input.OpenForm();
 		}
 
+        public void AddDisplay() {
+            IDeviceInput input = _devicesFactory.GetDisplay();
+            _devices.Add(input);
+
+            input.OpenForm();
+        }
+
 		public void FormClosed() {
 			_form = null;
 		}
