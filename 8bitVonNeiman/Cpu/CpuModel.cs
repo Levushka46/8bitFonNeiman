@@ -7,12 +7,13 @@ using _8bitVonNeiman.Cpu.View;
 
 namespace _8bitVonNeiman.Cpu {
     public class CpuModel: ICpuModelInput, ICpuFormOutput {
-        
+        private static readonly double UPDATE_PERIOD_MILLIS = 100.0;
+
         /// Аккамулятор.
         private ExtendedBitArray _acc = new ExtendedBitArray();
 
         /// Счетчик команд.
-        private int _pcl;
+        private volatile int _pcl;
 
         /// Указатель стека.
         private byte _spl;
@@ -59,7 +60,7 @@ namespace _8bitVonNeiman.Cpu {
         
         private CpuForm _view;
 
-        private bool _shouldStopRunning = true;
+        private volatile bool _shouldStopRunning = true;
 
         private Thread _runThread;
         private UpdateStateDelegate _updateStateDelegate;
@@ -110,22 +111,27 @@ namespace _8bitVonNeiman.Cpu {
             _y27();
             _y31();
             RunCommand();
-            _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
 
         private void RunLoop() {
             var i = 0;
+            double lastUpdateMillis = 0;
             while (!_shouldStopRunning) {
                 TickAsync();
-                if (_view.InvokeRequired) {
+                double nowMillis = DateTime.Now.ToUniversalTime().Subtract(
+                    new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                    ).TotalMilliseconds;
+                if (nowMillis - lastUpdateMillis > UPDATE_PERIOD_MILLIS && _view.InvokeRequired) {
                     _view.Invoke(_updateStateDelegate);
+                    lastUpdateMillis = nowMillis;
                 }
-                Console.WriteLine("Tick " + i++);
             }
+            _view.Invoke(_updateStateDelegate);
         }
 
         private void UpdateState() {
             _view?.ShowState(MakeState());
+            _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
 
         public void Stop() {
