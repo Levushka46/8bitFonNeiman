@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Threading;
 using _8bitVonNeiman.Common;
 using _8bitVonNeiman.Cpu.View;
 
 namespace _8bitVonNeiman.Cpu {
     public class CpuModel: ICpuModelInput, ICpuFormOutput {
-        
+        private static readonly double UPDATE_PERIOD_MILLIS = 100.0;
+
         /// Аккамулятор.
         private ExtendedBitArray _acc = new ExtendedBitArray();
 
         /// Счетчик команд.
-        private int _pcl;
+        private volatile int _pcl;
 
         /// Указатель стека.
         private byte _spl;
@@ -58,11 +60,18 @@ namespace _8bitVonNeiman.Cpu {
         
         private CpuForm _view;
 
-        private bool _shouldStopRunning = true;
+        private volatile bool _shouldStopRunning = true;
+
+        private Thread _runThread;
+        private UpdateStateDelegate _updateStateDelegate;
+
+        private delegate void UpdateStateDelegate();
 
         public CpuModel(ICpuModelOutput output) {
             _output = output;
             Reset();
+
+            _updateStateDelegate = new UpdateStateDelegate(UpdateState);
         }
 
         /// Вызывается при нажатии кнопки сброса на форме. Сбрасывает состояние и обновляет состояние формы
@@ -88,6 +97,39 @@ namespace _8bitVonNeiman.Cpu {
             _y27();
             _y31();
             RunCommand();
+            _view?.ShowState(MakeState());
+            _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
+        }
+
+        public void TickAsync() {
+            _y43();
+            _y1();
+            _y26();
+            _y31();
+            _y43();
+            _y1();
+            _y27();
+            _y31();
+            RunCommand();
+        }
+
+        private void RunLoop() {
+            var i = 0;
+            double lastUpdateMillis = 0;
+            while (!_shouldStopRunning) {
+                TickAsync();
+                double nowMillis = DateTime.Now.ToUniversalTime().Subtract(
+                    new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                    ).TotalMilliseconds;
+                if (nowMillis - lastUpdateMillis > UPDATE_PERIOD_MILLIS && _view.InvokeRequired) {
+                    _view.Invoke(_updateStateDelegate);
+                    lastUpdateMillis = nowMillis;
+                }
+            }
+            _view.Invoke(_updateStateDelegate);
+        }
+
+        private void UpdateState() {
             _view?.ShowState(MakeState());
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
@@ -148,10 +190,11 @@ namespace _8bitVonNeiman.Cpu {
         }
 
         public void RunButtonClicked() {
+            if (_runThread?.IsAlive ?? false) return;
+
             _shouldStopRunning = false;
-            while (!_shouldStopRunning) {
-                Tick();
-            }
+            _runThread = new Thread(RunLoop);
+            _runThread.Start();
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
 
