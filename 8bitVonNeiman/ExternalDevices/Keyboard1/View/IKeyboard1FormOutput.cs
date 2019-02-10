@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _8bitVonNeiman.ExternalDevices.Keyboard1.View {
     public interface IKeyboard1FormOutput {
-        void CharacterEntered(char character);
+        void CharacterEntered();
 
         void ReadyButtonClicked();
         void ResetButtonClicked();

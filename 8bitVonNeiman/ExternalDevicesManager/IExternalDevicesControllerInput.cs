@@ -11,5 +11,7 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 		void ChangeFormState();
         ExtendedBitArray GetExternalMemory(int address);
         void SetExternalMemory(ExtendedBitArray memory, int address);
+
+        void CommandHasRun(int pcl, List<ExtendedBitArray> memory, bool isAutomatic);
     }
 }

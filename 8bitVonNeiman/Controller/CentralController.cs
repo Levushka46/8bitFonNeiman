@@ -28,9 +28,9 @@ namespace _8bitVonNeiman.Controller {
             _compilerController = Assembly.GetCompilerController(this);
             _memoryController = Assembly.GetMemoryController();
             _debugController = Assembly.GetDebugController(this);
+            _externalDevicesController = Assembly.GetExternalDevicesController();
             // Важно, чтобы CPU создавался после debug'a
             _cpu = Assembly.GetCpu(this);
-			_externalDevicesController = Assembly.GetExternalDevicesController();
         }
 
         public void FormClosed() {
@@ -86,6 +86,7 @@ namespace _8bitVonNeiman.Controller {
             _lastPcl = pcl;
             _lastCs = cs;
             _debugController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
+            _externalDevicesController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
         }
 	}
 }

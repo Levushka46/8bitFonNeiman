@@ -14,7 +14,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
 
         private int _baseAddress;
 
-        private ExtendedBitArray _dr = new ExtendedBitArray();
+        private ExtendedBitArray _dr { get { return new ExtendedBitArray(GetCharacter()); } }
 
         private ExtendedBitArray _cr = new ExtendedBitArray();
 
@@ -22,8 +22,15 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
 
         private readonly Encoding cp1251 = Encoding.GetEncoding("Windows-1251");
 
+        private int _readIndex = 0;
+
+        private delegate void UpdateFormDelegate();
+
+        private UpdateFormDelegate _updateFormDelegate;
+
         public Keyboard1Controller(IDeviceOutput output) {
             _output = output;
+            _updateFormDelegate = new UpdateFormDelegate(UpdateForm);
         }
 
         public void OpenForm() {
@@ -56,7 +63,6 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
         public void SetMemory(ExtendedBitArray memory, int address) {
             switch (address - _baseAddress) {
                 case 0:
-                    _dr = memory;
                     break;
                 case 1:
                     _cr = memory;
@@ -65,15 +71,15 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
                     _sr = memory;
                     break;
             }
-            UpdateForm();
         }
 
         public ExtendedBitArray GetMemory(int address) {
             switch (address - _baseAddress) {
                 case 0:
-                    SetReadyFlag(false);
-                    UpdateForm();
-                    return _dr;
+                    ExtendedBitArray value = _dr;
+                    NextCharacter();
+                    SetReadyFlag(0 < _form.TextLength() && _readIndex < _form.TextLength());
+                    return value;
                 case 1:
                     return _cr;
                 case 2:
@@ -82,14 +88,14 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             return new ExtendedBitArray();
         }
 
-        public void CharacterEntered(char character) {
+        public void CommandHasRun(int pcl, List<ExtendedBitArray> memory, bool isAutomatic) {
+            UpdateForm();
+        }
+
+        public void CharacterEntered() {
             if (!IsEnabled()) return;
 
-            byte[] bs = cp1251.GetBytes(new char[] { character });
-            byte b = bs[0];
-
             if (!ReadyOnButtonClick()) {
-                _dr = new ExtendedBitArray(b);
                 SetReadyFlag(true);
 
                 if (IsInterruptionEnabled()) {
@@ -97,7 +103,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
                 }
             }
 
-            UpdateForm();
+            _form.Invoke(_updateFormDelegate);
         }
 
         public void FormClosed() {
@@ -106,31 +112,39 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             _output.DeviceFormClosed(this);
         }
 
+        private byte GetCharacter() {
+            char character = _form.GetCharacter(_readIndex);
+            byte[] bs = cp1251.GetBytes(new char[] { character });
+            byte b = bs[0];
+            return b;
+        }
+
+        private void NextCharacter() {
+            if (_readIndex < _form.TextLength()) {
+                _readIndex++;
+            }
+        }
+
         public void ReadyButtonClicked() {
             if (!IsEnabled()) return;
 
-            char character = _form.GetCharacter();
-            byte[] bs = cp1251.GetBytes(new char[] { character });
-            byte b = bs[0];
-
-            _dr = new ExtendedBitArray(b);
             SetReadyFlag(true);
 
             if (IsInterruptionEnabled()) {
                 MakeInterruption();
             }
 
-            UpdateForm();
+            _form.Invoke(_updateFormDelegate);
         }
 
         public void ResetButtonClicked() {
             _form.ClearBuffer();
 
-            _dr = new ExtendedBitArray();
+            _readIndex = 0;
             _cr = new ExtendedBitArray();
             _sr = new ExtendedBitArray();
 
-            UpdateForm();
+            _form.Invoke(_updateFormDelegate);
         }
 
         private bool IsEnabled() {

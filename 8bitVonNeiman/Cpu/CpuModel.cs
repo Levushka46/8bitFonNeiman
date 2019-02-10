@@ -132,6 +132,7 @@ namespace _8bitVonNeiman.Cpu {
         private void UpdateState() {
             _view?.ShowState(MakeState());
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
+            
         }
 
         public void Stop() {

@@ -20,8 +20,13 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
 
         private readonly Encoding cp1251 = Encoding.GetEncoding("Windows-1251");
 
+        private delegate void SetCharacterDelegate(int textBoxIndex, char character);
+
+        private SetCharacterDelegate _updateFormDelegate;
+
         public DisplayController(IDeviceOutput output) {
             _output = output;
+            _updateFormDelegate = new SetCharacterDelegate((textBoxIndex, character) => _form.SetCharacter(textBoxIndex, character));
         }
 
         public void OpenForm() {
@@ -78,6 +83,10 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             return new ExtendedBitArray();
         }
 
+        public void CommandHasRun(int pcl, List<ExtendedBitArray> memory, bool isAutomatic) {
+            UpdateForm();
+        }
+
         public void ResetButtonClicked() {
             _form.ClearScreen();
 
@@ -124,7 +133,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
                 string s = cp1251.GetString(new byte[] { (byte)value.NumValue() });
                 char character = s[0];
 
-                _form.SetCharacter(textBoxIndex, character);
+                _form.Invoke(_updateFormDelegate, textBoxIndex, character);
             }
         }
     }
