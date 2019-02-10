@@ -28,7 +28,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display.View {
         }
 
         public void ClearScreen() {
-            displayTextBox.Text = "                \n                \n                \n                \n                \n                \n                \n                ";
+            displayTextBox.Text = "                \r\n                \r\n                \r\n                \r\n                \r\n                \r\n                \r\n                ";
         }
 
         public char GetCharacter(int index) {
