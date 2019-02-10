@@ -60,6 +60,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             switch (address - _baseAddress) {
                 case 0:
                     SetDr(memory);
+                    NextAddress();
                     break;
                 case 1:
                     _cr = memory;
@@ -68,13 +69,14 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
                     _ar = memory;
                     break;
             }
-            UpdateForm();
         }
 
         public ExtendedBitArray GetMemory(int address) {
             switch (address - _baseAddress) {
                 case 0:
-                    return GetDr();
+                    ExtendedBitArray value = GetDr();
+                    NextAddress();
+                    return value;
                 case 1:
                     return _cr;
                 case 2:
@@ -106,12 +108,16 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             return _cr[0];
         }
 
+        private bool IsAutoincrement() {
+            return _cr[1];
+        }
+
         private ExtendedBitArray GetDr() {
             if (0 <= _ar.NumValue() && _ar.NumValue() < 8 * 16 + 7) {
                 int lineIndex = _ar.NumValue() / 16;
                 int linePos = _ar.NumValue() % 16;
 
-                int textBoxIndex = lineIndex * 17 + linePos;
+                int textBoxIndex = lineIndex * 18 + linePos;
                 char character = _form.GetCharacter(textBoxIndex);
 
                 byte[] bs = cp1251.GetBytes(new char[] { character });
@@ -123,12 +129,18 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             return new ExtendedBitArray();
         }
 
+        private void NextAddress() {
+            if (IsAutoincrement()) {
+                _ar.Inc();
+            }
+        }
+
         private void SetDr(ExtendedBitArray value) {
             if (IsEnabled() && 0 <= _ar.NumValue() && _ar.NumValue() < 8 * 16 + 7) {
                 int lineIndex = _ar.NumValue() / 16;
                 int linePos = _ar.NumValue() % 16;
 
-                int textBoxIndex = lineIndex * 17 + linePos;
+                int textBoxIndex = lineIndex * 18 + linePos;
 
                 string s = cp1251.GetString(new byte[] { (byte)value.NumValue() });
                 char character = s[0];

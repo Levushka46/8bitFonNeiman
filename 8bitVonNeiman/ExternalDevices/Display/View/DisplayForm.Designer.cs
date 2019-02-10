@@ -54,6 +54,7 @@
             this.displayTextBox.TabIndex = 0;
             this.displayTextBox.Text = "                \r\n                \r\n                \r\n                \r\n         " +
     "       \r\n                \r\n                \r\n                ";
+            this.displayTextBox.WordWrap = false;
             // 
             // label10
             // 
@@ -233,7 +234,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.displayTextBox);
             this.Name = "DisplayForm";
-            this.Text = "DisplayForm";
+            this.Text = "Дисплей";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DisplayForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
