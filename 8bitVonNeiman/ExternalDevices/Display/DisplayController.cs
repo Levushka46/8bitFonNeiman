@@ -34,6 +34,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
                 _form = new DisplayForm(this);
             }
             UpdateForm();
+            _form.ShowDeviceParameters(_baseAddress);
             _form.Show();
         }
 

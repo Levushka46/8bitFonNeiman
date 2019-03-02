@@ -27,6 +27,11 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1.View {
             srBinTextBox.Text = sr.ToBinString();
         }
 
+        public void ShowDeviceParameters(int baseAddress, byte irq) {
+            baseAddressLabel.Text = baseAddress.ToString();
+            interruptionVectorLabel.Text = irq.ToString();
+        }
+
         public char GetCharacter(int index) {
             if (index >= bufferTextBox.Text.Length) {
                 return bufferTextBox.Text.LastOrDefault();

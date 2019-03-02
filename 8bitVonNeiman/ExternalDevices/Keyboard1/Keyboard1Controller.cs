@@ -13,6 +13,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
         private readonly IDeviceOutput _output;
 
         private int _baseAddress;
+        private byte _irq = 1;
 
         private ExtendedBitArray _dr { get { return new ExtendedBitArray(GetCharacter()); } }
 
@@ -38,6 +39,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
                 _form = new Keyboard1Form(this);
             }
             UpdateForm();
+            _form.ShowDeviceParameters(_baseAddress, _irq);
             _form.Show();
         }
 
@@ -168,7 +170,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
         }
 
         private void MakeInterruption() {
-            // todo INT
+            _output.MakeInterruption(_irq);
         }
     }
 }

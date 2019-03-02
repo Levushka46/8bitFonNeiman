@@ -27,6 +27,10 @@ namespace _8bitVonNeiman.ExternalDevices.Display.View {
             arBinTextBox.Text = ar.ToBinString();
         }
 
+        public void ShowDeviceParameters(int baseAddress) {
+            baseAddressLabel.Text = baseAddress.ToString();
+        }
+
         public void ClearScreen() {
             displayTextBox.Text = "                \r\n                \r\n                \r\n                \r\n                \r\n                \r\n                \r\n                ";
         }

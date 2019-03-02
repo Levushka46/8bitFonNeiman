@@ -170,11 +170,11 @@
             // 
             this.interruptionVectorLabel.AutoSize = true;
             this.interruptionVectorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.interruptionVectorLabel.Location = new System.Drawing.Point(126, 39);
+            this.interruptionVectorLabel.Location = new System.Drawing.Point(130, 39);
             this.interruptionVectorLabel.Name = "interruptionVectorLabel";
-            this.interruptionVectorLabel.Size = new System.Drawing.Size(18, 20);
+            this.interruptionVectorLabel.Size = new System.Drawing.Size(15, 20);
             this.interruptionVectorLabel.TabIndex = 3;
-            this.interruptionVectorLabel.Text = "0";
+            this.interruptionVectorLabel.Text = "–";
             this.interruptionVectorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // baseAddressLabel

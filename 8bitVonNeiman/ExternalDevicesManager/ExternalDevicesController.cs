@@ -80,7 +80,7 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
         }
 
         public void MakeInterruption(byte irq) {
-            throw new NotImplementedException();
+            _output.MakeInterruption(irq);
         }
     }
 }
