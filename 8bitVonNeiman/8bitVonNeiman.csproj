@@ -116,6 +116,7 @@
     <Compile Include="Debugger\View\IDebugFormOutput.cs" />
     <Compile Include="ExternalDevicesManager\ExternalDevicesController.cs" />
     <Compile Include="ExternalDevicesManager\IExternalDevicesControllerInput.cs" />
+    <Compile Include="ExternalDevicesManager\IExternalDevicesControllerOutput.cs" />
     <Compile Include="ExternalDevicesManager\View\DeviceManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +143,8 @@
     <Compile Include="ExternalDevices\Keyboard1\View\Keyboard1Form.Designer.cs">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterruptionController\IInterruptionControllerInput.cs" />
+    <Compile Include="InterruptionController\InterruptionController.cs" />
     <Compile Include="Memory\IMemoryControllerInput.cs" />
     <Compile Include="Memory\MemoryController.cs" />
     <Compile Include="Memory\MemoryFileHandler.cs" />

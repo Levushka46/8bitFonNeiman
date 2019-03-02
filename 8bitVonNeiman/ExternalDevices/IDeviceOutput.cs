@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace _8bitVonNeiman.ExternalDevices {
     public interface IDeviceOutput {
         void DeviceFormClosed(IDeviceInput device);
+        void MakeInterruption(byte irq);
     }
 }

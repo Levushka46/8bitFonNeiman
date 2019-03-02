@@ -37,5 +37,26 @@ namespace _8bitVonNeiman.Cpu {
         /// <param name="memory">Значение ячейки памяти.</param>
         /// <param name="address">Адрес ячейки памяти внешнего устройства.</param>
         void SetExternalMemory(ExtendedBitArray memory, int address);
+
+        /// <summary>
+        /// Проверяет имеются ли запросы на прерывание.
+        /// </summary>
+        bool HasInterruptionRequests();
+
+        /// <summary>
+        /// Подтверждает запрос на прерывание и возвращает вектор подтвержденного прерывания.
+        /// </summary>
+        byte AcknowledgeInterruption();
+
+        /// <summary>
+        /// Создает запрос на прерывание.
+        /// </summary>
+        /// <param name="irq">Вектор прерывания.</param>
+        void MakeInterruption(byte irq);
+
+        /// <summary>
+        /// Очищает список текущих обрабатываемых прерываний.
+        /// </summary>
+        void ClearInterruptions();
     }
 }

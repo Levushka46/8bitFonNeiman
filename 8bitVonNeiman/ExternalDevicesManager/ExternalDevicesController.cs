@@ -12,11 +12,13 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 
 		private DeviceManagerForm _form;
 
+        private readonly IExternalDevicesControllerOutput _output;
         private readonly DevicesFactory _devicesFactory;
         private ISet<IDeviceInput> _devices = new HashSet<IDeviceInput>();
 
-		public ExternalDevicesController() {
+		public ExternalDevicesController(IExternalDevicesControllerOutput output) {
             _devicesFactory = new DevicesFactory(this);
+            _output = output;
         }
 
 		/// Открывает форму, если она закрыта или закрывает, если открыта
@@ -75,6 +77,10 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             foreach (var device in _devices) {
                 device.CommandHasRun(pcl, memory, isAutomatic);
             }
+        }
+
+        public void MakeInterruption(byte irq) {
+            throw new NotImplementedException();
         }
     }
 }

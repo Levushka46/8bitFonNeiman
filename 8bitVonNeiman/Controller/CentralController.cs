@@ -8,9 +8,10 @@ using _8bitVonNeiman.Cpu;
 using _8bitVonNeiman.Debug;
 using _8bitVonNeiman.Memory;
 using _8bitVonNeiman.ExternalDevicesManager;
+using _8bitVonNeiman.InterruptionController;
 
 namespace _8bitVonNeiman.Controller {
-    public class CentralController: ApplicationContext, IComponentsFormOutput, ICompilerControllerOutput, ICpuModelOutput, IDebugModuleOutput {
+    public class CentralController: ApplicationContext, IComponentsFormOutput, ICompilerControllerOutput, ICpuModelOutput, IDebugModuleOutput, IExternalDevicesControllerOutput {
 
         private readonly IMemoryControllerInput _memoryController;
         private readonly ComponentsForm _componentsForm;
@@ -18,6 +19,7 @@ namespace _8bitVonNeiman.Controller {
         private readonly IDebugModuleInput _debugController;
         private readonly ICpuModelInput _cpu;
 		private readonly IExternalDevicesControllerInput _externalDevicesController;
+        private readonly IInterruptionControllerInput _interruptionController;
 
         private int _lastPcl;
         private int _lastCs;
@@ -28,7 +30,8 @@ namespace _8bitVonNeiman.Controller {
             _compilerController = Assembly.GetCompilerController(this);
             _memoryController = Assembly.GetMemoryController();
             _debugController = Assembly.GetDebugController(this);
-            _externalDevicesController = Assembly.GetExternalDevicesController();
+            _interruptionController = Assembly.GetInterruptionController();
+            _externalDevicesController = Assembly.GetExternalDevicesController(this);
             // Важно, чтобы CPU создавался после debug'a
             _cpu = Assembly.GetCpu(this);
         }
@@ -88,5 +91,21 @@ namespace _8bitVonNeiman.Controller {
             _debugController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
             _externalDevicesController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
         }
-	}
+
+        public bool HasInterruptionRequests() {
+            return _interruptionController.HasInterruptionRequests();
+        }
+
+        public byte AcknowledgeInterruption() {
+            return _interruptionController.AcknowledgeInterruption();
+        }
+
+        public void MakeInterruption(byte irq) {
+            _interruptionController.MakeInterruption(irq);
+        }
+
+        public void ClearInterruptions() {
+            _interruptionController.ClearInterruptions();
+        }
+    }
 }

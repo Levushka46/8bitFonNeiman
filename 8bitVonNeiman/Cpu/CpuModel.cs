@@ -88,15 +88,7 @@ namespace _8bitVonNeiman.Cpu {
         /// Шаг процессора. Выполняет стандартный набор команд для каждого шага 
         /// после чего выполняет загруженную команду и обновляет состояние формы
         public void Tick() {
-            _y43();
-            _y1();
-            _y26();
-            _y31();
-            _y43();
-            _y1();
-            _y27();
-            _y31();
-            RunCommand();
+            TickAsync();
             _view?.ShowState(MakeState());
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
@@ -111,6 +103,7 @@ namespace _8bitVonNeiman.Cpu {
             _y27();
             _y31();
             RunCommand();
+            CheckInterruptionRequests();
         }
 
         private void RunLoop() {
@@ -260,6 +253,34 @@ namespace _8bitVonNeiman.Cpu {
         /// <param name="address">Адрес, по которому записывается память.</param>
         private void SetExternalMemory(ExtendedBitArray data, int address) {
             _output.SetExternalMemory(data, address);
+        }
+
+        private void CheckInterruptionRequests() {
+            if (_flags.I) {
+                if (_output.HasInterruptionRequests()) {
+                    // PUSH pcl
+                    _y62();
+
+                    _y35();
+                    _y45();
+                    _y4();
+                    
+                    // PUSH flags.cs
+                    _rdb = new ExtendedBitArray();
+                    _y57();
+                    _y58();
+
+                    _y35();
+                    _y45();
+                    _y4();
+
+                    // pcl := M(cs.IRQ)
+                    _y65();
+                    _y1();
+                    _y33();
+                    _flags.I = false;
+                }
+            }
         }
 
         /// Формирует объект класса CpuState с текущим состоянием процессора
@@ -660,23 +681,8 @@ namespace _8bitVonNeiman.Cpu {
             }
             //INT psl -> cr+psw
             if (highBin.StartsWith("010011")) {
-                _y62();
-
-                _y35();
-                _y45();
-                _y4();
-
-                _rdb = new ExtendedBitArray();
-                _y57();
-                _y58();
-
-                _y35();
-                _y45();
-                _y4();
-
-                _y32();
-                _y30();
-                _flags.I = false;
+                _y61();
+                _y67();
             }
             //JZ
             if (highBin.StartsWith("001100")) {
@@ -770,6 +776,7 @@ namespace _8bitVonNeiman.Cpu {
                 _y34();
 
                 _y33();
+                _y66();
             }
 
             //EI
@@ -1302,6 +1309,22 @@ namespace _8bitVonNeiman.Cpu {
             for (int i = 2; i < 4; i++) {
                 _rab += _cr[1][i] ? 1 << (i - 2) : 0;
             }
+        }
+
+        private void _y64() {
+            _rab = _cr[0].NumValue() + (_cs << Constants.WordSize);
+        }
+
+        private void _y65() {
+            _rab = _output.AcknowledgeInterruption() + (_cs << Constants.WordSize);
+        }
+
+        private void _y66() {
+            _output.ClearInterruptions();
+        }
+
+        private void _y67() {
+            _output.MakeInterruption((byte) (_rdb.NumValue() & 0xFF));
         }
 
         #endregion
