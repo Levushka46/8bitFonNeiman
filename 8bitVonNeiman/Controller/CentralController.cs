@@ -107,5 +107,9 @@ namespace _8bitVonNeiman.Controller {
         public void ClearInterruptions() {
             _interruptionController.ClearInterruptions();
         }
+
+        public void Clear() {
+            _interruptionController.Clear();
+        }
     }
 }

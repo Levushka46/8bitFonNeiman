@@ -13,5 +13,6 @@ namespace _8bitVonNeiman.InterruptionController {
         void MakeInterruption(byte irq);
 
         void ClearInterruptions();
+        void Clear();
     }
 }

@@ -47,5 +47,14 @@ namespace _8bitVonNeiman.InterruptionController {
                 }
             }
         }
+
+        public void Clear() {
+            lock (_lock) {
+                for (byte i = 0; i < 8; i++) {
+                    _irqs[i] = false;
+                    _currentIrqs[i] = false;
+                }
+            }
+        }
     }
 }

@@ -226,6 +226,7 @@ namespace _8bitVonNeiman.Cpu {
                 new ExtendedBitArray(), new ExtendedBitArray(), new ExtendedBitArray(), new ExtendedBitArray(),
                 new ExtendedBitArray(), new ExtendedBitArray(), new ExtendedBitArray(), new ExtendedBitArray()
             };
+            _output.Clear();
             _output.CommandHasRun(_pcl, _cs, false);
         }
 

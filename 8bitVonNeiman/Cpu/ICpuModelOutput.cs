@@ -58,5 +58,10 @@ namespace _8bitVonNeiman.Cpu {
         /// Очищает список текущих обрабатываемых прерываний.
         /// </summary>
         void ClearInterruptions();
+
+        /// <summary>
+        /// Очищает список текущих обрабатываемых прерываний и список запросов на прерывание.
+        /// </summary>
+        void Clear();
     }
 }
