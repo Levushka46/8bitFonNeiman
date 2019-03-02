@@ -5,6 +5,7 @@ namespace _8bitVonNeiman.Debug {
     public class DebugCommand {
         public readonly int Address;
         public readonly string Name;
+        public readonly string Argument;
         public readonly string Command;
         public bool HasBreakpoint = false;
         public bool Selected = false;
@@ -19,6 +20,7 @@ namespace _8bitVonNeiman.Debug {
 
             Command = new string(highCommand.ToBinString().ToArray()) + ' ' + new string(lowCommand.ToBinString().ToArray());
             Name = GetCommandName(lowCommand, highCommand);
+            Argument = GetCommandArgument(lowCommand, highCommand);
         }
 
         private string GetCommandName(ExtendedBitArray lowCommand, ExtendedBitArray highCommand) {
@@ -294,6 +296,104 @@ namespace _8bitVonNeiman.Debug {
             }
 
             return "ERROR";
+        }
+
+        private string GetCommandArgument(ExtendedBitArray lowCommand, ExtendedBitArray highCommand) {
+            var highBin = highCommand.ToBinString();
+            var highHex = highCommand.ToHexString();
+            var lowBin = lowCommand.ToBinString();
+            var lowHex = lowCommand.ToHexString();
+
+            // Безадресные
+            if (highHex == "00") {
+                return null;
+            }
+
+            // DJRNZ
+            if (highBin.StartsWith("0001")) {
+                int register = (highCommand.NumValue() >> 2) & 0b11;
+                string segment = (highCommand.NumValue() & 0b11).ToString();
+                string address = lowCommand.ToHexString();
+                return string.Format("R{0}, 0x{1}{2}", register.ToString(), segment, address);
+            }
+
+            // операторы перехода
+            if (highBin.StartsWith("001")) {
+                string segment = (highCommand.NumValue() & 0b11).ToString();
+                string address = lowCommand.ToHexString();
+                return string.Format("0x{0}{1}", segment, address);
+            }
+
+            // Операторы передачи управления
+            if (highBin.StartsWith("0100")) {
+                string segment = (highCommand.NumValue() & 0b11).ToString();
+                string address = lowCommand.ToHexString();
+                return string.Format("0x{0}{1}", segment, address);
+            }
+
+            // Регистровые команды
+            //Прямая - 000
+            //@R     - 100
+            //@R+    - 001
+            //+@R    - 101
+            //@R-    - 011
+            //-@R    - 111
+            // 041537
+            if (highBin.StartsWith("0101") || highBin.StartsWith("1111")) {
+                int addressType = lowCommand.NumValue() >> 4;
+                int register = lowCommand.NumValue() & 0x0F;
+                string registerFormat = "R{0}";
+                switch (addressType) {
+                    case 0:
+                        registerFormat = "R{0}";
+                        break;
+                    case 1:
+                        registerFormat = "@R{0}";
+                        break;
+                    case 4:
+                        registerFormat = "@R{0}+";
+                        break;
+                    case 5:
+                        registerFormat = "+@R{0}";
+                        break;
+                    case 6:
+                        registerFormat = "@R{0}-";
+                        break;
+                    case 7:
+                        registerFormat = "-@R{0}";
+                        break;
+                }
+                return string.Format(registerFormat, register);
+            }
+
+            // ОЗУ
+            if (highBin.StartsWith("011")) {
+                string addressOrConst = lowCommand.NumValue().ToString();
+                bool isConst = highBin.StartsWith("0111");
+                return (isConst ? "#" : "") + addressOrConst;
+            }
+
+            // Битовые команды
+            if (highBin.StartsWith("100")) {
+                string bit = (highCommand.NumValue() & 0b111).ToString();
+                string address = lowCommand.NumValue().ToString();
+                return string.Format("{0}, {1}", address, bit);
+            }
+            if (highBin.StartsWith("101")) {
+                string bit = (highCommand.NumValue() & 0b111).ToString();
+                ExtendedBitArray addr = new ExtendedBitArray(lowCommand);
+                addr.And(new ExtendedBitArray("0111111"));
+                string address = addr.NumValue().ToString();
+                return string.Format("{0}, {1}", address, bit);
+            }
+
+            // Команды ввода-вывода
+            if (highBin == "11000000" || highBin == "11000001") {
+                string address = lowCommand.NumValue().ToString();
+                return address;
+            }
+
+            return null;
         }
     }
 }

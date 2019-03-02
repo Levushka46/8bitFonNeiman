@@ -18,7 +18,11 @@ namespace _8bitVonNeiman.Debugger.View {
             dataGridView1.Rows.Clear();
 
             foreach (var command in commands) {
-                int index = dataGridView1.Rows.Add(command.Selected ? ">" : "", command.Address.ToString("X"), command.Name, command.Command);
+                string commandName = command.Name;
+                if (command.Argument != null) {
+                    commandName = commandName + " " + command.Argument;
+                }
+                int index = dataGridView1.Rows.Add(command.Selected ? ">" : "", command.Address.ToString("X"), commandName, command.Command);
                 dataGridView1.Rows[index].Cells[0].Style.BackColor = command.HasBreakpoint ? Color.Red : Color.White;
             }
         }

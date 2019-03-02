@@ -23,13 +23,13 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.deleteAllButton = new System.Windows.Forms.Button();
             this.BreakpointColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commandColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteAllButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +57,17 @@
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
+            // deleteAllButton
+            // 
+            this.deleteAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteAllButton.Location = new System.Drawing.Point(231, 586);
+            this.deleteAllButton.Name = "deleteAllButton";
+            this.deleteAllButton.Size = new System.Drawing.Size(181, 23);
+            this.deleteAllButton.TabIndex = 1;
+            this.deleteAllButton.Text = "Удалить все точки останова";
+            this.deleteAllButton.UseVisualStyleBackColor = true;
+            this.deleteAllButton.Click += new System.EventHandler(this.deleteAllButton_Click);
+            // 
             // BreakpointColumn
             // 
             this.BreakpointColumn.Frozen = true;
@@ -82,29 +93,18 @@
             this.commandColumn.Name = "commandColumn";
             this.commandColumn.ReadOnly = true;
             this.commandColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.commandColumn.Width = 70;
+            this.commandColumn.Width = 120;
             // 
             // codeColumn
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.codeColumn.Frozen = true;
             this.codeColumn.HeaderText = "Код";
             this.codeColumn.Name = "codeColumn";
             this.codeColumn.ReadOnly = true;
             this.codeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.codeColumn.Width = 200;
-            // 
-            // deleteAllButton
-            // 
-            this.deleteAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteAllButton.Location = new System.Drawing.Point(231, 586);
-            this.deleteAllButton.Name = "deleteAllButton";
-            this.deleteAllButton.Size = new System.Drawing.Size(181, 23);
-            this.deleteAllButton.TabIndex = 1;
-            this.deleteAllButton.Text = "Удалить все точки останова";
-            this.deleteAllButton.UseVisualStyleBackColor = true;
-            this.deleteAllButton.Click += new System.EventHandler(this.deleteAllButton_Click);
+            this.codeColumn.Width = 150;
             // 
             // DebugForm
             // 
