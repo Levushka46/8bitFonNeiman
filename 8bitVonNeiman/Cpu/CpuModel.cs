@@ -333,6 +333,11 @@ namespace _8bitVonNeiman.Cpu {
                 ProcessBitCommands(highBin, highHex, lowBin, lowHex);
             }
 
+            //Битовые команды с регистрами ввода/вывода
+            if (highBin.StartsWith("1010") || highBin.StartsWith("1011")) {
+                ProcessIOBitCommands(highBin, highHex, lowBin, lowHex);
+            }
+
             //Команды ввода/вывода
             if (highBin.StartsWith("1100")) {
                 ProcessIOCommand(highBin, highHex, lowBin, lowHex);
@@ -910,6 +915,42 @@ namespace _8bitVonNeiman.Cpu {
                 var index = Convert.ToInt32(highBin.Substring(5, 3), 2);
                 if (_rdb[index] == (highBin[4] == '1')) {
                     _y31();
+                    _y31();
+                }
+            }
+        }
+
+        private void ProcessIOBitCommands(string highBin, string highHex, string lowBin, string lowHex) {
+            bool cop0 = lowBin[0] == '1';
+            bool cop1 = highBin[4] == '1';
+            bool cop2 = highBin[3] == '1';
+            int cop = (cop2 ? 4 : 0) + (cop1 ? 2 : 0) + (cop0 ? 1 : 0);
+            //CBI, SBI and NBI
+            if (1 <= cop && cop <= 3) {
+                _y48();
+                _y3();
+                var index = Convert.ToInt32(highBin.Substring(5, 3), 2);
+                // CBI and SBI
+                if (1 <= cop && cop <= 2) {
+                    _rdb[index] = cop1;
+                } else { // NBI
+                    _rdb[index] = !_rdb[index];
+                }
+                _y6();
+            }
+
+            //SBIC and SBIS and SBISC
+            if (4 <= cop && cop <= 6) {
+                _y48();
+                _y3();
+                var index = Convert.ToInt32(highBin.Substring(5, 3), 2);
+                if (_rdb[index] == (cop > 4)) {
+                    _y31();
+                    _y31();
+                    if (cop == 6) {
+                        _rdb[index] = false;
+                        _y6();
+                    }
                 }
             }
         }
