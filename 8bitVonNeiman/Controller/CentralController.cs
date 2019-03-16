@@ -89,7 +89,10 @@ namespace _8bitVonNeiman.Controller {
             _lastPcl = pcl;
             _lastCs = cs;
             _debugController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
-            _externalDevicesController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
+        }
+
+        public void UpdateUI() {
+            _externalDevicesController.UpdateUI();
         }
 
         public bool HasInterruptionRequests() {

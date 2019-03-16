@@ -23,6 +23,11 @@ namespace _8bitVonNeiman.Cpu {
         /// <param name="cs">Новый сегмент памяти</param>
         /// <param name="isAutomatic">true если команда выполнена в автоматическом режиме, false - если через "шаг"</param>
         void CommandHasRun(int pcl, int cs, bool isAutomatic);
+        
+        /// <summary>
+        /// Вызывается при обновлении интерфейса. Предназначена для обеспечения автоматического режима выполнения команд.
+        /// </summary>
+        void UpdateUI();
 
         /// <summary>
         /// Возвращает память, содержащуюся по переданному адресу внешнего устройства.

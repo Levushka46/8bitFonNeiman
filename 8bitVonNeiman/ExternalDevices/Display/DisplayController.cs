@@ -86,7 +86,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             return new ExtendedBitArray();
         }
 
-        public void CommandHasRun(int pcl, List<ExtendedBitArray> memory, bool isAutomatic) {
+        public void UpdateUI() {
             UpdateForm();
         }
 

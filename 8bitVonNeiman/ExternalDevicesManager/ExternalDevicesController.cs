@@ -73,9 +73,9 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             }
         }
 
-        public void CommandHasRun(int pcl, List<ExtendedBitArray> memory, bool isAutomatic) {
+        public void UpdateUI() {
             foreach (var device in _devices) {
-                device.CommandHasRun(pcl, memory, isAutomatic);
+                device.UpdateUI();
             }
         }
 

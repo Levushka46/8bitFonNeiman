@@ -64,6 +64,7 @@ namespace _8bitVonNeiman.Cpu {
 
         private Thread _runThread;
         private UpdateStateDelegate _updateStateDelegate;
+        private UpdateStateDelegate _commandHasRunDelegate;
 
         private delegate void UpdateStateDelegate();
 
@@ -72,6 +73,7 @@ namespace _8bitVonNeiman.Cpu {
             Reset();
 
             _updateStateDelegate = new UpdateStateDelegate(UpdateState);
+            _commandHasRunDelegate = new UpdateStateDelegate(CommandHasRunAsync);
         }
 
         /// Вызывается при нажатии кнопки сброса на форме. Сбрасывает состояние и обновляет состояние формы
@@ -118,14 +120,19 @@ namespace _8bitVonNeiman.Cpu {
                     _view.Invoke(_updateStateDelegate);
                     lastUpdateMillis = nowMillis;
                 }
+                _output.CommandHasRun(_pcl, _cs, true);
             }
             _view.Invoke(_updateStateDelegate);
+            _view.Invoke(_commandHasRunDelegate);
         }
 
         private void UpdateState() {
             _view?.ShowState(MakeState());
+            _output.UpdateUI();
+        }
+
+        private void CommandHasRunAsync() {
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
-            
         }
 
         public void Stop() {
