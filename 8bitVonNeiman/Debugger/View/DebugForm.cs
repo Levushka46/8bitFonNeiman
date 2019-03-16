@@ -28,9 +28,14 @@ namespace _8bitVonNeiman.Debugger.View {
         }
 
         public void ShowCommand(DebugCommand command, int address) {
+            string commandName = command.Name;
+            if (command.Argument != null) {
+                commandName = commandName + " " + command.Argument;
+            }
+
             dataGridView1.Rows[address].Cells[0].Value = command.Selected ? ">" : "";
             dataGridView1.Rows[address].Cells[1].Value = command.Address.ToString("X");
-            dataGridView1.Rows[address].Cells[2].Value = command.Name;
+            dataGridView1.Rows[address].Cells[2].Value = commandName;
             dataGridView1.Rows[address].Cells[3].Value = command.Command;
             dataGridView1.Rows[address].Cells[0].Style.BackColor = command.HasBreakpoint ? Color.Red : Color.White;
         }
