@@ -11,6 +11,9 @@
         /// и в который по умолчанию устанавливается процессор при сбросею
         public const int StartAddress = 8;
 
+        /// Адрес ячейки, в которой хранится начальный адрес.
+        public const int ResetVectorAddress = 0;
+
         /// Размер слова в архитектуре процессора
         public const int WordSize = 8;
     }

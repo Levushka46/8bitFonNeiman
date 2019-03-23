@@ -16,6 +16,9 @@ namespace _8bitVonNeiman.Memory {
 
         public MemoryController() {
             _memory = new Dictionary<int, ExtendedBitArray>();
+
+            // Установка начального адреса в ячейку вектора сброса
+            SetMemory(new ExtendedBitArray(Constants.StartAddress), Constants.ResetVectorAddress);
         }
 
         /// Добавляет переданную память к текущей
@@ -111,6 +114,10 @@ namespace _8bitVonNeiman.Memory {
         /// Очищает память.
         public void ClearMemoryClicked() {
             _memory = new Dictionary<int, ExtendedBitArray>();
+
+            // Установка начального адреса по умолчанию в ячейку вектора сброса
+            SetMemory(new ExtendedBitArray(Constants.StartAddress), Constants.ResetVectorAddress);
+
             ShowMemory();
         }
 

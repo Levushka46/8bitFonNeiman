@@ -224,7 +224,7 @@ namespace _8bitVonNeiman.Cpu {
             _cs = _defaultCs;
             _ds = _defaultDs;
             _ss = _defaultSs;
-            _pcl = Constants.StartAddress;
+            _pcl = GetMemory(Constants.ResetVectorAddress).NumValue();
             _acc = new ExtendedBitArray();
             _spl = 0;
             _flags.Reset();

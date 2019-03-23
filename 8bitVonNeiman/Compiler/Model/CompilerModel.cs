@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using _8bitVonNeiman.Common;
 
 namespace _8bitVonNeiman.Compiler.Model {
     public class CompilerModel {
@@ -191,7 +192,7 @@ namespace _8bitVonNeiman.Compiler.Model {
                 if (components.Length != 2) {
                     throw new CompilationErrorExcepton("После /n должно следовать одно число через пробел.", env.GetCurrentLine());
                 }
-                
+
                 try {
                     int address = CompilerSupport.ConvertToInt(components[1]);
                     if (address > 255 || address < 0) {
@@ -209,9 +210,29 @@ namespace _8bitVonNeiman.Compiler.Model {
                 int segment = TryToGetSegmentFromDirecrive(line, env.GetCurrentLine());
                 env.DefaultStackSegment = segment;
 
-            } else if (line[1] == 'D' || line[1] == 'd') {
+            } else if ((line[1] == 'D' || line[1] == 'd') && line[2] != 'B' && line[2] != 'b') {
                 int segment = TryToGetSegmentFromDirecrive(line, env.GetCurrentLine());
                 env.DefaultDataSegment = segment;
+
+            } else if ((line[1] == 'D' || line[1] == 'd') && (line[2] == 'B' || line[2] == 'b')) {
+                string values = line.Substring(3);
+                string[] components = values.Split(',');
+                foreach (var i in components) {
+                    string value = i.Trim();
+                    int address = CompilerSupport.ConvertLabelToFarAddress(value, env);
+                    if (address != -1) {
+                        address = address & 0xFF;
+
+                        env.SetByte(new ExtendedBitArray(address));
+                    } else {
+                        env.SetCommandWithoutLabel(new CompilerEnvironment.MemoryForLabel {
+                            HighBitArray = new ExtendedBitArray(),
+                            LowBitArray = new ExtendedBitArray(),
+                            Address = env.CurrentAddress,
+                            SingleByte = true
+                        }, value);
+                    }
+                }
 
             } else {
                 throw new CompilationErrorExcepton("Некорректная директива процессора.", env.GetCurrentLine());

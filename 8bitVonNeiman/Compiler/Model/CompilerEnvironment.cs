@@ -15,10 +15,11 @@ namespace _8bitVonNeiman.Compiler.Model {
             public ExtendedBitArray LowBitArray;
             public int Address;
             public int Line;
+            public bool SingleByte;
         }
 
         private Dictionary<int, ExtendedBitArray> _memory = new Dictionary<int, ExtendedBitArray>();
-        private Dictionary<string, List<MemoryForLabel>> _memoryForLabels = new Dictionary<string, List<MemoryForLabel>>(); 
+        private Dictionary<string, List<MemoryForLabel>> _memoryForLabels = new Dictionary<string, List<MemoryForLabel>>();
 
         /// Текущая линия кода, на которой находится обработка.
         private int _currentLine;
@@ -111,7 +112,7 @@ namespace _8bitVonNeiman.Compiler.Model {
             }
             memoryForLabel.Line = _currentLine;
             _memoryForLabels[label].Add(memoryForLabel);
-            _currentAddress += 2;
+            _currentAddress += memoryForLabel.SingleByte ? 1 : 2;
         }
 
         /// <summary>
@@ -152,7 +153,9 @@ namespace _8bitVonNeiman.Compiler.Model {
                 CompilerSupport.FillBitArray(memoryForLabel.HighBitArray, memoryForLabel.LowBitArray,
                 _currentAddress, Constants.FarAddressBitsCount);
                 _memory[memoryForLabel.Address] = memoryForLabel.LowBitArray;
-                _memory[memoryForLabel.Address + 1] = memoryForLabel.HighBitArray; 
+                if (!memoryForLabel.SingleByte) {
+                    _memory[memoryForLabel.Address + 1] = memoryForLabel.HighBitArray;
+                }
             }
             _memoryForLabels.Remove(label);
         }
