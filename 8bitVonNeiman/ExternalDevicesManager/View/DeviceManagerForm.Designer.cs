@@ -25,6 +25,7 @@
 		private void InitializeComponent() {
             this.addDeviceButton = new System.Windows.Forms.Button();
             this.addDisplayButton = new System.Windows.Forms.Button();
+            this.addTimer2Button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addDeviceButton
@@ -47,11 +48,22 @@
             this.addDisplayButton.UseVisualStyleBackColor = true;
             this.addDisplayButton.Click += new System.EventHandler(this.addDisplayButton_Click);
             // 
+            // addTimer2Button
+            // 
+            this.addTimer2Button.Location = new System.Drawing.Point(85, 71);
+            this.addTimer2Button.Name = "addTimer2Button";
+            this.addTimer2Button.Size = new System.Drawing.Size(149, 24);
+            this.addTimer2Button.TabIndex = 2;
+            this.addTimer2Button.Text = "Таймер 2";
+            this.addTimer2Button.UseVisualStyleBackColor = true;
+            this.addTimer2Button.Click += new System.EventHandler(this.addTimer2Button_Click);
+            // 
             // DeviceManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 91);
+            this.ClientSize = new System.Drawing.Size(324, 107);
+            this.Controls.Add(this.addTimer2Button);
             this.Controls.Add(this.addDisplayButton);
             this.Controls.Add(this.addDeviceButton);
             this.Location = new System.Drawing.Point(0, 200);
@@ -67,5 +79,6 @@
 
 		private System.Windows.Forms.Button addDeviceButton;
         private System.Windows.Forms.Button addDisplayButton;
+        private System.Windows.Forms.Button addTimer2Button;
     }
 }

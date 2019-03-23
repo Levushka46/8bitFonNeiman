@@ -2,6 +2,7 @@
 	public interface IDeviceManagerFormOutput {
 		void AddExternalDevice();
         void AddDisplay();
+        void AddTimer2();
 		void FormClosed();
 	}
 }

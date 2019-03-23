@@ -47,7 +47,14 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             input.OpenForm();
         }
 
-		public void FormClosed() {
+        public void AddTimer2() {
+            IDeviceInput input = _devicesFactory.GetTimer2();
+            _devices.Add(input);
+
+            input.OpenForm();
+        }
+
+        public void FormClosed() {
 			_form = null;
 		}
 

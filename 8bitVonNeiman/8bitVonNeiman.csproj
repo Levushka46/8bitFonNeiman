@@ -143,6 +143,14 @@
     <Compile Include="ExternalDevices\Keyboard1\View\Keyboard1Form.Designer.cs">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalDevices\Timer2\Timer2Controller.cs" />
+    <Compile Include="ExternalDevices\Timer2\View\ITimer2FormOutput.cs" />
+    <Compile Include="ExternalDevices\Timer2\View\Timer2Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\Timer2\View\Timer2Form.Designer.cs">
+      <DependentUpon>Timer2Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterruptionController\IInterruptionControllerInput.cs" />
     <Compile Include="InterruptionController\InterruptionController.cs" />
     <Compile Include="Memory\IMemoryControllerInput.cs" />
@@ -177,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Keyboard1\View\Keyboard1Form.resx">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\Timer2\View\Timer2Form.resx">
+      <DependentUpon>Timer2Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Memory\View\MemoryForm.resx">
       <DependentUpon>MemoryForm.cs</DependentUpon>
