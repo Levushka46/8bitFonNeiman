@@ -179,6 +179,11 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
         private void SetCapture(bool capture) {
             _tscrH[0] = capture;
+
+            byte mode = GetMode();
+            if (mode == 1 && capture) {
+                SetCaptureFlag(true);
+            }
         }
 
         private bool IsOverflowFlag() {
@@ -196,7 +201,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
                 }
             }
 
-            if (IsOverflowIntEnabled()) {
+            if (overflow && IsOverflowIntEnabled()) {
                 MakeInterruption();
             }
         }
@@ -208,7 +213,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
         private void SetComparisonFlag(bool comparison) {
             _tscrH[2] = comparison;
 
-            if (IsComparisonIntEnabled()) {
+            if (comparison && IsComparisonIntEnabled()) {
                 MakeInterruption();
             }
         }
@@ -222,7 +227,15 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
             SetCapture(false);
 
-            if (IsCaptureIntEnabled()) {
+            if (capture) {
+                byte mode = GetMode();
+                if (mode == 1) { // режим захвата
+                    _tiorH = new ExtendedBitArray(_tcntH);
+                    _tiorL = new ExtendedBitArray(_tcntL);
+                }
+            }
+
+            if (capture && IsCaptureIntEnabled()) {
                 MakeInterruption();
             }
         }
