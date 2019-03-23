@@ -79,7 +79,7 @@ namespace _8bitVonNeiman.Cpu {
         /// Вызывается при нажатии кнопки сброса на форме. Сбрасывает состояние и обновляет состояние формы
         public void ResetButtonTapped() {
             Reset();
-            _view?.ShowState(MakeState());
+            UpdateState();
         }
 
         /// Вызывается при закрытии формы. Обнуляет переменную формы для ее нормального дальнейшего открытия
@@ -91,7 +91,7 @@ namespace _8bitVonNeiman.Cpu {
         /// после чего выполняет загруженную команду и обновляет состояние формы
         public void Tick() {
             TickAsync();
-            _view?.ShowState(MakeState());
+            UpdateState();
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
 
