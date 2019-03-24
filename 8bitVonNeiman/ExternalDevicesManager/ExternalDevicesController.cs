@@ -104,6 +104,12 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             }
         }
 
+        public void Clock() {
+            foreach (var device in _devices) {
+                device.Clock();
+            }
+        }
+
         public void UpdateUI() {
             foreach (var device in _devices) {
                 device.UpdateUI();

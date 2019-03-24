@@ -14,6 +14,7 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
         void SetExternalMemory(ExtendedBitArray memory, int address);
         bool GetExternalMemoryBit(int address, int bitIndex);
         void SetExternalMemoryBit(bool value, int address, int bitIndex);
+        void Clock();
 
         void UpdateUI();
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Threading;
 using _8bitVonNeiman.Common;
+using _8bitVonNeiman.Common.MicroLibrary;
 using _8bitVonNeiman.Cpu.View;
 
 namespace _8bitVonNeiman.Cpu {
@@ -68,12 +69,17 @@ namespace _8bitVonNeiman.Cpu {
 
         private delegate void UpdateStateDelegate();
 
+        private readonly MicroTimer _clockTimer;
+
         public CpuModel(ICpuModelOutput output) {
             _output = output;
             Reset();
 
             _updateStateDelegate = new UpdateStateDelegate(UpdateState);
             _commandHasRunDelegate = new UpdateStateDelegate(CommandHasRunAsync);
+
+            _clockTimer = new MicroTimer(1000);
+            _clockTimer.MicroTimerElapsed += new MicroTimer.MicroTimerElapsedEventHandler(OnClockTimerEvent);
         }
 
         /// Вызывается при нажатии кнопки сброса на форме. Сбрасывает состояние и обновляет состояние формы
@@ -85,18 +91,25 @@ namespace _8bitVonNeiman.Cpu {
         /// Вызывается при закрытии формы. Обнуляет переменную формы для ее нормального дальнейшего открытия
         public void FormClosed() {
             _view = null;
+
+            _clockTimer.Abort();
+            _clockTimer.Enabled = false;
         }
 
         public void ExitThread() {
             Stop();
             _runThread?.Abort();
-        }
+            _clockTimer.Abort();
+            _clockTimer.Enabled = false;
+    }
 
-        /// Шаг процессора. Выполняет стандартный набор команд для каждого шага 
-        /// после чего выполняет загруженную команду и обновляет состояние формы
-        public void Tick() {
+    /// Шаг процессора. Выполняет стандартный набор команд для каждого шага 
+    /// после чего выполняет загруженную команду и обновляет состояние формы
+    public void Tick() {
+            _clockTimer.Enabled = true;
             TickAsync();
             UpdateState();
+            _clockTimer.Enabled = false;
             _output.CommandHasRun(_pcl, _cs, !_shouldStopRunning);
         }
 
@@ -116,6 +129,7 @@ namespace _8bitVonNeiman.Cpu {
         private void RunLoop() {
             var i = 0;
             double lastUpdateMillis = 0;
+            _clockTimer.Enabled = !_shouldStopRunning;
             while (!_shouldStopRunning) {
                 TickAsync();
                 double nowMillis = DateTime.Now.ToUniversalTime().Subtract(
@@ -127,6 +141,7 @@ namespace _8bitVonNeiman.Cpu {
                 }
                 _output.CommandHasRun(_pcl, _cs, true);
             }
+            _clockTimer.Enabled = false;
             _view.Invoke(_updateStateDelegate);
             _view.Invoke(_commandHasRunDelegate);
         }
@@ -307,6 +322,10 @@ namespace _8bitVonNeiman.Cpu {
         /// Формирует объект класса CpuState с текущим состоянием процессора
         private CpuState MakeState() {
             return new CpuState(_acc, _dr, _flags.Flags, _ss, _ds, _cs, _pcl, _spl, _cr, _registers);
+        }
+
+        private void OnClockTimerEvent(object sender, MicroTimerEventArgs e) {
+            _output.Clock();
         }
 
         /// Определяет к какой группе относится команда и запускает специфичный обработчик
