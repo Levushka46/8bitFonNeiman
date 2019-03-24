@@ -47,6 +47,11 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             _form.Show();
         }
 
+        public void ExitThread() {
+            _timer.Abort();
+            _timer.Enabled = false;
+        }
+
         /// Открывает форму, если она закрыта или закрывает, если открыта
         public void ChangeFormState() {
             if (_form == null) {
@@ -114,6 +119,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
         public void FormClosed() {
             _form = null;
+            _timer.Abort();
+            _timer.Enabled = false;
 
             _output.DeviceFormClosed(this);
         }

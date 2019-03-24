@@ -43,6 +43,8 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             _form.Show();
         }
 
+        public void ExitThread() { }
+
         /// Открывает форму, если она закрыта или закрывает, если открыта
         public void ChangeFormState() {
             if (_form == null) {

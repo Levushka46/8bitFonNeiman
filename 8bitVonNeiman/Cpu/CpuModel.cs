@@ -87,6 +87,11 @@ namespace _8bitVonNeiman.Cpu {
             _view = null;
         }
 
+        public void ExitThread() {
+            Stop();
+            _runThread.Abort();
+        }
+
         /// Шаг процессора. Выполняет стандартный набор команд для каждого шага 
         /// после чего выполняет загруженную команду и обновляет состояние формы
         public void Tick() {

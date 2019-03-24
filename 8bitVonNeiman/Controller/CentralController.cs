@@ -37,6 +37,8 @@ namespace _8bitVonNeiman.Controller {
         }
 
         public void FormClosed() {
+            _cpu.ExitThread();
+            _externalDevicesController.ExitThread();
             ExitThread();
         }
 

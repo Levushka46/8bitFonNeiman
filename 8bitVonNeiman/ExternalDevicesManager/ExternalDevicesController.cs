@@ -32,6 +32,12 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 			}
 		}
 
+        public void ExitThread() {
+            foreach(var device in _devices) {
+                device.ExitThread();
+            }
+        }
+
 		public void AddExternalDevice() {
             // todo select proper device
             IDeviceInput input = _devicesFactory.GetKeyboard1();

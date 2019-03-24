@@ -9,6 +9,7 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 	public interface IExternalDevicesControllerInput {
 		/// Функция, показывающая форму, если она закрыта
 		void ChangeFormState();
+        void ExitThread();
         ExtendedBitArray GetExternalMemory(int address);
         void SetExternalMemory(ExtendedBitArray memory, int address);
 
