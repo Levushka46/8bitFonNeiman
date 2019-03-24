@@ -22,7 +22,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
         private ExtendedBitArray _tiorH = new ExtendedBitArray();
         private ExtendedBitArray _tiorL = new ExtendedBitArray();
 
-        private ExtendedBitArray _tscrH = new ExtendedBitArray();
+        private ExtendedBitArray _tscrH = new ExtendedBitArray(0x10);
         private ExtendedBitArray _tscrL = new ExtendedBitArray();
 
         private ExtendedBitArray _hBuffer = new ExtendedBitArray();
@@ -74,7 +74,13 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
         }
 
         public override void SetMemory(ExtendedBitArray memory, int address) {
-            switch (address - _baseAddress) {
+            int localAddress = address - _baseAddress;
+            if (4 <= localAddress && localAddress <= 5 && memory[7]) {
+                WriteBitCmd(memory, address);
+                return;
+            }
+
+            switch (localAddress) {
                 case 0:
                     _tcntL = memory;
                     _tcntH = new ExtendedBitArray(_hBuffer);
@@ -85,7 +91,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
                     break;
                 case 4:
                     _tscrL = memory;
-                    _tscrH = new ExtendedBitArray(_hBuffer);
+                    var value = _hBuffer.NumValue() & 0xF1 | _tscrH.NumValue() & 0x0E;
+                    _tscrH = new ExtendedBitArray(value);
                     break;
                 case 1:
                 case 3:
@@ -176,7 +183,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             _tiorH = new ExtendedBitArray();
             _tiorL = new ExtendedBitArray();
 
-            _tscrH = new ExtendedBitArray();
+            _tscrH = new ExtendedBitArray(0x10);
             _tscrL = new ExtendedBitArray();
 
             _hBuffer = new ExtendedBitArray();
@@ -190,6 +197,12 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             SetCapture(true);
 
             _form.Invoke(_updateFormDelegate);
+        }
+
+        private void WriteBitCmd(ExtendedBitArray cmd, int address) {
+            bool value = cmd[0];
+            int bitIndex = (cmd.NumValue() & 0xF) >> 1;
+            SetMemoryBit(value, address, bitIndex);
         }
 
         private void MakeInterruption() {
@@ -307,6 +320,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
         private void ApplySettings() {
             byte divider = GetDividerMode();
             if (divider == 0) {
+                _tscrH[4] = true;
                 divider = 1;
             }
             _timer.Interval = 1000 * divider;
