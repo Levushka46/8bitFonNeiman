@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ExtendedBitArray.cs" />
+    <Compile Include="Common\MicroLibrary.cs" />
     <Compile Include="Compiler\CompilationErrorExcepton.cs" />
     <Compile Include="Compiler\ICompilerControllerOutput.cs" />
     <Compile Include="Compiler\Model\CommandProcessorFactory.cs" />

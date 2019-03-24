@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using _8bitVonNeiman.Common;
+using _8bitVonNeiman.Common.MicroLibrary;
 using _8bitVonNeiman.ExternalDevices.Timer2.View;
 
 namespace _8bitVonNeiman.ExternalDevices.Timer2 {
@@ -29,13 +29,13 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
         private UpdateFormDelegate _updateFormDelegate;
 
-        private readonly Timer _timer;
+        private readonly MicroTimer _timer;
 
         public Timer2Controller(IDeviceOutput output) {
             _output = output;
             _updateFormDelegate = new UpdateFormDelegate(UpdateForm);
-            _timer = new Timer(1);
-            _timer.Elapsed += OnTimerEvent;
+            _timer = new MicroTimer(1000);
+            _timer.MicroTimerElapsed += new MicroTimer.MicroTimerElapsedEventHandler(OnTimerEvent);
         }
 
         public void OpenForm() {
@@ -256,7 +256,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             if (divider == 0) {
                 divider = 1;
             }
-            _timer.Interval = divider;
+            _timer.Interval = 1000 * divider;
             _timer.Enabled = IsEnabled();
 
             byte mode = GetMode();
@@ -265,7 +265,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             }
         }
 
-        private void OnTimerEvent(object sender, ElapsedEventArgs e) {
+        private void OnTimerEvent(object sender, MicroTimerEventArgs e) {
             if (_tcntL.Inc()) {
                 if (_tcntH.Inc()) {
                     SetOverflowFlag(true);
