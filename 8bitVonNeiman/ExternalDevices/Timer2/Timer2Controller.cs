@@ -25,6 +25,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
         private ExtendedBitArray _tscrH = new ExtendedBitArray();
         private ExtendedBitArray _tscrL = new ExtendedBitArray();
 
+        private ExtendedBitArray _hBuffer = new ExtendedBitArray();
+
         private delegate void UpdateFormDelegate();
 
         private UpdateFormDelegate _updateFormDelegate;
@@ -75,21 +77,20 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             switch (address - _baseAddress) {
                 case 0:
                     _tcntL = memory;
-                    break;
-                case 1:
-                    _tcntH = memory;
+                    _tcntH = _hBuffer;
                     break;
                 case 2:
                     _tiorL = memory;
-                    break;
-                case 3:
-                    _tiorH = memory;
+                    _tiorH = _hBuffer;
                     break;
                 case 4:
                     _tscrL = memory;
+                    _tscrH = _hBuffer;
                     break;
+                case 1:
+                case 3:
                 case 5:
-                    _tscrH = memory;
+                    _hBuffer = memory;
                     break;
             }
             ApplySettings();
@@ -98,17 +99,18 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
         public ExtendedBitArray GetMemory(int address) {
             switch (address - _baseAddress) {
                 case 0:
+                    _hBuffer = new ExtendedBitArray(_tcntH);
                     return _tcntL;
-                case 1:
-                    return _tcntH;
                 case 2:
+                    _hBuffer = new ExtendedBitArray(_tiorH);
                     return _tiorL;
-                case 3:
-                    return _tiorH;
                 case 4:
+                    _hBuffer = new ExtendedBitArray(_tscrH);
                     return _tscrL;
+                case 1:
+                case 3:
                 case 5:
-                    return _tscrH;
+                    return _hBuffer;
             }
             return new ExtendedBitArray();
         }
