@@ -268,6 +268,14 @@ namespace _8bitVonNeiman.Cpu {
             _output.SetExternalMemory(data, address);
         }
 
+        private bool GetExternalMemoryBit(int address, int bitIndex) {
+            return _output.GetExternalMemoryBit(address, bitIndex);
+        }
+
+        private void SetExternalMemoryBit(bool value, int address, int bitIndex) {
+            _output.SetExternalMemoryBit(value, address, bitIndex);
+        }
+
         private void CheckInterruptionRequests() {
             if (_flags.I) {
                 if (_output.HasInterruptionRequests()) {
@@ -940,28 +948,26 @@ namespace _8bitVonNeiman.Cpu {
             //CBI, SBI and NBI
             if (1 <= cop && cop <= 3) {
                 _y48();
-                _y3();
-                var index = Convert.ToInt32(highBin.Substring(5, 3), 2);
+                _y68();
                 // CBI and SBI
                 if (1 <= cop && cop <= 2) {
-                    _rdb[index] = cop1;
+                    _rdb[0] = cop1;
                 } else { // NBI
-                    _rdb[index] = !_rdb[index];
+                    _rdb[0] = !_rdb[0];
                 }
-                _y6();
+                _y69();
             }
 
             //SBIC and SBIS and SBISC
             if (4 <= cop && cop <= 6) {
                 _y48();
-                _y3();
-                var index = Convert.ToInt32(highBin.Substring(5, 3), 2);
-                if (_rdb[index] == (cop > 4)) {
+                _y68();
+                if (_rdb[0] == (cop > 4)) {
                     _y31();
                     _y31();
                     if (cop == 6) {
-                        _rdb[index] = false;
-                        _y6();
+                        _rdb[0] = false;
+                        _y69();
                     }
                 }
             }
@@ -1379,6 +1385,18 @@ namespace _8bitVonNeiman.Cpu {
 
         private void _y67() {
             _output.MakeInterruption((byte) (_rdb.NumValue() & 0xFF));
+        }
+
+        private void _y68() {
+            var bitNumber = _cr[1].NumValue() & 0x7;
+            _rdb = new ExtendedBitArray() {
+                [0] = GetExternalMemoryBit(_rab, bitNumber)
+            };
+        }
+
+        private void _y69() {
+            var bitNumber = _cr[1].NumValue() & 0x7;
+            SetExternalMemoryBit(_rdb[0], _rab, bitNumber);
         }
 
         #endregion

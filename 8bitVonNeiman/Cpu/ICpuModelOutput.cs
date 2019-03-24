@@ -44,6 +44,23 @@ namespace _8bitVonNeiman.Cpu {
         void SetExternalMemory(ExtendedBitArray memory, int address);
 
         /// <summary>
+        /// Возвращает бит памяти, содержащуюся по переданному адресу внешнего устройства.
+        /// </summary>
+        /// <param name="address">Адрес внешнего устройства, по которому запрашивается память.</param>
+        /// <param name="bitIndex">Индекс бита в памяти.</param>
+        /// <returns>Память, содержащаяся по переданному адресу.</returns>
+        bool GetExternalMemoryBit(int address, int bitIndex);
+
+        /// <summary>
+        /// Устанавливает значение конкретного бита ячейки памяти.
+        /// </summary>
+        /// <param name="value">Значение бита ячейки памяти.</param>
+        /// <param name="address">Адрес внешнего устройства, по которому запрашивается память.</param>
+        /// <param name="bitIndex">Индекс бита в памяти.</param>
+        /// <returns>Память, содержащаяся по переданному адресу.</returns>
+        void SetExternalMemoryBit(bool value, int address, int bitIndex);
+
+        /// <summary>
         /// Проверяет имеются ли запросы на прерывание.
         /// </summary>
         bool HasInterruptionRequests();

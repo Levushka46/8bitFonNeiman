@@ -86,6 +86,24 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             }
         }
 
+        public bool GetExternalMemoryBit(int address, int bitIndex) {
+            foreach (var device in _devices) {
+                if (device.HasMemory(address)) {
+                    return device.GetMemoryBit(address, bitIndex);
+                }
+            }
+            return false;
+        }
+
+        public void SetExternalMemoryBit(bool value, int address, int bitIndex) {
+            foreach (var device in _devices) {
+                if (device.HasMemory(address)) {
+                    device.SetMemoryBit(value, address, bitIndex);
+                    break;
+                }
+            }
+        }
+
         public void UpdateUI() {
             foreach (var device in _devices) {
                 device.UpdateUI();

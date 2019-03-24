@@ -83,6 +83,14 @@ namespace _8bitVonNeiman.Controller {
             _externalDevicesController.SetExternalMemory(memory, address);
         }
 
+        public bool GetExternalMemoryBit(int address, int bitNumber) {
+            return _externalDevicesController.GetExternalMemoryBit(address, bitNumber);
+        }
+
+        public void SetExternalMemoryBit(bool value, int address, int bitNumber) {
+            _externalDevicesController.SetExternalMemoryBit(value, address, bitNumber);
+        }
+
         public void StopExecution() {
             _cpu.Stop();
         }

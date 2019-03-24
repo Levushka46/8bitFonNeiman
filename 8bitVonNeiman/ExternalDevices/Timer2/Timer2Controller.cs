@@ -40,7 +40,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             _timer.MicroTimerElapsed += new MicroTimer.MicroTimerElapsedEventHandler(OnTimerEvent);
         }
 
-        public void OpenForm() {
+        public override void OpenForm() {
             if (_form == null) {
                 _form = new Timer2Form(this);
             }
@@ -49,7 +49,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             _form.Show();
         }
 
-        public void ExitThread() {
+        public override void ExitThread() {
             _timer.Abort();
             _timer.Enabled = false;
         }
@@ -69,34 +69,34 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             _form.ShowRegisters(_tcntH, _tcntL, _tiorH, _tiorL, _tscrH, _tscrL);
         }
 
-        public bool HasMemory(int address) {
+        public override bool HasMemory(int address) {
             return _baseAddress <= address && address <= _baseAddress + 5;
         }
 
-        public void SetMemory(ExtendedBitArray memory, int address) {
+        public override void SetMemory(ExtendedBitArray memory, int address) {
             switch (address - _baseAddress) {
                 case 0:
                     _tcntL = memory;
-                    _tcntH = _hBuffer;
+                    _tcntH = new ExtendedBitArray(_hBuffer);
                     break;
                 case 2:
                     _tiorL = memory;
-                    _tiorH = _hBuffer;
+                    _tiorH = new ExtendedBitArray(_hBuffer);
                     break;
                 case 4:
                     _tscrL = memory;
-                    _tscrH = _hBuffer;
+                    _tscrH = new ExtendedBitArray(_hBuffer);
                     break;
                 case 1:
                 case 3:
                 case 5:
-                    _hBuffer = memory;
+                    _hBuffer = new ExtendedBitArray(memory);
                     break;
             }
             ApplySettings();
         }
 
-        public ExtendedBitArray GetMemory(int address) {
+        public override ExtendedBitArray GetMemory(int address) {
             switch (address - _baseAddress) {
                 case 0:
                     _hBuffer = new ExtendedBitArray(_tcntH);
@@ -115,7 +115,49 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             return new ExtendedBitArray();
         }
 
-        public void UpdateUI() {
+        public override void SetMemoryBit(bool value, int address, int bitIndex) {
+            switch (address - _baseAddress) {
+                case 0:
+                    _tcntL[bitIndex] = value;
+                    break;
+                case 1:
+                    _tcntH[bitIndex] = value;
+                    break;
+                case 2:
+                    _tiorL[bitIndex] = value;
+                    break;
+                case 3:
+                    _tiorH[bitIndex] = value;
+                    break;
+                case 4:
+                    _tscrL[bitIndex] = value;
+                    break;
+                case 5:
+                    _tscrH[bitIndex] = value;
+                    break;
+            }
+            ApplySettings();
+        }
+
+        public override bool GetMemoryBit(int address, int bitIndex) {
+            switch (address - _baseAddress) {
+                case 0:
+                    return _tcntL[bitIndex];
+                case 1:
+                    return _tcntH[bitIndex];
+                case 2:
+                    return _tiorL[bitIndex];
+                case 3:
+                    return _tiorH[bitIndex];
+                case 4:
+                    return _tscrL[bitIndex];
+                case 5:
+                    return _tscrH[bitIndex];
+            }
+            return false;
+        }
+
+        public override void UpdateUI() {
             UpdateForm();
         }
 
@@ -136,6 +178,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
             _tscrH = new ExtendedBitArray();
             _tscrL = new ExtendedBitArray();
+
+            _hBuffer = new ExtendedBitArray();
 
             ApplySettings();
 

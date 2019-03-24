@@ -29,7 +29,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             _updateFormDelegate = new SetCharacterDelegate((textBoxIndex, character) => _form.SetCharacter(textBoxIndex, character));
         }
 
-        public void OpenForm() {
+        public override void OpenForm() {
             if (_form == null) {
                 _form = new DisplayForm(this);
             }
@@ -37,8 +37,6 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             _form.ShowDeviceParameters(_baseAddress);
             _form.Show();
         }
-
-        public void ExitThread() { }
 
         /// Открывает форму, если она закрыта или закрывает, если открыта
         public void ChangeFormState() {
@@ -55,11 +53,11 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             _form.ShowRegisters(GetDr(), _cr, _ar);
         }
 
-        public bool HasMemory(int address) {
+        public override bool HasMemory(int address) {
             return _baseAddress <= address && address <= _baseAddress + 2;
         }
 
-        public void SetMemory(ExtendedBitArray memory, int address) {
+        public override void SetMemory(ExtendedBitArray memory, int address) {
             switch (address - _baseAddress) {
                 case 0:
                     SetDr(memory);
@@ -74,7 +72,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             }
         }
 
-        public ExtendedBitArray GetMemory(int address) {
+        public override ExtendedBitArray GetMemory(int address) {
             switch (address - _baseAddress) {
                 case 0:
                     ExtendedBitArray value = GetDr();
@@ -88,7 +86,7 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
             return new ExtendedBitArray();
         }
 
-        public void UpdateUI() {
+        public override void UpdateUI() {
             UpdateForm();
         }
 

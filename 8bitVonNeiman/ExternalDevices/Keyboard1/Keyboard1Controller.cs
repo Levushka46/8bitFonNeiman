@@ -34,7 +34,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             _updateFormDelegate = new UpdateFormDelegate(UpdateForm);
         }
 
-        public void OpenForm() {
+        public override void OpenForm() {
             if (_form == null) {
                 _form = new Keyboard1Form(this);
             }
@@ -42,8 +42,6 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             _form.ShowDeviceParameters(_baseAddress, _irq);
             _form.Show();
         }
-
-        public void ExitThread() { }
 
         /// Открывает форму, если она закрыта или закрывает, если открыта
         public void ChangeFormState() {
@@ -60,11 +58,11 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             _form.ShowRegisters(_dr, _cr, _sr);
         }
 
-        public bool HasMemory(int address) {
+        public override bool HasMemory(int address) {
             return _baseAddress <= address && address <= _baseAddress + 2;
         }
 
-        public void SetMemory(ExtendedBitArray memory, int address) {
+        public override void SetMemory(ExtendedBitArray memory, int address) {
             switch (address - _baseAddress) {
                 case 0:
                     break;
@@ -77,7 +75,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             }
         }
 
-        public ExtendedBitArray GetMemory(int address) {
+        public override ExtendedBitArray GetMemory(int address) {
             switch (address - _baseAddress) {
                 case 0:
                     ExtendedBitArray value = _dr;
@@ -92,7 +90,7 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
             return new ExtendedBitArray();
         }
 
-        public void UpdateUI() {
+        public override void UpdateUI() {
             UpdateForm();
         }
 
