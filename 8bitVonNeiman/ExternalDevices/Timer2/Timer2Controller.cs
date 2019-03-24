@@ -275,6 +275,11 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             if (mode == 2) { // сравнение
                 if (_tcntL.NumValue() == _tiorL.NumValue() && _tcntH.NumValue() == _tiorH.NumValue()) {
                     SetComparisonFlag(true);
+
+                    if (IsResetOnCmp()) {
+                        _tcntH = new ExtendedBitArray();
+                        _tcntL = new ExtendedBitArray();
+                    }
                 }
             }
         }
