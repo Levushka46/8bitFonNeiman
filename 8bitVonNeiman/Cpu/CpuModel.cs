@@ -89,7 +89,7 @@ namespace _8bitVonNeiman.Cpu {
 
         public void ExitThread() {
             Stop();
-            _runThread.Abort();
+            _runThread?.Abort();
         }
 
         /// Шаг процессора. Выполняет стандартный набор команд для каждого шага 
