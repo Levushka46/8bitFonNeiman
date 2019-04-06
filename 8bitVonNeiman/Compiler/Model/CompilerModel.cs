@@ -58,7 +58,7 @@ namespace _8bitVonNeiman.Compiler.Model {
                     env.IncrementLine();
                     continue;
                 }
-                if (lines[i][0] == '/') {
+                if (lines[i][0] == '.') {
                     HandleDirective(lines[i], env);
                     env.IncrementLine();
                     continue;
