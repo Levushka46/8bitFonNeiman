@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _8bitVonNeiman.Common;
+using _8bitVonNeiman.Common.MicroLibrary;
 using _8bitVonNeiman.ExternalDevices.Timer2.View;
 
 namespace _8bitVonNeiman.ExternalDevices.Timer2 {
@@ -30,11 +31,14 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
         private UpdateFormDelegate _updateFormDelegate;
 
+        private readonly MicroTimer _timer;
         private byte _internalCounter;
 
         public Timer2Controller(IDeviceOutput output) {
             _output = output;
             _updateFormDelegate = new UpdateFormDelegate(UpdateForm);
+            _timer = new MicroTimer(1000);
+            _timer.MicroTimerElapsed += new MicroTimer.MicroTimerElapsedEventHandler(OnTimerEvent);
         }
 
         public override void OpenForm() {
@@ -44,6 +48,11 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             UpdateForm();
             _form.ShowDeviceParameters(_baseAddress, _irq);
             _form.Show();
+        }
+
+        public override void ExitThread() {
+            _timer.Abort();
+            _timer.Enabled = false;
         }
 
         /// Открывает форму, если она закрыта или закрывает, если открыта
@@ -162,6 +171,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
         public void FormClosed() {
             _form = null;
+            _timer.Abort();
+            _timer.Enabled = false;
 
             _output.DeviceFormClosed(this);
         }
@@ -315,6 +326,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
                 _tscrH[4] = true;
                 divider = 1;
             }
+            _timer.Enabled = IsEnabled();
 
             byte mode = GetMode();
             if (mode == 1 && Capture()) { // режим захвата
@@ -322,8 +334,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
             }
         }
 
-        public override void Clock() {
-            if (!IsEnabled()) return;
+        private void OnTimerEvent(object sender, MicroTimerEventArgs e) {
             if (++_internalCounter < GetDividerMode()) return;
 
             _internalCounter = 0;

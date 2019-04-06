@@ -21,7 +21,6 @@ namespace _8bitVonNeiman.ExternalDevices {
             ExtendedBitArray byteValue = GetMemory(address);
             return byteValue[bitIndex];
         }
-        public virtual void Clock() { }
 
         public abstract void UpdateUI();
     }

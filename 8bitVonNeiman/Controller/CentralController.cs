@@ -113,10 +113,6 @@ namespace _8bitVonNeiman.Controller {
             _debugController.CommandHasRun(pcl, _memoryController.GetMemoryFromSegment(cs), isAutomatic);
         }
 
-        public void Clock() {
-            _externalDevicesController.Clock();
-        }
-
         public void UpdateUI() {
             _externalDevicesController.UpdateUI();
         }
