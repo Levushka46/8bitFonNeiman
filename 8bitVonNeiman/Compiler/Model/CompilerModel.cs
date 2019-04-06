@@ -187,10 +187,10 @@ namespace _8bitVonNeiman.Compiler.Model {
         /// <param name="line">Строка кода, из которой извлекается директива.</param>
         /// <param name="env">Текущее окружение компилятора, которое изменяется в соответствии с директивой.</param>
         public void HandleDirective(string line, CompilerEnvironment env) {
-            if (line[1] == 'n' || line[1] == 'N') {
+            if (line.Substring(1).ToLower().StartsWith("org")) {
                 string[] components = line.Split(' ');
                 if (components.Length != 2) {
-                    throw new CompilationErrorExcepton("После /n должно следовать одно число через пробел.", env.GetCurrentLine());
+                    throw new CompilationErrorExcepton("После /org должно следовать одно число через пробел.", env.GetCurrentLine());
                 }
 
                 try {
