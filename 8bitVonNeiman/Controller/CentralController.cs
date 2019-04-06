@@ -67,6 +67,14 @@ namespace _8bitVonNeiman.Controller {
 			_externalDevicesController.ChangeFormState();
 		}
 
+        public void OpenAllButtonClicked() {
+            _cpu.Open();
+            _compilerController.Open();
+            _debugController.Open();
+            _memoryController.Open();
+            _externalDevicesController.Open();
+        }
+
 		public ExtendedBitArray GetMemory(int address) {
             return _memoryController.GetMemory(address);
         }

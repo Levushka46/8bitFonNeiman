@@ -25,11 +25,11 @@
         private void InitializeComponent() {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.deleteAllButton = new System.Windows.Forms.Button();
             this.BreakpointColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commandColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteAllButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,17 +56,6 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // deleteAllButton
-            // 
-            this.deleteAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteAllButton.Location = new System.Drawing.Point(231, 586);
-            this.deleteAllButton.Name = "deleteAllButton";
-            this.deleteAllButton.Size = new System.Drawing.Size(181, 23);
-            this.deleteAllButton.TabIndex = 1;
-            this.deleteAllButton.Text = "Удалить все точки останова";
-            this.deleteAllButton.UseVisualStyleBackColor = true;
-            this.deleteAllButton.Click += new System.EventHandler(this.deleteAllButton_Click);
             // 
             // BreakpointColumn
             // 
@@ -106,6 +95,17 @@
             this.codeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.codeColumn.Width = 150;
             // 
+            // deleteAllButton
+            // 
+            this.deleteAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteAllButton.Location = new System.Drawing.Point(231, 586);
+            this.deleteAllButton.Name = "deleteAllButton";
+            this.deleteAllButton.Size = new System.Drawing.Size(181, 23);
+            this.deleteAllButton.TabIndex = 1;
+            this.deleteAllButton.Text = "Удалить все точки останова";
+            this.deleteAllButton.UseVisualStyleBackColor = true;
+            this.deleteAllButton.Click += new System.EventHandler(this.deleteAllButton_Click);
+            // 
             // DebugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,7 +113,9 @@
             this.ClientSize = new System.Drawing.Size(424, 621);
             this.Controls.Add(this.deleteAllButton);
             this.Controls.Add(this.dataGridView1);
+            this.Location = new System.Drawing.Point(852, 40);
             this.Name = "DebugForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Отладка";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DebugForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

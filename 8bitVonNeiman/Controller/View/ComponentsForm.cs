@@ -34,5 +34,9 @@ namespace _8bitVonNeiman.Controller.View {
 		private void externalDevicesManagerButton_Click(object sender, EventArgs e) {
 			_output.ExternalDevicesManagerClicked();
 		}
-	}
+
+        private void openAllButton_Click(object sender, EventArgs e) {
+            _output.OpenAllButtonClicked();
+        }
+    }
 }

@@ -28,6 +28,14 @@ namespace _8bitVonNeiman.Compiler {
             _compilerModel = compilerModel;
         }
 
+        public void Open() {
+            if (_form == null) {
+                _form = new CompilerForm(this);
+                _form.Show();
+                _form.SetCode(_code);
+            }
+        }
+
         /// <summary>
         /// Функция, показывающая форму, если она закрыта, и закрывающая ее, если она открыта
         /// </summary>

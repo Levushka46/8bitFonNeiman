@@ -15,6 +15,14 @@ namespace _8bitVonNeiman.Debug {
             _output = output;
         }
 
+        public void Open() {
+            if (_form == null) {
+                _form = new DebugForm(this);
+                _form.Show();
+                _form.ShowCommands(_commands);
+            }
+        }
+
         /// Открывает форму, если она закрыта или закрывает, если открыта
         public void ChangeFormState() {
             if (_form == null) {

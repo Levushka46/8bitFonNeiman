@@ -27,6 +27,15 @@ namespace _8bitVonNeiman.Memory {
             
             ShowMemory();
         }
+
+        public void Open() {
+            if (_forms.Count == 0) {
+                var form = new MemoryForm(this);
+                form.Show();
+                _forms.Add(form);
+                ShowMemory();
+            }
+        }
         
         /// Открывает форму, если она закрыта или закрывает, если открыта
         public void ChangeFormState() {

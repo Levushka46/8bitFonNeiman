@@ -6,5 +6,7 @@
         void CpuButtonClicked();
         void DebugButtonClicked();
         void ExternalDevicesManagerClicked();
+
+        void OpenAllButtonClicked();
     }
 }

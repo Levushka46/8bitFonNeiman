@@ -7,6 +7,7 @@ using _8bitVonNeiman.Common;
 
 namespace _8bitVonNeiman.ExternalDevicesManager {
 	public interface IExternalDevicesControllerInput {
+        void Open();
 		/// Функция, показывающая форму, если она закрыта
 		void ChangeFormState();
         void ExitThread();

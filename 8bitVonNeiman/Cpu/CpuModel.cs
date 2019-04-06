@@ -227,6 +227,14 @@ namespace _8bitVonNeiman.Cpu {
             _fileHandler.SaveAs(MakeState());
         }
 
+        public void Open() {
+            if (_view == null) {
+                _view = new CpuForm { Output = this };
+                _view.Show();
+                _view?.ShowState(MakeState());
+            }
+        }
+
         /// Открывает форму, если она закрыта и закрывает, если открыта
         public void ChangeFormState() {
             if (_view == null) {

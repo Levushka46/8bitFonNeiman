@@ -21,6 +21,14 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             _output = output;
         }
 
+        public void Open() {
+            if (_form == null) {
+                _form = new DeviceManagerForm(this);
+                _form.Show();
+                _form.ShowAvailableDevices();
+            }
+        }
+
 		/// Открывает форму, если она закрыта или закрывает, если открыта
 		public void ChangeFormState() {
 			if (_form == null) {
