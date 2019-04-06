@@ -15,6 +15,7 @@ namespace _8bitVonNeiman.Debugger.View {
         }
 
         public void ShowCommands(List<DebugCommand> commands) {
+            int currentRow = dataGridView1.FirstDisplayedScrollingRowIndex;
             dataGridView1.Rows.Clear();
 
             foreach (var command in commands) {
@@ -24,6 +25,9 @@ namespace _8bitVonNeiman.Debugger.View {
                 }
                 int index = dataGridView1.Rows.Add(command.Selected ? ">" : "", command.Address.ToString("X"), commandName, command.Command);
                 dataGridView1.Rows[index].Cells[0].Style.BackColor = command.HasBreakpoint ? Color.Red : Color.White;
+            }
+            if (0 <= currentRow && currentRow < dataGridView1.RowCount) {
+                dataGridView1.FirstDisplayedScrollingRowIndex = currentRow;
             }
         }
 
