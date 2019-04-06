@@ -18,8 +18,8 @@ namespace _8bitVonNeiman.Controller {
             return compilerController;
         }
 
-        public static MemoryController GetMemoryController() {
-            var memoryController = new MemoryController();
+        public static MemoryController GetMemoryController(IMemoryControllerOutput output) {
+            var memoryController = new MemoryController(output);
             return memoryController;
         }
 

@@ -155,6 +155,7 @@
     <Compile Include="InterruptionController\IInterruptionControllerInput.cs" />
     <Compile Include="InterruptionController\InterruptionController.cs" />
     <Compile Include="Memory\IMemoryControllerInput.cs" />
+    <Compile Include="Memory\IMemoryControllerOutput.cs" />
     <Compile Include="Memory\MemoryController.cs" />
     <Compile Include="Memory\MemoryFileHandler.cs" />
     <Compile Include="Memory\View\IMemoryFormOutput.cs" />

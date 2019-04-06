@@ -32,6 +32,18 @@ namespace _8bitVonNeiman.Memory.View {
             MessageBox.Show(text);
         }
 
+        public void ScrollToSegment(int segment) {
+            if (0 <= segment && segment <= memoryDataGridView.RowCount / 16) {
+                memoryDataGridView.FirstDisplayedScrollingRowIndex = segment * 16;
+            }
+        }
+
+        public void ScrollToEndOfSegment(int segment) {
+            if (0 <= segment && segment <= memoryDataGridView.RowCount / 16 - 1) {
+                memoryDataGridView.FirstDisplayedScrollingRowIndex = (segment + 1) * 16 - memoryDataGridView.DisplayedRowCount(false) - 1;
+            }
+        }
+
         private void clearMemoryButton_Click(object sender, EventArgs e) {
             _output.ClearMemoryClicked();
         }

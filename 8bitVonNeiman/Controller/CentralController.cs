@@ -11,7 +11,7 @@ using _8bitVonNeiman.ExternalDevicesManager;
 using _8bitVonNeiman.InterruptionController;
 
 namespace _8bitVonNeiman.Controller {
-    public class CentralController: ApplicationContext, IComponentsFormOutput, ICompilerControllerOutput, ICpuModelOutput, IDebugModuleOutput, IExternalDevicesControllerOutput {
+    public class CentralController: ApplicationContext, IComponentsFormOutput, ICompilerControllerOutput, ICpuModelOutput, IMemoryControllerOutput, IDebugModuleOutput, IExternalDevicesControllerOutput {
 
         private readonly IMemoryControllerInput _memoryController;
         private readonly ComponentsForm _componentsForm;
@@ -24,11 +24,15 @@ namespace _8bitVonNeiman.Controller {
         private int _lastPcl;
         private int _lastCs;
 
+        public int CS { get { return _cpu.CS; } }
+        public int DS { get { return _cpu.DS; } }
+        public int SS { get { return _cpu.SS; } }
+
         public CentralController() {
             _componentsForm = new ComponentsForm(this);
             _componentsForm.Show();
             _compilerController = Assembly.GetCompilerController(this);
-            _memoryController = Assembly.GetMemoryController();
+            _memoryController = Assembly.GetMemoryController(this);
             _debugController = Assembly.GetDebugController(this);
             _interruptionController = Assembly.GetInterruptionController();
             _externalDevicesController = Assembly.GetExternalDevicesController(this);

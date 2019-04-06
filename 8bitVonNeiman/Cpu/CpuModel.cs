@@ -71,6 +71,10 @@ namespace _8bitVonNeiman.Cpu {
 
         private readonly MicroTimer _clockTimer;
 
+        public int CS { get { return _cs; } }
+        public int DS { get { return _ds; } }
+        public int SS { get { return _ss; } }
+
         public CpuModel(ICpuModelOutput output) {
             _output = output;
             Reset();

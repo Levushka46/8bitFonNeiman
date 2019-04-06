@@ -10,5 +10,9 @@ namespace _8bitVonNeiman.Cpu {
         void ChangeFormState();
         void Stop();
         void ExitThread();
+
+        int CS { get; }
+        int DS { get; }
+        int SS { get; }
     }
 }

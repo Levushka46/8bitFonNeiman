@@ -14,7 +14,10 @@ namespace _8bitVonNeiman.Memory {
         private Dictionary<int, ExtendedBitArray> _memory;
         private MemoryFileHandler _fileHandler = new MemoryFileHandler();
 
-        public MemoryController() {
+        private readonly IMemoryControllerOutput _output;
+
+        public MemoryController(IMemoryControllerOutput output) {
+            _output = output;
             _memory = new Dictionary<int, ExtendedBitArray>();
 
             // Установка начального адреса в ячейку вектора сброса
@@ -165,8 +168,21 @@ namespace _8bitVonNeiman.Memory {
 
         public void FormButtonClicked() {
             var form = new MemoryForm(this);
-            form.Show();
             _forms.Add(form);
+
+            int formsCount = _forms.Count;
+            switch (formsCount) {
+                case 2:
+                    int ds = _output.DS;
+                    form.ScrollToSegment(ds);
+                    break;
+                case 3:
+                    int ss = _output.SS;
+                    form.ScrollToEndOfSegment(ss);
+                    break;
+            }
+            form.Show();
+
             ShowMemory();
         }
 
