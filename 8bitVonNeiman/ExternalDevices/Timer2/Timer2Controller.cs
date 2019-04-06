@@ -9,6 +9,7 @@ using _8bitVonNeiman.ExternalDevices.Timer2.View;
 
 namespace _8bitVonNeiman.ExternalDevices.Timer2 {
     public class Timer2Controller : IDeviceInput, ITimer2FormOutput {
+        private static readonly double UPDATE_PERIOD_MILLIS = 100.0;
 
         private Timer2Form _form;
         private readonly IDeviceOutput _output;
@@ -33,6 +34,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
         private readonly MicroTimer _timer;
         private byte _internalCounter;
+
+        private double _lastUpdateMillis;
 
         public Timer2Controller(IDeviceOutput output) {
             _output = output;
@@ -67,7 +70,12 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
         }
 
         private void UpdateForm() {
+            double nowMillis = DateTime.Now.ToUniversalTime().Subtract(
+                new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                ).TotalMilliseconds;
+
             _form.ShowRegisters(_tcntH, _tcntL, _tiorH, _tiorL, _tscrH, _tscrL);
+            _lastUpdateMillis = nowMillis;
         }
 
         public override bool HasMemory(int address) {
@@ -354,6 +362,14 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
                         _tcntL = new ExtendedBitArray();
                     }
                 }
+            }
+
+            double nowMillis = DateTime.Now.ToUniversalTime().Subtract(
+                    new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                    ).TotalMilliseconds;
+            if (nowMillis - _lastUpdateMillis > UPDATE_PERIOD_MILLIS) {
+                _form.Invoke(_updateFormDelegate);
+                _lastUpdateMillis = nowMillis;
             }
         }
     }
