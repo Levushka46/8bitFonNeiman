@@ -386,20 +386,34 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
 
             _internalCounter = 0;
 
+            bool equalUpperLimit = _tcntL.NumValue() == upperLimit[0].NumValue() && _tcntH.NumValue() == upperLimit[1].NumValue();
+            bool equalLowerLimit = _tcntL.NumValue() == 0 && _tcntH.NumValue() == 0;
+
+            // Инкремент/декремент
             if (dec) {
                 if (_tcntL.Dec()) {
                     if (_tcntH.Dec()) {
                         // 0000 -> FFFF underflow
+                        Console.WriteLine("Shouldn't normally happen! 0000.Dec()");
                     }
                 }
             } else {
-                if (_tcntL.Inc()) {
+                if (equalUpperLimit) {
+                    _tcntL.And(new ExtendedBitArray());
+                    _tcntH.And(new ExtendedBitArray());
+
+                    SetOverflowFlag(true);
+                } else if (_tcntL.Inc()) {
                     if (_tcntH.Inc()) {
                         // FFFF -> 0000 overflow
+                        Console.WriteLine("Shouldn't normally happen! FFFF.Inc()");
                         SetOverflowFlag(true);
                     }
                 }
             }
+
+            equalUpperLimit = _tcntL.NumValue() == upperLimit[0].NumValue() && _tcntH.NumValue() == upperLimit[1].NumValue();
+            equalLowerLimit = _tcntL.NumValue() == 0 && _tcntH.NumValue() == 0;
 
             byte mode = GetMode();
             switch (mode) {
@@ -412,12 +426,72 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
                     }
                     break;
                 case 2: // быстрый ШИМ
-                    // как обычно
                     break;
                 case 3: // ШИМ с фазовой коррекцией
                     // проверка совпадения с верхним пределом
-                    if (_tcntL.NumValue() == upperLimit[0].NumValue() && _tcntH.NumValue() == upperLimit[1].NumValue()) {
+                    if (equalUpperLimit) {
                         dec = true;
+                    } else if (equalLowerLimit) {
+                        dec = false;
+                    }
+                    break;
+            }
+
+            bool equalTcntOcr = _tcntL.NumValue() == _ocrL.NumValue() && _tcntH.NumValue() == _ocrH.NumValue();
+            byte outputMode = GetOutputMode();
+            switch (outputMode) {
+                case 0:
+                    outputPinValue = false;
+                    break;
+                case 1: // инверсия при совпадении TCNT == OCR
+                    if (equalTcntOcr) {
+                        outputPinValue = !outputPinValue;
+                    }
+                    break;
+                case 2:
+                    if (mode < 2) { // Без ШИМ
+                        if (equalTcntOcr) { // сброс при совпадении
+                            outputPinValue = false;
+                        }
+                    }
+                    if (mode == 2) { // Быстрый ШИМ
+                        if (equalTcntOcr) { // сброс при совпадении
+                            outputPinValue = false;
+                        } else if (equalUpperLimit) { // установка на вершине счета
+                            outputPinValue = true;
+                        }
+                    }
+                    if (mode == 3) { // ШИМ с ФК
+                        if (equalTcntOcr) {
+                            if (dec) {
+                                outputPinValue = true; // установка при совпадении во время обратного счета
+                            } else {
+                                outputPinValue = false; // сброс при совпадении во время прямого счета
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    if (mode < 2) { // Без ШИМ
+                        if (equalTcntOcr) { // установка при совпадении
+                            outputPinValue = true;
+                        }
+                    }
+                    if (mode == 2) { // Быстрый ШИМ
+                        if (equalTcntOcr) { // установка при совпадении
+                            outputPinValue = true;
+                        } else if (equalUpperLimit) { // сброс на вершине счета
+                            outputPinValue = false;
+                        }
+                    }
+                    if (mode == 3) { // ШИМ с ФК
+                        if (equalTcntOcr) {
+                            if (dec) {
+                                outputPinValue = false; // сброс при совпадении во время обратного счета
+                            } else {
+                                outputPinValue = true; // установка при совпадении во время прямого счета
+                            }
+                        }
                     }
                     break;
             }
