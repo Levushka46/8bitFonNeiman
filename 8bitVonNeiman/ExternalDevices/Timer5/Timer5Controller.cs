@@ -26,7 +26,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
         private ExtendedBitArray _icrH = new ExtendedBitArray();
         private ExtendedBitArray _icrL = new ExtendedBitArray();
 
-        private ExtendedBitArray _tscrH = new ExtendedBitArray(0x10);
+        private ExtendedBitArray _tscrH = new ExtendedBitArray();
         private ExtendedBitArray _tscrL = new ExtendedBitArray();
 
         private ExtendedBitArray _hBuffer = new ExtendedBitArray();
@@ -218,7 +218,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
             _icrH = new ExtendedBitArray();
             _icrL = new ExtendedBitArray();
 
-            _tscrH = new ExtendedBitArray(0x10);
+            _tscrH = new ExtendedBitArray();
             _tscrL = new ExtendedBitArray();
 
             _hBuffer = new ExtendedBitArray();
@@ -372,7 +372,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
             if (divider == 0) {
                 _timer.Enabled = false;
             } else {
-                _timer.Enabled = IsEnabled();
+                _timer.Enabled = true;
             }
             upperLimit = GetUpperLimit();
 
@@ -414,11 +414,12 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
 
             equalUpperLimit = _tcntL.NumValue() == upperLimit[0].NumValue() && _tcntH.NumValue() == upperLimit[1].NumValue();
             equalLowerLimit = _tcntL.NumValue() == 0 && _tcntH.NumValue() == 0;
+            bool equalTcntOcr = _tcntL.NumValue() == _ocrL.NumValue() && _tcntH.NumValue() == _ocrH.NumValue();
 
             byte mode = GetMode();
             switch (mode) {
                 case 1: // сброс при совпадении
-                    if (_tcntL.NumValue() == _ocrL.NumValue() && _tcntH.NumValue() == _ocrH.NumValue()) {
+                    if (equalTcntOcr) {
                         SetComparisonFlag(true);
 
                         _tcntH = new ExtendedBitArray();
@@ -437,7 +438,6 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
                     break;
             }
 
-            bool equalTcntOcr = _tcntL.NumValue() == _ocrL.NumValue() && _tcntH.NumValue() == _ocrH.NumValue();
             byte outputMode = GetOutputMode();
             switch (outputMode) {
                 case 0:

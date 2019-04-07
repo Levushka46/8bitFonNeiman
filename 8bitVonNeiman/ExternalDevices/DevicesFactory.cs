@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using _8bitVonNeiman.ExternalDevices.Keyboard1;
 using _8bitVonNeiman.ExternalDevices.Display;
 using _8bitVonNeiman.ExternalDevices.Timer2;
+using _8bitVonNeiman.ExternalDevices.Timer5;
 
 namespace _8bitVonNeiman.ExternalDevices {
     public class DevicesFactory {
@@ -26,6 +27,10 @@ namespace _8bitVonNeiman.ExternalDevices {
 
         public IDeviceInput GetTimer2() {
             return new Timer2Controller(_output);
+        }
+
+        public IDeviceInput GetTimer5() {
+            return new Timer5Controller(_output);
         }
     }
 }

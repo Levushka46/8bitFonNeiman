@@ -35,5 +35,9 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
         private void addTimer2Button_Click(object sender, EventArgs e) {
             _output.AddTimer2();
         }
+
+        private void addTimer5Button_Click(object sender, EventArgs e) {
+            _output.AddTimer5();
+        }
     }
 }
