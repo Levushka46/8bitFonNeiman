@@ -22,6 +22,7 @@ namespace _8bitVonNeiman.Memory {
 
             // Установка начального адреса в ячейку вектора сброса
             SetMemory(new ExtendedBitArray(Constants.StartAddress), Constants.ResetVectorAddress);
+            SetMemory(new ExtendedBitArray(), Constants.ResetVectorAddress + 1);
         }
 
         /// Добавляет переданную память к текущей
@@ -129,6 +130,7 @@ namespace _8bitVonNeiman.Memory {
 
             // Установка начального адреса по умолчанию в ячейку вектора сброса
             SetMemory(new ExtendedBitArray(Constants.StartAddress), Constants.ResetVectorAddress);
+            SetMemory(new ExtendedBitArray(0), Constants.ResetVectorAddress + 1);
 
             ShowMemory();
         }

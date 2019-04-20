@@ -307,10 +307,18 @@ namespace _8bitVonNeiman.Cpu {
                     _y45();
                     _y4();
 
-                    // pcl := M(cs.IRQ)
+                    // cr := M(cs.IRQ)
                     _y65();
                     _y1();
-                    _y33();
+                    _y26();
+                    _y70();
+                    _y1();
+                    _y27();
+
+                    // cs.pcl = cr[1][1..0].cr[0]
+                    _y32();
+                    _y30();
+
                     _flags.I = false;
                 }
             }
@@ -1388,7 +1396,7 @@ namespace _8bitVonNeiman.Cpu {
         }
 
         private void _y65() {
-            _rab = _output.AcknowledgeInterruption() + (_cs << Constants.WordSize);
+            _rab = _output.AcknowledgeInterruption() * 2 + (_cs << Constants.WordSize);
         }
 
         private void _y66() {
@@ -1409,6 +1417,10 @@ namespace _8bitVonNeiman.Cpu {
         private void _y69() {
             var bitNumber = _cr[1].NumValue() & 0x7;
             SetExternalMemoryBit(_rdb[0], _rab, bitNumber);
+        }
+
+        private void _y70() {
+            _rab++;
         }
 
         #endregion
