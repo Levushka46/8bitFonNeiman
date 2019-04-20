@@ -14,8 +14,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
         private Timer5Form _form;
         private readonly IDeviceOutput _output;
 
-        private int _baseAddress = 20;
-        private byte _irq = 2;
+        private int _baseAddress = 30;
+        private byte _irq = 3;
 
         private ExtendedBitArray _tcntH = new ExtendedBitArray();
         private ExtendedBitArray _tcntL = new ExtendedBitArray();
