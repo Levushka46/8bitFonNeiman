@@ -108,13 +108,14 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
                     break;
                 case 6:
                     _tscrL = memory;
-                    var value = _hBuffer.NumValue() & 0x1F | _tscrH.NumValue() & 0xE0;
+                    break;
+                case 7:
+                    var value = memory.NumValue() & 0x1F | _tscrH.NumValue() & 0xE0;
                     _tscrH = new ExtendedBitArray(value);
                     break;
                 case 1:
                 case 3:
                 case 5:
-                case 7:
                     _hBuffer = new ExtendedBitArray(memory);
                     break;
             }
