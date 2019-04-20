@@ -210,6 +210,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
         }
 
         public void ResetButtonClicked() {
+            _timer.Abort();
+
             _tcntH = new ExtendedBitArray();
             _tcntL = new ExtendedBitArray();
 
