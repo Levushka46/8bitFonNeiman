@@ -38,5 +38,10 @@ namespace _8bitVonNeiman.Controller.View {
         private void openAllButton_Click(object sender, EventArgs e) {
             _output.OpenAllButtonClicked();
         }
+
+        private void aboutButton_Click(object sender, EventArgs e) {
+            AboutBox about = new AboutBox();
+            about.ShowDialog();
+        }
     }
 }

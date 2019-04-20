@@ -29,6 +29,7 @@
             this.debugButton = new System.Windows.Forms.Button();
             this.externalDevicesManagerButton = new System.Windows.Forms.Button();
             this.openAllButton = new System.Windows.Forms.Button();
+            this.aboutButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // editorButton
@@ -91,11 +92,22 @@
             this.openAllButton.UseVisualStyleBackColor = true;
             this.openAllButton.Click += new System.EventHandler(this.openAllButton_Click);
             // 
+            // aboutButton
+            // 
+            this.aboutButton.Location = new System.Drawing.Point(12, 157);
+            this.aboutButton.Name = "aboutButton";
+            this.aboutButton.Size = new System.Drawing.Size(176, 23);
+            this.aboutButton.TabIndex = 6;
+            this.aboutButton.Text = "О программе";
+            this.aboutButton.UseVisualStyleBackColor = true;
+            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
+            // 
             // ComponentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.aboutButton);
             this.Controls.Add(this.openAllButton);
             this.Controls.Add(this.externalDevicesManagerButton);
             this.Controls.Add(this.debugButton);
@@ -119,6 +131,7 @@
         private System.Windows.Forms.Button debugButton;
 		private System.Windows.Forms.Button externalDevicesManagerButton;
         private System.Windows.Forms.Button openAllButton;
+        private System.Windows.Forms.Button aboutButton;
     }
 }
 
