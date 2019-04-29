@@ -100,7 +100,7 @@ namespace _8bitVonNeiman.Cpu {
             }
             if ((mask & 8) != 0) {
                 int oldLow = _state.NumValue() & 15;
-                int argLow = arg?.NumValue() ?? 0 & 15;
+                int argLow = (arg?.NumValue() ?? 0) & 15;
                 int newLow = newState.NumValue() & 15;
                 if (command == "add") {
                     A = oldLow + argLow > 15;

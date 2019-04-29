@@ -887,10 +887,12 @@ namespace _8bitVonNeiman.Cpu {
                 if (temp.NumValue() > 9 || _flags.A) {
                     _y19();
                 }
+                temp = new ExtendedBitArray(_acc);
+                temp.And(new ExtendedBitArray("11110000"));
                 if (temp.NumValue() > 144 || _flags.C) {
                     _y20();
                 }
-                _flags.UpdateFlags(_acc, "daa");
+                _flags.UpdateFlags(_acc, "daa", _flags.C);
             }
 
             //DSA
@@ -902,7 +904,7 @@ namespace _8bitVonNeiman.Cpu {
                 if (_flags.C) {
                     _y22();
                 }
-                _flags.UpdateFlags(_acc, "dsa");
+                _flags.UpdateFlags(_acc, "dsa", _flags.C);
             }
 
             //IN
@@ -1173,19 +1175,19 @@ namespace _8bitVonNeiman.Cpu {
         }
 
         private void _y19() {
-            _acc.Add(6);
+            _flags.C = _flags.C | _acc.Add(new ExtendedBitArray(6));
         }
 
         private void _y20() {
-            _acc.Add(96);
+            _flags.C = _flags.C | _acc.Add(new ExtendedBitArray(96));
         }
 
         private void _y21() {
-            _acc.Add(-6);
+            _acc.Sub(new ExtendedBitArray(6));
         }
 
         private void _y22() {
-            _acc.Add(-96);
+            _acc.Sub(new ExtendedBitArray(96));
         }
 
         private void _y23() {
