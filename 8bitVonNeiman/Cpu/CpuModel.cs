@@ -454,7 +454,8 @@ namespace _8bitVonNeiman.Cpu {
             if (highHex[1] == '3') {
                 _flags.SetPreviousState(_acc);
                 _flags.SetArgument(_rdb);
-                bool overflow = _acc.Mul(_rdb);
+                _perform_mul();
+                bool overflow = false;
                 _flags.UpdateFlags(_acc, "mul", overflow);
                 ModifyRegister(lowBin);
                 return;
@@ -607,7 +608,8 @@ namespace _8bitVonNeiman.Cpu {
             if (highHex[1] == '3') {
                 _flags.SetPreviousState(_acc);
                 _flags.SetArgument(_rdb);
-                var overflow = _acc.Mul(_rdb);
+                _perform_mul();
+                var overflow = false;
                 _flags.UpdateFlags(_acc, "mul", overflow);
                 return;
             }
@@ -1426,5 +1428,11 @@ namespace _8bitVonNeiman.Cpu {
         }
 
         #endregion
+
+        private void _perform_mul() {
+            int result = _acc.NumValue() * _rdb.NumValue();
+            _registers[0] = new ExtendedBitArray(result & 0xFF);
+            _registers[1] = new ExtendedBitArray((result >> 8) & 0xFF);
+        }
     }
 }
