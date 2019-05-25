@@ -23,10 +23,10 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.registersGroupBox = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.r7TextBox = new System.Windows.Forms.TextBox();
@@ -54,7 +54,6 @@
             this.drHexTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
-            this.crBinTextBox = new System.Windows.Forms.TextBox();
             this.crHexTextBox = new System.Windows.Forms.TextBox();
             this.pswDataGridView = new System.Windows.Forms.DataGridView();
             this.label12 = new System.Windows.Forms.Label();
@@ -66,17 +65,16 @@
             this.splTextBox = new System.Windows.Forms.TextBox();
             this.resetButton = new System.Windows.Forms.Button();
             this.tickButton = new System.Windows.Forms.Button();
-            this.checkButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.saveAsButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.registersGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pswDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.srDataGridView)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // registersGroupBox
@@ -307,6 +305,7 @@
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.accBinTextBox);
             this.panel1.Controls.Add(this.accHexTextBox);
@@ -330,7 +329,7 @@
             this.accBinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.accBinTextBox.BackColor = System.Drawing.Color.White;
             this.accBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.accBinTextBox.Location = new System.Drawing.Point(9, 72);
+            this.accBinTextBox.Location = new System.Drawing.Point(9, 70);
             this.accBinTextBox.Name = "accBinTextBox";
             this.accBinTextBox.ReadOnly = true;
             this.accBinTextBox.Size = new System.Drawing.Size(93, 26);
@@ -344,7 +343,7 @@
             this.accHexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.accHexTextBox.BackColor = System.Drawing.Color.White;
             this.accHexTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.accHexTextBox.Location = new System.Drawing.Point(9, 12);
+            this.accHexTextBox.Location = new System.Drawing.Point(9, 10);
             this.accHexTextBox.Name = "accHexTextBox";
             this.accHexTextBox.ReadOnly = true;
             this.accHexTextBox.Size = new System.Drawing.Size(93, 26);
@@ -355,6 +354,7 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.drBinTextBox);
             this.panel2.Controls.Add(this.drHexTextBox);
@@ -378,7 +378,7 @@
             this.drBinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.drBinTextBox.BackColor = System.Drawing.Color.White;
             this.drBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.drBinTextBox.Location = new System.Drawing.Point(9, 72);
+            this.drBinTextBox.Location = new System.Drawing.Point(9, 70);
             this.drBinTextBox.Name = "drBinTextBox";
             this.drBinTextBox.ReadOnly = true;
             this.drBinTextBox.Size = new System.Drawing.Size(93, 26);
@@ -392,7 +392,7 @@
             this.drHexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.drHexTextBox.BackColor = System.Drawing.Color.White;
             this.drHexTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.drHexTextBox.Location = new System.Drawing.Point(9, 12);
+            this.drHexTextBox.Location = new System.Drawing.Point(9, 10);
             this.drHexTextBox.Name = "drHexTextBox";
             this.drHexTextBox.ReadOnly = true;
             this.drHexTextBox.Size = new System.Drawing.Size(93, 26);
@@ -403,47 +403,33 @@
             // 
             // panel3
             // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label11);
-            this.panel3.Controls.Add(this.crBinTextBox);
             this.panel3.Controls.Add(this.crHexTextBox);
             this.panel3.Location = new System.Drawing.Point(22, 282);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(202, 111);
+            this.panel3.Size = new System.Drawing.Size(111, 82);
             this.panel3.TabIndex = 20;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(85, 44);
+            this.label11.Location = new System.Drawing.Point(38, 45);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(32, 20);
             this.label11.TabIndex = 18;
             this.label11.Text = "CR";
-            // 
-            // crBinTextBox
-            // 
-            this.crBinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.crBinTextBox.BackColor = System.Drawing.Color.White;
-            this.crBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.crBinTextBox.Location = new System.Drawing.Point(9, 72);
-            this.crBinTextBox.Name = "crBinTextBox";
-            this.crBinTextBox.ReadOnly = true;
-            this.crBinTextBox.Size = new System.Drawing.Size(184, 26);
-            this.crBinTextBox.TabIndex = 17;
-            this.crBinTextBox.TabStop = false;
-            this.crBinTextBox.Text = "0000 0000 0000 0000";
-            this.crBinTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // crHexTextBox
             // 
             this.crHexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.crHexTextBox.BackColor = System.Drawing.Color.White;
             this.crHexTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.crHexTextBox.Location = new System.Drawing.Point(9, 12);
+            this.crHexTextBox.Location = new System.Drawing.Point(9, 8);
             this.crHexTextBox.Name = "crHexTextBox";
             this.crHexTextBox.ReadOnly = true;
-            this.crHexTextBox.Size = new System.Drawing.Size(184, 26);
+            this.crHexTextBox.Size = new System.Drawing.Size(93, 26);
             this.crHexTextBox.TabIndex = 16;
             this.crHexTextBox.TabStop = false;
             this.crHexTextBox.Text = "FFFF";
@@ -452,24 +438,24 @@
             // pswDataGridView
             // 
             this.pswDataGridView.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.pswDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.pswDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.pswDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.pswDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            this.pswDataGridView.Location = new System.Drawing.Point(165, 23);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.pswDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.pswDataGridView.Location = new System.Drawing.Point(165, 59);
             this.pswDataGridView.Name = "pswDataGridView";
             this.pswDataGridView.ReadOnly = true;
             this.pswDataGridView.RowHeadersVisible = false;
@@ -481,7 +467,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(262, 95);
+            this.label12.Location = new System.Drawing.Point(267, 34);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(45, 20);
             this.label12.TabIndex = 22;
@@ -490,24 +476,24 @@
             // srDataGridView
             // 
             this.srDataGridView.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.srDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.srDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.srDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.srDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
-            this.srDataGridView.Location = new System.Drawing.Point(165, 123);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.srDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            this.srDataGridView.Location = new System.Drawing.Point(164, 182);
             this.srDataGridView.Name = "srDataGridView";
             this.srDataGridView.ReadOnly = true;
             this.srDataGridView.RowHeadersVisible = false;
@@ -519,7 +505,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(283, 145);
+            this.label13.Location = new System.Drawing.Point(204, 159);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 20);
             this.label13.TabIndex = 24;
@@ -530,7 +516,7 @@
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(207, 199);
+            this.label14.Location = new System.Drawing.Point(308, 159);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(39, 20);
             this.label14.TabIndex = 17;
@@ -541,7 +527,7 @@
             this.pclTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pclTextBox.BackColor = System.Drawing.Color.White;
             this.pclTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.pclTextBox.Location = new System.Drawing.Point(165, 196);
+            this.pclTextBox.Location = new System.Drawing.Point(309, 200);
             this.pclTextBox.Name = "pclTextBox";
             this.pclTextBox.ReadOnly = true;
             this.pclTextBox.Size = new System.Drawing.Size(36, 26);
@@ -555,7 +541,7 @@
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(207, 231);
+            this.label15.Location = new System.Drawing.Point(369, 159);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(39, 20);
             this.label15.TabIndex = 26;
@@ -566,7 +552,7 @@
             this.splTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.splTextBox.BackColor = System.Drawing.Color.White;
             this.splTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.splTextBox.Location = new System.Drawing.Point(165, 228);
+            this.splTextBox.Location = new System.Drawing.Point(369, 200);
             this.splTextBox.Name = "splTextBox";
             this.splTextBox.ReadOnly = true;
             this.splTextBox.Size = new System.Drawing.Size(36, 26);
@@ -577,7 +563,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(340, 370);
+            this.resetButton.Location = new System.Drawing.Point(322, 328);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 2;
@@ -587,47 +573,17 @@
             // 
             // tickButton
             // 
-            this.tickButton.Location = new System.Drawing.Point(240, 370);
+            this.tickButton.Location = new System.Drawing.Point(322, 294);
             this.tickButton.Name = "tickButton";
             this.tickButton.Size = new System.Drawing.Size(75, 23);
             this.tickButton.TabIndex = 1;
-            this.tickButton.Text = "Такт";
+            this.tickButton.Text = "Шаг";
             this.tickButton.UseVisualStyleBackColor = true;
             this.tickButton.Click += new System.EventHandler(this.tickButton_Click);
             // 
-            // checkButton
-            // 
-            this.checkButton.Location = new System.Drawing.Point(322, 242);
-            this.checkButton.Name = "checkButton";
-            this.checkButton.Size = new System.Drawing.Size(93, 23);
-            this.checkButton.TabIndex = 27;
-            this.checkButton.Text = "Проверить";
-            this.checkButton.UseVisualStyleBackColor = true;
-            this.checkButton.Click += new System.EventHandler(this.checkButton_Click);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(322, 271);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(93, 23);
-            this.saveButton.TabIndex = 28;
-            this.saveButton.Text = "Сохранить";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // saveAsButton
-            // 
-            this.saveAsButton.Location = new System.Drawing.Point(322, 300);
-            this.saveAsButton.Name = "saveAsButton";
-            this.saveAsButton.Size = new System.Drawing.Size(93, 23);
-            this.saveAsButton.TabIndex = 29;
-            this.saveAsButton.Text = "Сохранить как";
-            this.saveAsButton.UseVisualStyleBackColor = true;
-            this.saveAsButton.Click += new System.EventHandler(this.saveAsButton_Click);
-            // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(240, 341);
+            this.runButton.Location = new System.Drawing.Point(18, 11);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(75, 23);
             this.runButton.TabIndex = 30;
@@ -637,7 +593,7 @@
             // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(340, 341);
+            this.stopButton.Location = new System.Drawing.Point(18, 45);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 23);
             this.stopButton.TabIndex = 31;
@@ -645,16 +601,22 @@
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.runButton);
+            this.panel4.Controls.Add(this.stopButton);
+            this.panel4.Location = new System.Drawing.Point(165, 282);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(111, 82);
+            this.panel4.TabIndex = 32;
+            // 
             // CpuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(436, 503);
-            this.Controls.Add(this.stopButton);
-            this.Controls.Add(this.runButton);
-            this.Controls.Add(this.saveAsButton);
-            this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.checkButton);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.tickButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.label15);
@@ -684,6 +646,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pswDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.srDataGridView)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -718,7 +681,6 @@
         private System.Windows.Forms.TextBox drHexTextBox;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox crBinTextBox;
         private System.Windows.Forms.TextBox crHexTextBox;
         private System.Windows.Forms.DataGridView pswDataGridView;
         private System.Windows.Forms.Label label12;
@@ -730,10 +692,8 @@
         private System.Windows.Forms.TextBox splTextBox;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button tickButton;
-        private System.Windows.Forms.Button checkButton;
-        private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button saveAsButton;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Panel panel4;
     }
 }
