@@ -37,7 +37,7 @@ namespace _8bitVonNeiman.Cpu.View {
 
             pclTextBox.Text = state.Pcl.ToString("X2");
             splTextBox.Text = state.Spl.ToString("X2");
-            crHexTextBox.Text = new string(state.Cr[1].ToHexString().Reverse().ToArray()) + new string(state.Cr[0].ToHexString().Reverse().ToArray());
+            crHexTextBox.Text = new string(state.Cr[1].ToHexString().ToArray()) + new string(state.Cr[0].ToHexString().ToArray());
 
             r0TextBox.Text = state.Registers[0].ToHexString();
             r1TextBox.Text = state.Registers[1].ToHexString();
