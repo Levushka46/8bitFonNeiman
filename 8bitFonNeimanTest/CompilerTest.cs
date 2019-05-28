@@ -98,7 +98,7 @@ namespace _8bitFonNeimanTest {
         [TestMethod]
         public void TestHandleDirective_whenGoToAddress_thenAddressChanged() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/n 100";
+            var line = ".org 100";
             var env = new CompilerEnvironment();
             env.CurrentAddress = 10;
 
@@ -111,7 +111,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenGoToTooBigAddress_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/n 1000";
+            var line = ".org 1000";
             var env = new CompilerEnvironment();
             env.CurrentAddress = 10;
 
@@ -122,7 +122,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenGoToIncorrectAddress_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/n 10x00";
+            var line = ".org 10x00";
             var env = new CompilerEnvironment();
             env.CurrentAddress = 10;
 
@@ -132,7 +132,7 @@ namespace _8bitFonNeimanTest {
         [TestMethod]
         public void TestHandleDirective_whenSetCodeSegment_thenSegmentChanged() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/c2";
+            var line = ".c2";
             var env = new CompilerEnvironment();
             env.DefaultCodeSegment = 1;
 
@@ -145,7 +145,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenSetTooBigCodeSegment_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/c4";
+            var line = ".c4";
             var env = new CompilerEnvironment();
 
             compilerModel.HandleDirective(line, env);
@@ -155,7 +155,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenSetIncorrectCodeSegment_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/cx2";
+            var line = ".cx2";
             var env = new CompilerEnvironment();
 
             compilerModel.HandleDirective(line, env);
@@ -164,7 +164,7 @@ namespace _8bitFonNeimanTest {
         [TestMethod]
         public void TestHandleDirective_whenSetDataSegment_thenSegmentChanged() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/d2";
+            var line = ".d2";
             var env = new CompilerEnvironment();
             env.DefaultDataSegment = 1;
 
@@ -177,7 +177,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenSetTooBigDataSegment_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/d4";
+            var line = ".d4";
             var env = new CompilerEnvironment();
 
             compilerModel.HandleDirective(line, env);
@@ -187,7 +187,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenSetIncorrectDataSegment_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/dx2";
+            var line = ".dx2";
             var env = new CompilerEnvironment();
 
             compilerModel.HandleDirective(line, env);
@@ -196,7 +196,7 @@ namespace _8bitFonNeimanTest {
         [TestMethod]
         public void TestHandleDirective_whenSetStackSegment_thenSegmentChanged() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/S2";
+            var line = ".S2";
             var env = new CompilerEnvironment();
             env.DefaultStackSegment = 1;
 
@@ -209,7 +209,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenSetTooBigStackSegment_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/S4";
+            var line = ".S4";
             var env = new CompilerEnvironment();
 
             compilerModel.HandleDirective(line, env);
@@ -219,7 +219,7 @@ namespace _8bitFonNeimanTest {
         [ExpectedException(typeof(CompilationErrorExcepton))]
         public void TestHandleDirective_whenSetIncorrectStackSegment_thenThrowException() {
             var compilerModel = new CompilerModel(null, null, null);
-            var line = "/sx2";
+            var line = ".sx2";
             var env = new CompilerEnvironment();
 
             compilerModel.HandleDirective(line, env);
