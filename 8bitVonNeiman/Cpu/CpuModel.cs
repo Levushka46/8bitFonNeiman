@@ -354,10 +354,8 @@ namespace _8bitVonNeiman.Cpu {
             if (highBin.StartsWith("0001")) {
                 _y63();
                 _y2();
-                _flags.SetPreviousState(_rdb);
                 var overflow = _rdb.Dec();
-                _flags.UpdateFlags(_rdb, "dec", overflow);
-                if (!_flags.Z) {
+                if (_rdb.NumValue() != 0) {
                     Jump();
                 }
                 _y5();
