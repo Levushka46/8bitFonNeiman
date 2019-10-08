@@ -350,7 +350,7 @@ namespace _8bitVonNeiman.Cpu {
                 ProcessJumpCommand(highBin);
             }
 
-            //DJRNZ
+            //DJRNZ не обновляет флаги
             if (highBin.StartsWith("0001")) {
                 _y63();
                 _y2();
