@@ -224,7 +224,7 @@ namespace _8bitVonNeiman.Debug {
                     return "DIV";
                 }
                 if (highHex[1] == '5') {
-                    return "ADD";
+                    return "AND";
                 }
                 if (highHex[1] == '6') {
                     return "OR";
