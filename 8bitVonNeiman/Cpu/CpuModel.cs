@@ -556,6 +556,7 @@ namespace _8bitVonNeiman.Cpu {
                 }
                 _flags.UpdateFlags(_acc, "subb", overflow, _rdb);
                 ModifyRegister(lowBin);
+                return; //проверить работу!
             }
         }
 
@@ -753,7 +754,7 @@ namespace _8bitVonNeiman.Cpu {
             }
             //JNC
             if (highBin.StartsWith("001001")) {
-                if (!_flags.Z) {
+                if (!_flags.C) {
                     Jump();
                 }
                 return;

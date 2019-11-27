@@ -339,38 +339,54 @@ namespace _8bitVonNeiman.Debug {
             //@R-    - 011
             //-@R    - 111
             // 041537
-            if (highBin.StartsWith("0101") || highBin.StartsWith("1111")) {
-                int addressType = lowCommand.NumValue() >> 4;
-                int register = lowCommand.NumValue() & 0x0F;
-                string registerFormat = "R{0}";
-                switch (addressType) {
-                    case 0:
-                        registerFormat = "R{0}";
-                        break;
-                    case 1:
-                        registerFormat = "@R{0}";
-                        break;
-                    case 4:
-                        registerFormat = "@R{0}+";
-                        break;
-                    case 5:
-                        registerFormat = "+@R{0}";
-                        break;
-                    case 6:
-                        registerFormat = "@R{0}-";
-                        break;
-                    case 7:
-                        registerFormat = "-@R{0}";
-                        break;
+            if (highBin.StartsWith("0101"))
+            {
+                //MOV R{0}, R{1}
+                if (highBin.StartsWith("01011111"))
+                {
+                    int registerSource = lowCommand.NumValue() >> 4;
+                    int registerDestination = lowCommand.NumValue() & 0x0F;
+                    string registerFormat = "R{0}, R{1}";
+                    return string.Format(registerFormat, registerDestination, registerSource);
                 }
-                return string.Format(registerFormat, register);
+                else
+                {
+                    int addressType = lowCommand.NumValue() >> 4;
+                    int register = lowCommand.NumValue() & 0x0F;
+                    string registerFormat = "R{0}";
+                    switch (addressType)
+                    {
+                        case 0:
+                            registerFormat = "R{0}";
+                            break;
+                        case 1:
+                            registerFormat = "@R{0}";
+                            break;
+                        case 4:
+                            registerFormat = "@R{0}+";
+                            break;
+                        case 5:
+                            registerFormat = "+@R{0}";
+                            break;
+                        case 6:
+                            registerFormat = "@R{0}-";
+                            break;
+                        case 7:
+                            registerFormat = "-@R{0}";
+                            break;
+                    }
+                    return string.Format(registerFormat, register);
+                }
             }
 
             // ОЗУ
-            if (highBin.StartsWith("011")) {
-                string addressOrConst = lowCommand.NumValue().ToString();
+            if (highBin.StartsWith("011"))
+            {
+            //Dec: lowCommand.NumValue().ToString(); 
+            //Hex: lowHex.ToString();
+                string addressOrConst = lowHex.ToString();
                 bool isConst = highBin.StartsWith("0111");
-                return (isConst ? "#" : "") + addressOrConst;
+                return (isConst ? "#0x" : "") + addressOrConst;
             }
 
             // Битовые команды
