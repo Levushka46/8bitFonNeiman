@@ -603,7 +603,7 @@ namespace _8bitVonNeiman.Cpu {
                 _flags.UpdateFlags(_acc, "sub", overflow, _rdb);
                 return;
             }
-            //MUL
+            //MUL //_perform_mul(); - вывод умножения в 0 и 1 регистры, и смена флага переполнения
             if (highHex[1] == '3') {
                 _flags.SetPreviousState(_acc);
                 _flags.SetArgument(_rdb);
@@ -612,7 +612,7 @@ namespace _8bitVonNeiman.Cpu {
                 _flags.UpdateFlags(_acc, "mul", overflow);
                 return;
             }
-            //DIV
+            //DIV  //тут аналогичной функции нет
             if (highHex[1] == '4') {
                 _flags.SetPreviousState(_acc);
                 _flags.SetArgument(_rdb);

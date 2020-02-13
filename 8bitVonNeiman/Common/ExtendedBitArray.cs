@@ -126,12 +126,14 @@ namespace _8bitVonNeiman.Common {
         /// <param name="array">Байт, на значение которого умножается текущий.</param>
         /// <returns>true, если переполнение произошло, false в ином случае.</returns>
         public bool Mul(ExtendedBitArray array) {
-            try {
-                checked {
-                    _data *= array._data;
-                }
+            try 
+            {
+                checked 
+                {_data *= array._data;}
                 return false;
-            } catch {
+            } 
+            catch 
+            {
                 _data *= array._data;
                 return true;
             }
@@ -141,8 +143,18 @@ namespace _8bitVonNeiman.Common {
         /// Делим слово на значение передаваемого слова. Генерирует <see cref="OverflowException"/> при переполнении.
         /// </summary>
         /// <param name="array">Байт, на значение которого умножается текущий.</param>
-        public void Div(ExtendedBitArray array) {
-            _data /= array._data;
+        public bool Div(ExtendedBitArray array) {
+            try
+            {
+                checked
+                { _data /= array._data; }
+                return false;
+            }
+            catch
+            {
+                _data /= array._data;
+                return true;
+            } 
         }
 
         /// <summary>

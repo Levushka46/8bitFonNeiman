@@ -624,7 +624,7 @@ namespace _8bitVonNeiman.Compiler.Model {
                     ["add"] = ADD,
                     ["sub"] = SUB,
                     ["mul"] = MUL,
-                    // ["div"] = DIV, // В данной сборке команда деления исключена из компилятора
+                    ["div"] = DIV, // В данной сборке команда деления исключена из компилятора
                     ["and"] = AND,
                     ["or"] = OR,
                     ["xor"] = XOR,
