@@ -556,7 +556,7 @@ namespace _8bitVonNeiman.Cpu {
                 }
                 _flags.UpdateFlags(_acc, "subb", overflow, _rdb);
                 ModifyRegister(lowBin);
-                return; //проверить работу!
+                return; 
             }
         }
 
@@ -683,12 +683,12 @@ namespace _8bitVonNeiman.Cpu {
                 return;
             }
             //SUBB A
-            if (highHex[1] == 'D') {
+            if (highHex[1] == 'E') {
                 _flags.SetPreviousState(_acc);
                 _flags.SetArgument(_rdb);
-                var overflow = _acc.Add(_rdb);
+                var overflow = _acc.Sub(_rdb);
                 if (_flags.C) {
-                    overflow |= _acc.Inc();
+                    overflow |= _acc.Dec();
                 }
                 _flags.UpdateFlags(_acc, "subb", overflow, _rdb);
                 return;
