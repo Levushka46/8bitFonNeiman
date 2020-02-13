@@ -214,7 +214,7 @@ namespace _8bitVonNeiman.Compiler.Model {
                 int segment = TryToGetSegmentFromDirecrive(line, env.GetCurrentLine());
                 env.DefaultDataSegment = segment;
 
-            } else if ((line[1] == 'D' || line[1] == 'd') && (line[2] == 'B' || line[2] == 'b')) {
+            } else if ((line[1] == 'D' || line[1] == 'd') && (line[2] == 'B' || line[2] == 'b')) { //работа дерективы .db 
                 string values = line.Substring(3);
                 string[] components = values.Split(',');
                 foreach (var i in components) {
