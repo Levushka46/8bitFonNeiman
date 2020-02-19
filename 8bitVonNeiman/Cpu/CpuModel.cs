@@ -914,9 +914,7 @@ namespace _8bitVonNeiman.Cpu {
             }
 
             //OUT
-            if (lowHex == "11") {
-
-            }
+            if (lowHex == "11") { }
 
             //ES
             if (lowHex == "12") {
@@ -938,6 +936,12 @@ namespace _8bitVonNeiman.Cpu {
                 _flags.SetPreviousState(_acc);
                 _y17();
                 _flags.UpdateFlags(_acc, "not");
+            }
+
+            //MOVAPSW 
+            if (lowHex == "16")
+            {
+                _y71(); 
             }
         }
 
@@ -1426,6 +1430,21 @@ namespace _8bitVonNeiman.Cpu {
             _rab++;
         }
 
+        private void _y71()
+        {
+            //_flags.Flags[5] = false;
+            _acc = new ExtendedBitArray()
+            {
+                [0] = _flags.Flags[0],
+                [1] = _flags.Flags[1],
+                [2] = _flags.Flags[2],
+                [3] = _flags.Flags[3],
+                [4] = _flags.Flags[4],
+                [5] = _flags.Flags[5],
+                [6] = _flags.Flags[6],
+                [7] = _flags.Flags[7]
+            };
+        }
         #endregion
 
         private void _perform_mul() {

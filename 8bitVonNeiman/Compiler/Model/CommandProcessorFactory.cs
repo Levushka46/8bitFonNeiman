@@ -50,7 +50,8 @@ namespace _8bitVonNeiman.Compiler.Model {
                     ["es"] = ES,
                     ["movasr"] = MOVASR,
                     ["movsra"] = MOVSRA,
-                    ["nota"] = NOTA
+                    ["nota"] = NOTA,
+                    ["movapsw"] = MOVAPSW
                 };
             }
 
@@ -233,6 +234,19 @@ namespace _8bitVonNeiman.Compiler.Model {
                 ValidateNoAddressCommand(args, "MOVSRA", env.GetCurrentLine());
                 var array = new ExtendedBitArray() {
                     [0] = true,
+                    [2] = true,
+                    [4] = true
+                };
+                env.SetByte(array);
+                env.SetByte(new ExtendedBitArray());
+            }
+
+            private static void MOVAPSW(string[] args, CompilerEnvironment env)
+            {
+                ValidateNoAddressCommand(args, "MOVAPSW", env.GetCurrentLine());
+                var array = new ExtendedBitArray()
+                {
+                    [1] = true,
                     [2] = true,
                     [4] = true
                 };

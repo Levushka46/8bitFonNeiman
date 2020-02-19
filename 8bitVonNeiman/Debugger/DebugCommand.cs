@@ -97,6 +97,9 @@ namespace _8bitVonNeiman.Debug {
                 if (lowHex == "15") {
                     return "NOTA";
                 }
+                if (lowHex == "16"){
+                    return "MOVAPSW";
+                }
             }
 
             // DJRNZ
