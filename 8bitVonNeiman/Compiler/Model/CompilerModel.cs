@@ -242,29 +242,57 @@ namespace _8bitVonNeiman.Compiler.Model {
 				foreach (var i in components)
 				{
 					string value = i.Trim();
-					string valueLow = (value[1] == 'x') ? "0x" + value.Substring(value.Length - 2) 
-														: "0b" + value.Substring(value.Length - 4);
-					string valueHigh = (value[1] == 'x') ? value.Substring(0,value.Length - 2)
-														: value.Substring(0, value.Length - 4);
-					int addressLow = CompilerSupport.ConvertLabelToFarAddress(valueLow, env);
-					int addressHigh = CompilerSupport.ConvertLabelToFarAddress(valueHigh, env);
-					if (addressLow != -1 && addressHigh != -1)
+					List<string> parameters = new List<string>();
+					//string[] parameters = new string[2];
+					//string parametr;
+					if (value[1] == 'x' && value.Length > 4)
 					{
-						addressLow = addressLow & 0xFF;
-						addressHigh = addressHigh & 0xFF;
-
-						env.SetByte(new ExtendedBitArray(addressLow));
-						env.SetByte(new ExtendedBitArray(addressHigh));
+						
+						parameters.Add("0x" + value.Substring(value.Length - 2));
+						parameters.Add(value.Substring(0, value.Length - 2));
+					}
+					else if (value[1] == 'b')
+					{
+						parameters.Add("0b" + value.Substring(value.Length - 4));
+						parameters.Add(value.Substring(0, value.Length - 4));
 					}
 					else
 					{
-						env.SetCommandWithoutLabel(new CompilerEnvironment.MemoryForLabel
+						parameters.Add(value);
+					}
+					foreach (var p in parameters)
+					{
+						int address = CompilerSupport.ConvertLabelToFarAddress(p, env);
+						if (address != -1)
 						{
-							HighBitArray = new ExtendedBitArray(),
-							LowBitArray = new ExtendedBitArray(),
-							Address = env.CurrentAddress,
-							SingleByte = true
-						}, value);
+							address = address & 0xFF;
+
+							env.SetByte(new ExtendedBitArray(address));
+						}
+						/*string valueLow = (value[1] == 'x') ? "0x" + value.Substring(value.Length - 2) //если 0х00 нужно обработаь
+															: "0b" + value.Substring(value.Length - 4);
+						string valueHigh = (value[1] == 'x') ? value.Substring(0,value.Length - 2)
+															: value.Substring(0, value.Length - 4);
+						int addressLow = CompilerSupport.ConvertLabelToFarAddress(valueLow, env);
+						int addressHigh = CompilerSupport.ConvertLabelToFarAddress(valueHigh, env);
+						if (addressLow != -1 && addressHigh != -1)
+						{
+							addressLow = addressLow & 0xFF;
+							addressHigh = addressHigh & 0xFF;
+
+							env.SetByte(new ExtendedBitArray(addressLow));
+							env.SetByte(new ExtendedBitArray(addressHigh));
+						}*/
+						else
+						{
+							env.SetCommandWithoutLabel(new CompilerEnvironment.MemoryForLabel
+							{
+								HighBitArray = new ExtendedBitArray(),
+								LowBitArray = new ExtendedBitArray(),
+								Address = env.CurrentAddress,
+								SingleByte = true
+							}, p);
+						}
 					}
 				}
 
