@@ -149,7 +149,7 @@ namespace _8bitVonNeiman.Debug {
             }
 
             // Регистровые команды
-            if (highBin.StartsWith("0101") || highBin.StartsWith("1111")) {
+            if (highBin.StartsWith("0101")) {
                 if (highHex[1] == 'F') {
                     return "MOV";
                 }
@@ -198,16 +198,22 @@ namespace _8bitVonNeiman.Debug {
                 if (highHex[1] == 'E') {
                     return "PUSH";
                 }
-                if (highHex == "F0") {
+                
+            }
+            //дополнительные регистровые
+            if (highBin.StartsWith("1111"))
+            {
+                if (highHex == "F0")
+                {
                     return "ADC";
                 }
-                if (highHex == "F1") {
+                if (highHex == "F1")
+                {
                     return "SUBB";
                 }
             }
-
-            // ОЗУ
-            if (highBin.StartsWith("011")) {
+                // ОЗУ
+                if (highBin.StartsWith("011")) {
                 if (highHex[1] == 'A') {
                     return "WR";
                 }
@@ -342,7 +348,7 @@ namespace _8bitVonNeiman.Debug {
             //@R-    - 011
             //-@R    - 111
             // 041537
-            if (highBin.StartsWith("0101"))
+            if (highBin.StartsWith("0101") || highBin.StartsWith("1111"))
             {
                 //MOV R{0}, R{1}
                 if (highBin.StartsWith("01011111"))
