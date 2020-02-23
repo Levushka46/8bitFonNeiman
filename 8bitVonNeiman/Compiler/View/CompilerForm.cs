@@ -14,6 +14,15 @@ namespace _8bitVonNeiman.Compiler.View {
             ResizeLinesCount();
             scintilla.Styles[Style.Default].Font = "Consolas";
             scintilla.Styles[Style.Default].Size = 10;
+            scintilla.Lexer = Lexer.Asm; //уставновка синтаксиса ASM
+            scintilla.Styles[Style.Asm.Comment].ForeColor = Color.Green;//коментарии
+            scintilla.Styles[Style.Asm.Number].ForeColor = Color.Blue;//числа
+            scintilla.Styles[Style.Asm.Operator].ForeColor = Color.Blue;//операторы
+            scintilla.Styles[Style.Asm.Register].ForeColor = Color.Blue;//регистры
+            scintilla.Styles[Style.Asm.Directive].ForeColor = Color.Red;//директивы процессора
+            scintilla.SetKeywords(2, "r0 r1 r2 r3 r4 r5 r6 r7 @r0 @r1 @r2 @r3 @r4 @r5 @r6 @r7");
+            scintilla.SetKeywords(3, ".org .db .dw .c .d .s");
+            //MessageBox.Show(scintilla.DescribeKeywordSets());//наборы ключевых слов
         }
 
         public void SetCode(string code) {
