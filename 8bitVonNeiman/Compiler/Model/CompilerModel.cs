@@ -243,22 +243,19 @@ namespace _8bitVonNeiman.Compiler.Model {
 				{
 					string value = i.Trim();
 					List<string> parameters = new List<string>();
-					//string[] parameters = new string[2];
-					//string parametr;
-					if (value[1] == 'x' && value.Length > 4)
+					if (value[1] == 'x' && value.Length > 4)//если адрес формата 0xFFFF или 0xFFF, раскладываем на 2 байта
 					{
-						
 						parameters.Add("0x" + value.Substring(value.Length - 2));
 						parameters.Add(value.Substring(0, value.Length - 2));
 					}
-					else if (value[1] == 'b')
+					else if (value[1] == 'b')//если 0b0000000000000000
 					{
 						parameters.Add("0b" + value.Substring(value.Length - 4));
 						parameters.Add(value.Substring(0, value.Length - 4));
 					}
 					else
 					{
-						parameters.Add(value);
+						parameters.Add(value);//если 0xFF или Метка
 					}
 					foreach (var p in parameters)
 					{
@@ -266,23 +263,8 @@ namespace _8bitVonNeiman.Compiler.Model {
 						if (address != -1)
 						{
 							address = address & 0xFF;
-
 							env.SetByte(new ExtendedBitArray(address));
 						}
-						/*string valueLow = (value[1] == 'x') ? "0x" + value.Substring(value.Length - 2) //если 0х00 нужно обработаь
-															: "0b" + value.Substring(value.Length - 4);
-						string valueHigh = (value[1] == 'x') ? value.Substring(0,value.Length - 2)
-															: value.Substring(0, value.Length - 4);
-						int addressLow = CompilerSupport.ConvertLabelToFarAddress(valueLow, env);
-						int addressHigh = CompilerSupport.ConvertLabelToFarAddress(valueHigh, env);
-						if (addressLow != -1 && addressHigh != -1)
-						{
-							addressLow = addressLow & 0xFF;
-							addressHigh = addressHigh & 0xFF;
-
-							env.SetByte(new ExtendedBitArray(addressLow));
-							env.SetByte(new ExtendedBitArray(addressHigh));
-						}*/
 						else
 						{
 							env.SetCommandWithoutLabel(new CompilerEnvironment.MemoryForLabel
