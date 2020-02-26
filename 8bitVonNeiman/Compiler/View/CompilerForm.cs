@@ -15,7 +15,7 @@ namespace _8bitVonNeiman.Compiler.View {
             scintilla.Styles[Style.Default].Font = "Consolas";
             scintilla.Styles[Style.Default].Size = 10;
             scintilla.Lexer = Lexer.Asm; //уставновка синтаксиса ASM
-            scintilla.Styles[Style.Asm.Comment].ForeColor = Color.Green;//коментарии
+            scintilla.Styles[Style.Asm.Comment].ForeColor = Color.Green;//комментарии
             scintilla.Styles[Style.Asm.Number].ForeColor = Color.Blue;//числа
             scintilla.Styles[Style.Asm.Operator].ForeColor = Color.Blue;//операторы
             scintilla.Styles[Style.Asm.Register].ForeColor = Color.Blue;//регистры
