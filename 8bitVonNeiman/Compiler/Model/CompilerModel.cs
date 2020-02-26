@@ -243,19 +243,20 @@ namespace _8bitVonNeiman.Compiler.Model {
 				{
 					string value = i.Trim();
 					List<string> parameters = new List<string>();
-					if (value[1] == 'x' && value.Length > 4)//если адрес формата 0xFFFF или 0xFFF, раскладываем на 2 байта
+					if (value.StartsWith("0x") && value.Length > 4)//если адрес формата 0xFFFF или 0xFFF, раскладываем на 2 байта
 					{
 						parameters.Add("0x" + value.Substring(value.Length - 2));
 						parameters.Add(value.Substring(0, value.Length - 2));
 					}
-					else if (value[1] == 'b')//если 0b0000000000000000
+					else if (value.StartsWith("0b") && value.Length > 10)//если 0b11..11 (больше 1 байта)
 					{
-						parameters.Add("0b" + value.Substring(value.Length - 4));
-						parameters.Add(value.Substring(0, value.Length - 4));
+						parameters.Add("0b" + value.Substring(value.Length - 8));
+						parameters.Add(value.Substring(0, value.Length - 8));
 					}
 					else
 					{
-						parameters.Add(value);//если 0xFF или Метка
+						parameters.Add(value);//если 0xFF, 0b11111111 или Метка
+						parameters.Add("0x00");
 					}
 					foreach (var p in parameters)
 					{
