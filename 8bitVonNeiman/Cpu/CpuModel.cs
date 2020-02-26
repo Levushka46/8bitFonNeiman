@@ -421,6 +421,38 @@ namespace _8bitVonNeiman.Cpu {
             }
 
             LoadRegister(lowBin);
+            //дополнительные команды с адресом 1111-F
+            if (highHex[0] == 'F')
+            {
+                //ADC
+                if (highHex == "F0")
+                {
+                    _flags.SetPreviousState(_acc);
+                    _flags.SetArgument(_rdb);
+                    var overflow = _acc.Add(_rdb);
+                    if (_flags.C)
+                    {
+                        overflow |= _acc.Inc();
+                    }
+                    _flags.UpdateFlags(_acc, "adc", overflow, _rdb);
+                    ModifyRegister(lowBin);
+                    return;
+                }
+                //SUBB
+                if (highHex == "F1")
+                {
+                    _flags.SetPreviousState(_acc);
+                    _flags.SetArgument(_rdb);
+                    var overflow = _acc.Sub(_rdb);
+                    if (_flags.C)
+                    {
+                        overflow |= _acc.Dec();
+                    }
+                    _flags.UpdateFlags(_acc, "subb", overflow, _rdb);
+                    ModifyRegister(lowBin);
+                    return;
+                }
+            }
             //NOT
             if (highHex[1] == '0') {
                 _flags.SetPreviousState(_rdb);
@@ -533,30 +565,6 @@ namespace _8bitVonNeiman.Cpu {
                 _y4();
                 ModifyRegister(lowBin);
                 return;
-            }
-            //ADC
-            if (highHex == "F0") {
-                _flags.SetPreviousState(_acc);
-                _flags.SetArgument(_rdb);
-                var overflow = _acc.Add(_rdb);
-                if (_flags.C) {
-                    overflow |= _acc.Inc();
-                }
-                _flags.UpdateFlags(_acc, "adc", overflow, _rdb);
-                ModifyRegister(lowBin);
-                return;
-            }
-            //SUBB
-            if (highHex == "F1") {
-                _flags.SetPreviousState(_acc);
-                _flags.SetArgument(_rdb);
-                var overflow = _acc.Sub(_rdb);
-                if (_flags.C) {
-                    overflow |= _acc.Dec();
-                }
-                _flags.UpdateFlags(_acc, "subb", overflow, _rdb);
-                ModifyRegister(lowBin);
-                return; 
             }
         }
 

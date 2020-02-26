@@ -786,7 +786,7 @@ namespace _8bitVonNeiman.Compiler.Model {
                 env.SetByte(dataResponse.lowBitArray);
                 env.SetByte(dataResponse.highBitArray);
             }
-
+            //тест ветвления
             private static void SUBB(string[] args, CompilerEnvironment env) {
                 var dataResponse = GetBitArrays(args, "SUBB", env);
 
