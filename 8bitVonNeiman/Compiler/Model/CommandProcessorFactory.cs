@@ -786,11 +786,12 @@ namespace _8bitVonNeiman.Compiler.Model {
                 env.SetByte(dataResponse.lowBitArray);
                 env.SetByte(dataResponse.highBitArray);
             }
-            //тест ветвления
+           
             private static void SUBB(string[] args, CompilerEnvironment env) {
                 var dataResponse = GetBitArrays(args, "SUBB", env);
 
                 if (dataResponse.highBitArray[5]) {
+                    //Если команда с ОЗУ
                     dataResponse.highBitArray[1] = true;
                     dataResponse.highBitArray[2] = true;
                     dataResponse.highBitArray[3] = true;

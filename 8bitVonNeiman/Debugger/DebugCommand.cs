@@ -200,7 +200,7 @@ namespace _8bitVonNeiman.Debug {
                 }
                 
             }
-            //дополнительные регистровые
+            //дополнительные регистровые SUBB и ADC
             if (highBin.StartsWith("1111"))
             {
                 if (highHex == "F0")
