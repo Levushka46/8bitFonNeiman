@@ -421,7 +421,7 @@ namespace _8bitVonNeiman.Cpu {
             }
 
             LoadRegister(lowBin);
-            //дополнительные команды с адресом 1111
+            //дополнительные команды с адресом 1111-F
             if (highHex[0] == 'F')
             {
                 //ADC
