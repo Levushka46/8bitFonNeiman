@@ -1246,8 +1246,10 @@ namespace _8bitVonNeiman.Cpu {
 
         private void _y31() {
             _pcl++;
-            if (_pcl > (2 ^ (Constants.WordSize + 2))) {
-                //TODO: Действие по переполнению PCL?
+            if (_pcl > Math.Pow(2, Constants.WordSize)-1)//_pcl > (2 ^ (Constants.WordSize + 2))
+            {
+                _cs++;
+                _pcl = 0; 
             }
         }
 
