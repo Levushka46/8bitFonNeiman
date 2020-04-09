@@ -69,6 +69,8 @@ namespace _8bitVonNeiman.Cpu {
             case "or":
             case "xor":
             case "not":
+                A = false; //сброс всех флагов
+                C = false;
                 Z = false;
                 N = false;
                 O = false;
