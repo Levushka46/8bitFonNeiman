@@ -7,6 +7,7 @@ using _8bitVonNeiman.ExternalDevices.Keyboard1;
 using _8bitVonNeiman.ExternalDevices.Display;
 using _8bitVonNeiman.ExternalDevices.Timer2;
 using _8bitVonNeiman.ExternalDevices.Timer5;
+using _8bitVonNeiman.ExternalDevices.Oscillograph;
 
 namespace _8bitVonNeiman.ExternalDevices {
     public class DevicesFactory {
@@ -31,6 +32,11 @@ namespace _8bitVonNeiman.ExternalDevices {
 
         public IDeviceInput GetTimer5() {
             return new Timer5Controller(_output);
+        }
+
+        public IDeviceInput GetOscillograph()
+        {
+            return new OscillographController(_output);
         }
     }
 }

@@ -54,6 +54,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -150,6 +151,14 @@
     <Compile Include="ExternalDevices\Keyboard1\View\Keyboard1Form.Designer.cs">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalDevices\Oscillograph\OscillographController.cs" />
+    <Compile Include="ExternalDevices\Oscillograph\View\IOscillographFormOutput.cs" />
+    <Compile Include="ExternalDevices\Oscillograph\View\OscillographForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\Oscillograph\View\OscillographForm.Designer.cs">
+      <DependentUpon>OscillographForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExternalDevices\Timer5\Timer5Controller.cs" />
     <Compile Include="ExternalDevices\Timer5\View\ITimer5FormOutput.cs" />
     <Compile Include="ExternalDevices\Timer2\Timer2Controller.cs" />
@@ -204,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Keyboard1\View\Keyboard1Form.resx">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\Oscillograph\View\OscillographForm.resx">
+      <DependentUpon>OscillographForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Timer2\View\Timer2Form.resx">
       <DependentUpon>Timer2Form.cs</DependentUpon>

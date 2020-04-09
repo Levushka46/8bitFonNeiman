@@ -75,6 +75,14 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             input.OpenForm();
         }
 
+        public void AddOscillograph()
+        {
+            IDeviceInput input = _devicesFactory.GetOscillograph();
+            _devices.Add(input);
+
+            input.OpenForm();
+        }
+
         public void FormClosed() {
 			_form = null;
 		}

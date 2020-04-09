@@ -27,6 +27,7 @@
             this.addDisplayButton = new System.Windows.Forms.Button();
             this.addTimer2Button = new System.Windows.Forms.Button();
             this.addTimer5Button = new System.Windows.Forms.Button();
+            this.addOscillographButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addDeviceButton
@@ -69,11 +70,22 @@
             this.addTimer5Button.UseVisualStyleBackColor = true;
             this.addTimer5Button.Click += new System.EventHandler(this.addTimer5Button_Click);
             // 
+            // addOscillographButton
+            // 
+            this.addOscillographButton.Location = new System.Drawing.Point(85, 131);
+            this.addOscillographButton.Name = "addOscillographButton";
+            this.addOscillographButton.Size = new System.Drawing.Size(149, 24);
+            this.addOscillographButton.TabIndex = 4;
+            this.addOscillographButton.Text = "Осциллограф";
+            this.addOscillographButton.UseVisualStyleBackColor = true;
+            this.addOscillographButton.Click += new System.EventHandler(this.addOscillographButton_Click);
+            // 
             // DeviceManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 135);
+            this.ClientSize = new System.Drawing.Size(324, 167);
+            this.Controls.Add(this.addOscillographButton);
             this.Controls.Add(this.addTimer5Button);
             this.Controls.Add(this.addTimer2Button);
             this.Controls.Add(this.addDisplayButton);
@@ -93,5 +105,6 @@
         private System.Windows.Forms.Button addDisplayButton;
         private System.Windows.Forms.Button addTimer2Button;
         private System.Windows.Forms.Button addTimer5Button;
+        private System.Windows.Forms.Button addOscillographButton;
     }
 }
