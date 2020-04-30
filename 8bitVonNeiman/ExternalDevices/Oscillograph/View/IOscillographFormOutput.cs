@@ -11,6 +11,7 @@ namespace _8bitVonNeiman.ExternalDevices.Oscillograph.View
         //операции формы!!!
         //void ResetButtonClicked();
         //void CaptureButtonClicked();
+        //void Button1StartClicked();
         void FormClosed();
     }
 }
