@@ -36,6 +36,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5.View {
             tscrLTextBox.Text = tscrL.ToBinString();
 
             outputPinTextBox.Text = outputPinValue ? "1" : "0";
+            OutPin.outputPinValueTimer5 = outputPinValue;
         }
 
         public void ShowDeviceParameters(int baseAddress, byte irq) {

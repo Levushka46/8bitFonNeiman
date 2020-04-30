@@ -159,6 +159,7 @@
     <Compile Include="ExternalDevices\Oscillograph\View\OscillographForm.Designer.cs">
       <DependentUpon>OscillographForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalDevices\OutPin.cs" />
     <Compile Include="ExternalDevices\Timer5\Timer5Controller.cs" />
     <Compile Include="ExternalDevices\Timer5\View\ITimer5FormOutput.cs" />
     <Compile Include="ExternalDevices\Timer2\Timer2Controller.cs" />
