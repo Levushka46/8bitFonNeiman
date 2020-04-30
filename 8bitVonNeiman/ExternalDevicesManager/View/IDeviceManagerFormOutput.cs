@@ -4,6 +4,7 @@
         void AddDisplay();
         void AddTimer2();
         void AddTimer5();
+		void AddOscillograph();
 		void FormClosed();
 	}
 }

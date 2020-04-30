@@ -16,7 +16,7 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
         private readonly DevicesFactory _devicesFactory;
         private ISet<IDeviceInput> _devices = new HashSet<IDeviceInput>();
 
-		public ExternalDevicesController(IExternalDevicesControllerOutput output) {
+        public ExternalDevicesController(IExternalDevicesControllerOutput output) {
             _devicesFactory = new DevicesFactory(this);
             _output = output;
         }
@@ -70,6 +70,14 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 
         public void AddTimer5() {
             IDeviceInput input = _devicesFactory.GetTimer5();
+            _devices.Add(input);
+
+            input.OpenForm();
+        }
+
+        public void AddOscillograph()
+        {
+            IDeviceInput input = _devicesFactory.GetOscillograph();
             _devices.Add(input);
 
             input.OpenForm();

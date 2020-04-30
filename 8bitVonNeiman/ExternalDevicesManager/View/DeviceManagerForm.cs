@@ -39,5 +39,10 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
         private void addTimer5Button_Click(object sender, EventArgs e) {
             _output.AddTimer5();
         }
-    }
+
+		private void addOscillographButton_Click(object sender, EventArgs e)
+		{
+			_output.AddOscillograph();
+		}
+	}
 }
