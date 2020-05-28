@@ -35,7 +35,8 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5.View {
             tscrHTextBox.Text = tscrH.ToBinString();
             tscrLTextBox.Text = tscrL.ToBinString();
 
-            outputPinTextBox.Text = outputPinValue ? "1" : "0";
+            //вывод значений во внешний порт
+            outputPinTextBox.Text = outputPinValue ? "1" : "0"; 
             OutPin.outputPinValueTimer5 = outputPinValue;
         }
 
