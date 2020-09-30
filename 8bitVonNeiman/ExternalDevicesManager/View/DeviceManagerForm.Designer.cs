@@ -28,6 +28,7 @@
             this.addTimer2Button = new System.Windows.Forms.Button();
             this.addTimer5Button = new System.Windows.Forms.Button();
             this.addOscillographButton = new System.Windows.Forms.Button();
+            this.addKeypadAndIndicationButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addDeviceButton
@@ -80,11 +81,22 @@
             this.addOscillographButton.UseVisualStyleBackColor = true;
             this.addOscillographButton.Click += new System.EventHandler(this.addOscillographButton_Click);
             // 
+            // addKeypadAndIndicationButton
+            // 
+            this.addKeypadAndIndicationButton.Location = new System.Drawing.Point(85, 159);
+            this.addKeypadAndIndicationButton.Name = "addKeypadAndIndicationButton";
+            this.addKeypadAndIndicationButton.Size = new System.Drawing.Size(149, 24);
+            this.addKeypadAndIndicationButton.TabIndex = 5;
+            this.addKeypadAndIndicationButton.Text = "Клав. и Индикация";
+            this.addKeypadAndIndicationButton.UseVisualStyleBackColor = true;
+            this.addKeypadAndIndicationButton.Click += new System.EventHandler(this.addKeypadAndIndicationButton_Click);
+            // 
             // DeviceManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 167);
+            this.ClientSize = new System.Drawing.Size(324, 195);
+            this.Controls.Add(this.addKeypadAndIndicationButton);
             this.Controls.Add(this.addOscillographButton);
             this.Controls.Add(this.addTimer5Button);
             this.Controls.Add(this.addTimer2Button);
@@ -106,5 +118,6 @@
         private System.Windows.Forms.Button addTimer2Button;
         private System.Windows.Forms.Button addTimer5Button;
         private System.Windows.Forms.Button addOscillographButton;
+        private System.Windows.Forms.Button addKeypadAndIndicationButton;
     }
 }

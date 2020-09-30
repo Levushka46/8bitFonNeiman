@@ -44,5 +44,10 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
 		{
 			_output.AddOscillograph();
 		}
-	}
+
+        private void addKeypadAndIndicationButton_Click(object sender, EventArgs e)
+        {
+            _output.AddKeypadAndIndication();
+		}
+    }
 }
