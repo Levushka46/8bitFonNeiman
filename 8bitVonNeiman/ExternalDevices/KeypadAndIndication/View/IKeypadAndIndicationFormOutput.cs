@@ -3,6 +3,7 @@
     public interface ISevenSegmentFormOutput
     {
         void ResetButtonClicked();
+        void Key(int num);
         void FormClosed();
     }
 }

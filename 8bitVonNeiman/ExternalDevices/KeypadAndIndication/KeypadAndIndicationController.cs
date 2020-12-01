@@ -1,5 +1,6 @@
 ﻿using _8bitVonNeiman.Common;
 using System;
+using System.Collections.Generic;
 using _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View;
 
 namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
@@ -8,28 +9,23 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
     {
         private KeypadAndIndicationForm _form;
         private readonly IDeviceOutput _output;
-        //private delegate void UpdateFormDelegate();
-        //private UpdateFormDelegate _updateFormDelegate;
+
         //todo: учёт, что адресс вывода не больше колличества сегментов
-        //todo: SR - 1110 0001 - переполнение очереди
-        //todo: CR - 0000 AISE - автоинкремент адреса в видеопамяти/прервывания/загрузка из видеопамяти/вкл-выкл
         //todo: циклический вывод из памяти
         //todo: тесты на количестве сегментов
         //todo: удаление лишнего кода
         //todo: рбота с прерываниями
         //todo: чистка формы и файла с Настройками формы 
 
-
-        private int _baseAddress = 50;
-        private byte _irq = 5;
+        private int _baseAddress = 40;
+        private byte _irq = 4;
 
         private ExtendedBitArray _sym = new ExtendedBitArray();
-
         private ExtendedBitArray _addr = new ExtendedBitArray();
-
         private ExtendedBitArray _cr = new ExtendedBitArray();
-
         private ExtendedBitArray _sr = new ExtendedBitArray();
+
+        private int _addrVideo = 0;
 
         private ExtendedBitArray [] _videoMem = new ExtendedBitArray[8] 
             {
@@ -43,6 +39,8 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
                 new ExtendedBitArray()
             };
 
+        //буффер матричной клавиатуры
+        Queue<ExtendedBitArray> _keyBuffer = new Queue<ExtendedBitArray>();
 
         private delegate void SetCharacterDelegate(int textBoxIndex, char character);
 
@@ -70,7 +68,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             }
         }
 
-        /// Открывает форму, если она закрыта или закрывает, если открыта
+        // Открывает форму, если она закрыта или закрывает, если открыта
         public void ChangeFormState()
         {
             if (_form == null)
@@ -89,7 +87,8 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
         {
             if (IsEnabled())
             {
-                _form.ShowRegisters(_addr /*GetDr()*/, _sym, _cr, _sr, _videoMem);
+                _sym = (_keyBuffer.Count == 0)? new ExtendedBitArray() : _keyBuffer.Peek();
+                _form.ShowRegisters(_addr, _sym, _cr, _sr, _videoMem);
             }
             else
             {
@@ -103,7 +102,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
 
         public override bool HasMemory(int address)
         {
-            return _baseAddress <= address && address <= _baseAddress + 4;
+            return _baseAddress <= address && address <= _baseAddress + 5;
         }
 
         public override void SetMemory(ExtendedBitArray memory, int address)
@@ -111,12 +110,11 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             switch (address - _baseAddress)
             {
                 case 0:
-                    _addr = memory;//SetDr(memory);
-                    //NextAddress();
+                    _addr = memory;
                     break;
-                case 1:
-                    _sym = memory;
-                    break;
+                //case 1:
+                //    _sym = _keyBuffer.Peek();
+                //    break;
                 case 2:
                     _cr = memory;
                     break;
@@ -130,8 +128,14 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
 
             if (IsEnabled())
             {
-                SetSymbols(_addr.NumValue(), _sym.NumValue());
+                for (var reg = 0; reg < _videoMem.Length; reg++)
+                {
+                    SetSymbols(reg, _videoMem[reg]);
+                    //_sym = _videoMem[reg]; //убрать!!!
+                }
             }
+
+            if (!_cr[0]) ResetButtonClicked();
         }
 
         public override ExtendedBitArray GetMemory(int address)
@@ -139,18 +143,17 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             switch (address - _baseAddress)
             {
                 case 0:
-                    //ExtendedBitArray value = _addr;//GetDr();
-                    //NextAddress(); //нужен ли этот метод?
-                    //return value;
                     return _addr;
                 case 1:
-                    return _sym;
+                    return (_keyBuffer.Count == 0) ? new ExtendedBitArray() : _keyBuffer.Dequeue();
                 case 2:
                     return _cr;
                 case 3:
                     return _sr;
-                case 4:
-                    return GetVideoMem();
+                //case 4:
+                //    return GetVideoMem();
+                //case 5:
+                //    return (_keyBuffer.Count == 0)? new ExtendedBitArray() : _keyBuffer.Dequeue();
             }
             return new ExtendedBitArray();
         }
@@ -168,11 +171,14 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             _sym = new ExtendedBitArray();
             _cr = new ExtendedBitArray();
             _sr = new ExtendedBitArray();
-            for (var i = 0; i < _videoMem.Length; i++)
+            for (var reg = 0; reg < 8; reg++)
             {
-                _videoMem[i] = new ExtendedBitArray();
+                _videoMem[reg] = new ExtendedBitArray();
+                SetSymbols(reg, _videoMem[reg]);
             }
+            _keyBuffer.Clear();
 
+            _addrVideo = 0;
             UpdateForm();
         }
 
@@ -184,15 +190,42 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
 
         private void SetVideoMem(ExtendedBitArray memory)
         {
-            ExtendedBitArray index = new ExtendedBitArray("00000" + _sr.ToBinString().Substring(0, 3));
-            _videoMem[index.NumValue()] = memory;
+            //todo: предусмотреть что то, если оба флага установлены
+            if (IsLoad() && !IsLoadToAddr())
+            {
+                _videoMem[_addrVideo] = memory;
+                _addrVideo++;
+            }
+
+            if ((IsLoadToAddr() && !IsLoad()) || (IsLoadToAddr() && IsLoad()))
+            {
+                ExtendedBitArray index = new ExtendedBitArray(_addr.ToBinString().Substring(5));
+                _videoMem[index.NumValue()] = memory;
+                //_videoMem[_addr.NumValue()] = memory;
+            }
+
+            if (_addrVideo > _form.SevenSegmentCount-1)
+            {
+                _cr[1] = false;
+                _addrVideo = 0;
+            }
+            //ExtendedBitArray index = new ExtendedBitArray("00000" + _sr.ToBinString().Substring(0, 3));
+            //_videoMem[index.NumValue()] = memory;
         }
 
-        private ExtendedBitArray GetVideoMem()
-        {
-            ExtendedBitArray index = new ExtendedBitArray("00000" + _sr.ToBinString().Substring(0, 3));
-            return _videoMem[index.NumValue()];
-        }
+        //private ExtendedBitArray GetVideoMem()
+        //{
+        //    if (IsLoad() && !IsLoadToAddr())
+        //    {
+        //        return _videoMem[_addrVideo++];
+        //    }
+
+        //    if (IsLoadToAddr() && !IsLoad())
+        //    {
+        //        return _videoMem[_addr.NumValue()];
+        //    }
+        //    return new ExtendedBitArray();
+        //}
 
         private void MakeInterruption()
         {
@@ -200,9 +233,18 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             //todo: использование, судить по клавиатуре
         }
 
-        private void SetSymbols(int index, int symbol)
+        //установка символа и точки в сегменте по видеопамяти
+        private void SetSymbols(int index, ExtendedBitArray symbol)
         {
-            _form.sevenSegments[index].CustomPattern = symbol;
+            int pointPosition = _form.PointPosition;
+            if (index >= _form.SevenSegmentCount) return;
+            //установка точки
+            _form.sevenSegments[index].DecimalOn = symbol[pointPosition];
+            //установка символа
+            if (pointPosition == 7)
+                _form.sevenSegments[index].CustomPattern = symbol.NumValue();
+            else
+                _form.sevenSegments[index].CustomPattern = symbol.NumValue() >> 1;
         }
 
         private bool IsEnabled()
@@ -210,9 +252,26 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             return _cr[0];
         }
 
+        //последовательная загрузка в видеопамять
+        private bool IsLoad()
+        {
+            return _cr[1];
+        }
+
+        //загрузка в видеопамять по адресу
+        private bool IsLoadToAddr()
+        {
+            return _cr[2];
+        }
+
         private bool IsAutoincrement()
         {
             return _sym[1];
+        }
+
+        private bool IsOverflowBuffer()
+        {
+            return _sr[0];
         }
 
         private void NextAddress()
@@ -221,6 +280,19 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             {
                 _cr.Inc();
             }
+        }
+
+        //нажатие клавиши на матричной клавиатуре
+        public void Key(int num)
+        {
+            if (!IsEnabled() || IsOverflowBuffer()) return;
+            if (_keyBuffer.Count < 8)
+                _keyBuffer.Enqueue(new ExtendedBitArray(num));
+            //переполнение при записи 8 символа
+            if (_keyBuffer.Count == 8)
+                _sr[0] = true;
+
+            UpdateForm();
         }
     }
 }
