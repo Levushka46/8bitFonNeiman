@@ -177,10 +177,12 @@ namespace _8bitVonNeiman.Memory {
                 case 2:
                     int ds = _output.DS;
                     form.ScrollToSegment(ds);
+                    form.Text = "Память - Сегмент данных";
                     break;
                 case 3:
                     int ss = _output.SS;
                     form.ScrollToEndOfSegment(ss);
+                    form.Text = "Память - Сегмент стека";
                     break;
             }
             form.Show();

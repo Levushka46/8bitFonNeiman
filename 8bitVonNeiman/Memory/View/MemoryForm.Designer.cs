@@ -126,7 +126,7 @@
             this.Location = new System.Drawing.Point(390, 592);
             this.Name = "MemoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Память";
+            this.Text = "Память - Сегмент кода";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MemoryForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.memoryDataGridView)).EndInit();
             this.ResumeLayout(false);
