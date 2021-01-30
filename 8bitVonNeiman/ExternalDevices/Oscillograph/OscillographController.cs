@@ -11,8 +11,8 @@ namespace _8bitVonNeiman.ExternalDevices.Oscillograph
         private delegate void UpdateFormDelegate();
         private UpdateFormDelegate _updateFormDelegate;
 
-        private int _baseAddress = 40;
-        private byte _irq = 4;
+        private int _baseAddress = 100;
+        //private byte _irq = 10;
 
         public OscillographController(IDeviceOutput output)
         {

@@ -83,6 +83,14 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             input.OpenForm();
         }
 
+        public void AddKeypadAndIndication()
+        {
+            IDeviceInput input = _devicesFactory.GetKeypadAndIndication();
+            _devices.Add(input);
+
+            input.OpenForm();
+        }
+
         public void FormClosed() {
 			_form = null;
 		}

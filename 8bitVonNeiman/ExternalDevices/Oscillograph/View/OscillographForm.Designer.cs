@@ -65,7 +65,7 @@
             this.graph1Chart.Name = "graph1Chart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
-            series1.Name = "Канал 1 (Таймер 5)";
+            series1.Name = "Канал 1";
             this.graph1Chart.Series.Add(series1);
             this.graph1Chart.Size = new System.Drawing.Size(700, 100);
             this.graph1Chart.TabIndex = 0;
@@ -81,7 +81,7 @@
             this.graph2Chart.Name = "graph2Chart";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
-            series2.Name = "Канал 2 (Таймер 5)";
+            series2.Name = "Канал 2";
             this.graph2Chart.Series.Add(series2);
             this.graph2Chart.Size = new System.Drawing.Size(700, 100);
             this.graph2Chart.TabIndex = 1;
