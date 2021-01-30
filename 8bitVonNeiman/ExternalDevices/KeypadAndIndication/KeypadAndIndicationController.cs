@@ -88,7 +88,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             if (IsEnabled())
             {
                 _sym = (_keyBuffer.Count == 0)? new ExtendedBitArray() : _keyBuffer.Peek();
-                _form.ShowRegisters(_addr, _sym, _cr, _sr, _videoMem);
+                _form.ShowRegisters(_addr, _sym, _cr, _sr, _videoMem, _keyBuffer);
             }
             else
             {
@@ -96,7 +96,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
                     new ExtendedBitArray(),
                     new ExtendedBitArray(),
                     new ExtendedBitArray(),
-                    _videoMem); //сбрасывать ли видеопамять?
+                    _videoMem, _keyBuffer); //сбрасывать ли видеопамять?
             }
         }
 
@@ -145,7 +145,13 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
                 case 0:
                     return _addr;
                 case 1:
-                    return (_keyBuffer.Count == 0) ? new ExtendedBitArray() : _keyBuffer.Dequeue();
+                {
+                    if (_keyBuffer.Count == 0) return new ExtendedBitArray();
+                    var buf = _keyBuffer.Dequeue();
+                    SizeBuffer();
+                    return buf;
+                }
+                    //return (_keyBuffer.Count == 0) ? new ExtendedBitArray() : _keyBuffer.Dequeue();
                 case 2:
                     return _cr;
                 case 3:
@@ -269,9 +275,10 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             return _sym[1];
         }
 
+        //переполнение буфера
         private bool IsOverflowBuffer()
         {
-            return _sr[0];
+            return _sr[3];
         }
 
         private void NextAddress()
@@ -282,15 +289,28 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
             }
         }
 
+        //получение значения размера буфера
+        private void SizeBuffer()
+        {
+            _sr = new ExtendedBitArray(_keyBuffer.Count);
+        }
+
         //нажатие клавиши на матричной клавиатуре
         public void Key(int num)
         {
             if (!IsEnabled() || IsOverflowBuffer()) return;
             if (_keyBuffer.Count < 8)
+            {
                 _keyBuffer.Enqueue(new ExtendedBitArray(num));
+                SizeBuffer();
+            }
+            else
+            {
+                _sr[3] = true;
+            }
             //переполнение при записи 8 символа
-            if (_keyBuffer.Count == 8)
-                _sr[0] = true;
+            //if (_keyBuffer.Count == 8)
+            //    _sr[0] = true;
 
             UpdateForm();
         }

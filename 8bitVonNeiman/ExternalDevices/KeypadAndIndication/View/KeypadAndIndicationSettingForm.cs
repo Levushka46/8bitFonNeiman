@@ -11,8 +11,8 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
         }
 
         private int _sevenSegmentCount = 8;
-        private int _pointPosition = 7;
-        private int _keyPadCount = 4;
+        private int _pointPosition = 0;
+        private int _keyPadCount = 33;
         private readonly KeypadAndIndicationForm _mainForm;
 
         public KeypadAndIndicationSettingForm(KeypadAndIndicationForm form)
@@ -42,9 +42,9 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
 
             _mainForm.PointPosition = _pointPosition;
 
-            if (Key3RadioButton.Checked) _keyPadCount = 3;
+            if (Key3RadioButton.Checked) _keyPadCount = 33;
             if (Key34RadioButton.Checked) _keyPadCount = 34;
-            if (Key4RadioButton.Checked) _keyPadCount = 4;
+            if (Key4RadioButton.Checked) _keyPadCount = 44;
             if (KeyNoneRadioButton.Checked) _keyPadCount = 0;
 
             _mainForm.KeyPadCountEdit(_keyPadCount);
@@ -69,9 +69,9 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
 
             switch (_keyPadCount)
             {
-                case 3: Key3RadioButton.Checked = true; break;
+                case 33: Key3RadioButton.Checked = true; break;
                 case 34: Key34RadioButton.Checked = true; break;
-                case 4: Key4RadioButton.Checked = true; break;
+                case 44: Key4RadioButton.Checked = true; break;
             }
         }
     }

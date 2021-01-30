@@ -31,17 +31,31 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
 
             SevenSegmentCountEdit(SevenSegmentCount);
             KeyPadCountEdit(KeyPadCount);
+
+            //настройка отображения буфера
+            BufferDataGridView.ColumnCount = 8;
+            BufferDataGridView.RowCount = 1;
+            BufferDataGridView.RowHeadersVisible = false;
+            BufferDataGridView.ColumnHeadersVisible = false;
+            BufferDataGridView.AllowUserToResizeColumns = false;
+            BufferDataGridView.AllowUserToResizeRows = false;
+            BufferDataGridView.Rows[0].Height = 30;
+            for (int col = 0; col < 8; col++)
+            {
+                BufferDataGridView.Columns[col].Width = 30;
+            }
         }
 
         private List<DmitryBrant.CustomControls.SevenSegment> allSevenSegments;
         public List<DmitryBrant.CustomControls.SevenSegment> sevenSegments;
        
         public int SevenSegmentCount = 8;
-        public int PointPosition = 7;
-        public int KeyPadCount = 4;
+        public int PointPosition = 0;
+        public int KeyPadCount = 33;
 
         //sevenSegment1.Value = textBox1.Text;
         //sevenSegment2.CustomPattern = int.Parse(textBox2.Text);
+        
 
 
         private void settingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,7 +79,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
 
             switch (KeyPadCount)
             {
-                case 3:
+                case 33:
                     keyPadPanel.Width = 120;
                     keyPadPanel.Height = 120;
                     KeyA.Visible = false;
@@ -76,7 +90,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
                     Key0.Visible = false;
                     KeyHash.Visible = false;
                     break;
-                case 4:
+                case 44:
                     keyPadPanel.Width = 155;
                     keyPadPanel.Height = 155;
                     KeyA.Visible = true;
@@ -117,23 +131,27 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
             //displayTextBox.Text = text.ToString();
         }
 
-        public void ShowRegisters(ExtendedBitArray addr, ExtendedBitArray sym, ExtendedBitArray cr, ExtendedBitArray sr, ExtendedBitArray [] videoMem)
+        public void ShowRegisters(ExtendedBitArray addr, ExtendedBitArray sym, ExtendedBitArray cr, ExtendedBitArray sr, ExtendedBitArray [] videoMem, Queue<ExtendedBitArray> keyBuffer)
         {
             addrBinTextBox.Text = addr.ToBinString();
             symBinTextBox.Text = sym.ToBinString();
             crBinTextBox.Text = cr.ToBinString();
             srBinTextBox.Text = sr.ToBinString();
+
             StringBuilder strVideoMem = new StringBuilder();
             for (var line = 0; line < videoMem.Length; line++)
             {
                 strVideoMem.Append(videoMem[line].ToBinString() + "\r");
-                //videoMemBinTextBox.Lines[line] = videoMem[line].ToBinString(); //разобраться с выводом
-                //videoMemBinTextBox.Lines
             }
-
             videoMemBinTextBox.Text = strVideoMem.ToString();
             videoMemBinTextBox.SelectAll();
             videoMemBinTextBox.SelectionAlignment = HorizontalAlignment.Center;
+
+            var bufferExtendedBitArrays = keyBuffer.ToArray();
+            for (int col = 0; col < 8; col++)
+            {
+                BufferDataGridView[col, 0].Value = (col >= bufferExtendedBitArrays.Length) ? "0" : bufferExtendedBitArrays[col].ToHexString().Substring(1);
+            }
 
         }
 

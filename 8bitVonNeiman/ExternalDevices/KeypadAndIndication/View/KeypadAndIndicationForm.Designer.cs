@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sevenSegment1 = new DmitryBrant.CustomControls.SevenSegment();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,9 +76,11 @@
             this.Key3 = new System.Windows.Forms.Button();
             this.Key2 = new System.Windows.Forms.Button();
             this.Key1 = new System.Windows.Forms.Button();
+            this.BufferDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.keyPadPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BufferDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // sevenSegment1
@@ -303,7 +306,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(12, 42);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 13);
+            this.label8.Size = new System.Drawing.Size(108, 13);
             this.label8.TabIndex = 1;
             this.label8.Text = "Вектор прерывания";
             // 
@@ -312,7 +315,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(12, 13);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(86, 13);
+            this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Базовый адрес";
             // 
@@ -679,11 +682,32 @@
             this.Key1.UseVisualStyleBackColor = true;
             this.Key1.Click += new System.EventHandler(this.Key1_Click);
             // 
+            // BufferDataGridView
+            // 
+            this.BufferDataGridView.AllowUserToAddRows = false;
+            this.BufferDataGridView.AllowUserToDeleteRows = false;
+            this.BufferDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.BufferDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.BufferDataGridView.Location = new System.Drawing.Point(283, 271);
+            this.BufferDataGridView.Name = "BufferDataGridView";
+            this.BufferDataGridView.ReadOnly = true;
+            this.BufferDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.BufferDataGridView.Size = new System.Drawing.Size(243, 33);
+            this.BufferDataGridView.TabIndex = 48;
+            // 
             // KeypadAndIndicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 354);
+            this.Controls.Add(this.BufferDataGridView);
             this.Controls.Add(this.keyPadPanel);
             this.Controls.Add(this.videoMemBinTextBox);
             this.Controls.Add(this.label11);
@@ -721,6 +745,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.keyPadPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BufferDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -774,5 +799,6 @@
         private System.Windows.Forms.Button Key9;
         private System.Windows.Forms.Button Key8;
         private System.Windows.Forms.Button Key7;
+        private System.Windows.Forms.DataGridView BufferDataGridView;
     }
 }
