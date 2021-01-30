@@ -89,6 +89,8 @@ namespace _8bitVonNeiman.Cpu {
         public void FormFlags(ExtendedBitArray newState, int mask, bool? overflow, string command, ExtendedBitArray arg) {
             if ((mask & 1) != 0) {
                 Z = newState.NumValue() == 0;
+                if (command == "div")
+                    Z = false;
             }
             if ((mask & 2) != 0) {
                 N = newState[Constants.WordSize - 1];
