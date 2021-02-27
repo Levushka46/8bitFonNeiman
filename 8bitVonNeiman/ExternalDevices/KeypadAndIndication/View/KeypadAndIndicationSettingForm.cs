@@ -10,6 +10,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
             InitializeComponent();
         }
 
+        //начальные значения
         private int _sevenSegmentCount = 8;
         private int _pointPosition = 0;
         private int _keyPadCount = 33;
@@ -28,6 +29,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
             this.Close();
         }
 
+        //установка значений
         private void SetButton_Click(object sender, EventArgs e)
         {
             if (Seg2RadioButton.Checked) _sevenSegmentCount = 2;
@@ -49,7 +51,8 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
 
             _mainForm.KeyPadCountEdit(_keyPadCount);
         }
-
+        
+        //получение значений
         private void GetChecked()
         {
             _sevenSegmentCount = _mainForm.SevenSegmentCount;

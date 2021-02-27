@@ -33,16 +33,16 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
             KeyPadCountEdit(KeyPadCount);
 
             //настройка отображения буфера
-            BufferDataGridView.ColumnCount = 8;
-            BufferDataGridView.RowCount = 1;
-            BufferDataGridView.RowHeadersVisible = false;
-            BufferDataGridView.ColumnHeadersVisible = false;
-            BufferDataGridView.AllowUserToResizeColumns = false;
-            BufferDataGridView.AllowUserToResizeRows = false;
-            BufferDataGridView.Rows[0].Height = 30;
+            bufferDataGridView.ColumnCount = 8;
+            bufferDataGridView.RowCount = 1;
+            bufferDataGridView.RowHeadersVisible = false;
+            bufferDataGridView.ColumnHeadersVisible = false;
+            bufferDataGridView.AllowUserToResizeColumns = false;
+            bufferDataGridView.AllowUserToResizeRows = false;
+            bufferDataGridView.Rows[0].Height = 30;
             for (int col = 0; col < 8; col++)
             {
-                BufferDataGridView.Columns[col].Width = 30;
+                bufferDataGridView.Columns[col].Width = 30;
             }
         }
 
@@ -52,12 +52,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
         public int SevenSegmentCount = 8;
         public int PointPosition = 0;
         public int KeyPadCount = 33;
-
-        //sevenSegment1.Value = textBox1.Text;
-        //sevenSegment2.CustomPattern = int.Parse(textBox2.Text);
-        
-
-
+      
         private void settingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             KeypadAndIndicationSettingForm newForm = new KeypadAndIndicationSettingForm(this);
@@ -120,17 +115,6 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
             _output.ResetButtonClicked();
         }
 
-        public void ClearScreen()
-        {
-        }
-
-        public void SetCharacter(int index, char value)
-        {
-            //StringBuilder text = new StringBuilder(displayTextBox.Text);
-            //text[index] = value;
-            //displayTextBox.Text = text.ToString();
-        }
-
         public void ShowRegisters(ExtendedBitArray addr, ExtendedBitArray sym, ExtendedBitArray cr, ExtendedBitArray sr, ExtendedBitArray [] videoMem, Queue<ExtendedBitArray> keyBuffer)
         {
             addrBinTextBox.Text = addr.ToBinString();
@@ -150,7 +134,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
             var bufferExtendedBitArrays = keyBuffer.ToArray();
             for (int col = 0; col < 8; col++)
             {
-                BufferDataGridView[col, 0].Value = (col >= bufferExtendedBitArrays.Length) ? "0" : bufferExtendedBitArrays[col].ToHexString().Substring(1);
+                bufferDataGridView[col, 0].Value = (col >= bufferExtendedBitArrays.Length) ? " " : bufferExtendedBitArrays[col].ToHexString().Substring(1);
             }
 
         }
@@ -159,11 +143,6 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
         {
             baseAddressLabel.Text = baseAddress.ToString();
             interruptionVectorLabel.Text = irq.ToString();
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void Key1_Click(object sender, EventArgs e)

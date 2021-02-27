@@ -76,11 +76,13 @@
             this.Key3 = new System.Windows.Forms.Button();
             this.Key2 = new System.Windows.Forms.Button();
             this.Key1 = new System.Windows.Forms.Button();
-            this.BufferDataGridView = new System.Windows.Forms.DataGridView();
+            this.bufferDataGridView = new System.Windows.Forms.DataGridView();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.keyPadPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BufferDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bufferDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // sevenSegment1
@@ -274,7 +276,7 @@
             this.panel1.Controls.Add(this.baseAddressLabel);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(166, 176);
+            this.panel1.Location = new System.Drawing.Point(166, 183);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(191, 69);
             this.panel1.TabIndex = 41;
@@ -465,7 +467,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(11, 174);
+            this.label11.Location = new System.Drawing.Point(11, 185);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(18, 20);
             this.label11.TabIndex = 46;
@@ -474,7 +476,7 @@
             // videoMemBinTextBox
             // 
             this.videoMemBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.videoMemBinTextBox.Location = new System.Drawing.Point(35, 176);
+            this.videoMemBinTextBox.Location = new System.Drawing.Point(35, 183);
             this.videoMemBinTextBox.Name = "videoMemBinTextBox";
             this.videoMemBinTextBox.ReadOnly = true;
             this.videoMemBinTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -504,7 +506,6 @@
             this.keyPadPanel.Name = "keyPadPanel";
             this.keyPadPanel.Size = new System.Drawing.Size(155, 155);
             this.keyPadPanel.TabIndex = 42;
-            this.keyPadPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // KeyD
             // 
@@ -682,11 +683,11 @@
             this.Key1.UseVisualStyleBackColor = true;
             this.Key1.Click += new System.EventHandler(this.Key1_Click);
             // 
-            // BufferDataGridView
+            // bufferDataGridView
             // 
-            this.BufferDataGridView.AllowUserToAddRows = false;
-            this.BufferDataGridView.AllowUserToDeleteRows = false;
-            this.BufferDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bufferDataGridView.AllowUserToAddRows = false;
+            this.bufferDataGridView.AllowUserToDeleteRows = false;
+            this.bufferDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -694,20 +695,40 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.BufferDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
-            this.BufferDataGridView.Location = new System.Drawing.Point(283, 271);
-            this.BufferDataGridView.Name = "BufferDataGridView";
-            this.BufferDataGridView.ReadOnly = true;
-            this.BufferDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.BufferDataGridView.Size = new System.Drawing.Size(243, 33);
-            this.BufferDataGridView.TabIndex = 48;
+            this.bufferDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.bufferDataGridView.Location = new System.Drawing.Point(283, 271);
+            this.bufferDataGridView.Name = "bufferDataGridView";
+            this.bufferDataGridView.ReadOnly = true;
+            this.bufferDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.bufferDataGridView.Size = new System.Drawing.Size(243, 33);
+            this.bufferDataGridView.TabIndex = 48;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(91, 165);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(30, 13);
+            this.label12.TabIndex = 49;
+            this.label12.Text = "I A E";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(233, 168);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(85, 13);
+            this.label13.TabIndex = 50;
+            this.label13.Text = "Z        В буфере";
             // 
             // KeypadAndIndicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 354);
-            this.Controls.Add(this.BufferDataGridView);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.bufferDataGridView);
             this.Controls.Add(this.keyPadPanel);
             this.Controls.Add(this.videoMemBinTextBox);
             this.Controls.Add(this.label11);
@@ -745,7 +766,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.keyPadPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.BufferDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bufferDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -799,6 +820,8 @@
         private System.Windows.Forms.Button Key9;
         private System.Windows.Forms.Button Key8;
         private System.Windows.Forms.Button Key7;
-        private System.Windows.Forms.DataGridView BufferDataGridView;
+        private System.Windows.Forms.DataGridView bufferDataGridView;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
