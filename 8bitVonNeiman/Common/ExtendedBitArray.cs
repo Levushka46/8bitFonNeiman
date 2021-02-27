@@ -158,6 +158,15 @@ namespace _8bitVonNeiman.Common {
         }
 
         /// <summary>
+        /// Остаток от деления слова на значение передаваемого слова.
+        /// </summary>
+        /// <param name="array">Байт, по модулю которого получается остаток от деления.</param>
+        public void Mod(ExtendedBitArray array)
+        {
+            _data %= array._data;
+        }
+
+        /// <summary>
         /// Применяет операцию логического И к словам.
         /// </summary>
         public void And(ExtendedBitArray array) {
