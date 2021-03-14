@@ -33,7 +33,7 @@
             // 
             // addDeviceButton
             // 
-            this.addDeviceButton.Location = new System.Drawing.Point(85, 12);
+            this.addDeviceButton.Location = new System.Drawing.Point(85, 10);
             this.addDeviceButton.Name = "addDeviceButton";
             this.addDeviceButton.Size = new System.Drawing.Size(149, 23);
             this.addDeviceButton.TabIndex = 0;
@@ -43,7 +43,7 @@
             // 
             // addDisplayButton
             // 
-            this.addDisplayButton.Location = new System.Drawing.Point(85, 41);
+            this.addDisplayButton.Location = new System.Drawing.Point(85, 40);
             this.addDisplayButton.Name = "addDisplayButton";
             this.addDisplayButton.Size = new System.Drawing.Size(149, 24);
             this.addDisplayButton.TabIndex = 1;
@@ -53,7 +53,7 @@
             // 
             // addTimer2Button
             // 
-            this.addTimer2Button.Location = new System.Drawing.Point(85, 71);
+            this.addTimer2Button.Location = new System.Drawing.Point(85, 70);
             this.addTimer2Button.Name = "addTimer2Button";
             this.addTimer2Button.Size = new System.Drawing.Size(149, 24);
             this.addTimer2Button.TabIndex = 2;
@@ -63,7 +63,7 @@
             // 
             // addTimer5Button
             // 
-            this.addTimer5Button.Location = new System.Drawing.Point(85, 101);
+            this.addTimer5Button.Location = new System.Drawing.Point(85, 100);
             this.addTimer5Button.Name = "addTimer5Button";
             this.addTimer5Button.Size = new System.Drawing.Size(149, 24);
             this.addTimer5Button.TabIndex = 3;
@@ -73,7 +73,7 @@
             // 
             // addOscillographButton
             // 
-            this.addOscillographButton.Location = new System.Drawing.Point(85, 131);
+            this.addOscillographButton.Location = new System.Drawing.Point(85, 130);
             this.addOscillographButton.Name = "addOscillographButton";
             this.addOscillographButton.Size = new System.Drawing.Size(149, 24);
             this.addOscillographButton.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             // addKeypadAndIndicationButton
             // 
-            this.addKeypadAndIndicationButton.Location = new System.Drawing.Point(85, 159);
+            this.addKeypadAndIndicationButton.Location = new System.Drawing.Point(85, 160);
             this.addKeypadAndIndicationButton.Name = "addKeypadAndIndicationButton";
             this.addKeypadAndIndicationButton.Size = new System.Drawing.Size(149, 24);
             this.addKeypadAndIndicationButton.TabIndex = 5;

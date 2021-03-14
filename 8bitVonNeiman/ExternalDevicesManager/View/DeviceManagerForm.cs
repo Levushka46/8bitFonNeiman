@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,40 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
 			_output = output;
 
 			InitializeComponent();
+            ConnectingExternalDevices();
 		}
+        
+        public void ConnectingExternalDevices()
+        {
+			string path = @"ExternalDevices\";
+            int coord = 10;
 
-		public void ShowAvailableDevices() { }
+            Dictionary<string, Button> externalDevices = new Dictionary<string, Button>
+            {
+                { "Display.bin", addDisplayButton},
+                { "Keyboard1.bin", addDeviceButton},
+                { "KeypadAndIndication.bin", addKeypadAndIndicationButton},
+                { "Oscillograph.bin", addOscillographButton},
+                { "Timer2.bin", addTimer2Button},
+                { "Timer5.bin", addTimer5Button}
+            };
+
+            foreach (var ed in externalDevices)
+            {
+                if (File.Exists(path + ed.Key))
+                {
+                    ed.Value.Location = new Point(85,coord);
+                    coord += 30;
+                }
+                else
+                {
+                    ed.Value.Visible = false;
+                }
+            }
+
+        }
+        
+        public void ShowAvailableDevices() { }
 
 		private void addDeviceButton_Click(object sender, EventArgs e) {
 			_output.AddExternalDevice();
