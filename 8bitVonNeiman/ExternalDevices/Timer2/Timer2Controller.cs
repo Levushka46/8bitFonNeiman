@@ -37,11 +37,13 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2 {
 
         private double _lastUpdateMillis;
 
-        public Timer2Controller(IDeviceOutput output) {
+        public Timer2Controller(IDeviceOutput output, int baseAddress, int irq) {
             _output = output;
             _updateFormDelegate = new UpdateFormDelegate(UpdateForm);
             _timer = new MicroTimer(1000);
             _timer.MicroTimerElapsed += new MicroTimer.MicroTimerElapsedEventHandler(OnTimerEvent);
+            _baseAddress = baseAddress * 0x10;
+            _irq = (byte)irq;
         }
 
         public override void OpenForm() {

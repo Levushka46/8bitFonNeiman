@@ -27,8 +27,9 @@ namespace _8bitVonNeiman.ExternalDevices.Display.View {
             arBinTextBox.Text = ar.ToBinString();
         }
 
-        public void ShowDeviceParameters(int baseAddress) {
-            baseAddressLabel.Text = baseAddress.ToString();
+        public void ShowDeviceParameters(int baseAddress)
+        {
+            baseAddressLabel.Text = "0x" + Convert.ToString(baseAddress, 16); //baseAddress.ToString();
         }
 
         public void ClearScreen() {

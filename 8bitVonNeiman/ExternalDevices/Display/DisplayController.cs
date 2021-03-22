@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using _8bitVonNeiman.Common;
 using _8bitVonNeiman.ExternalDevices.Display.View;
+using _8bitVonNeiman.ExternalDevicesManager;
+using _8bitVonNeiman.ExternalDevicesManager.View;
 
 namespace _8bitVonNeiman.ExternalDevices.Display {
     public class DisplayController : IDeviceInput, IDisplayFormOutput {
@@ -24,9 +26,10 @@ namespace _8bitVonNeiman.ExternalDevices.Display {
 
         private SetCharacterDelegate _updateFormDelegate;
 
-        public DisplayController(IDeviceOutput output) {
+        public DisplayController(IDeviceOutput output, int baseAddress) {
             _output = output;
             _updateFormDelegate = new SetCharacterDelegate((textBoxIndex, character) => _form.SetCharacter(textBoxIndex, character));
+            _baseAddress = baseAddress * 0x10;
         }
 
         public override void OpenForm() {

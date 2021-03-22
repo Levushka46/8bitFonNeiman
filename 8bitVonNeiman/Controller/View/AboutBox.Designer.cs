@@ -93,7 +93,7 @@
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(271, 17);
             this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "Версия 1.0.1";
+            this.labelVersion.Text = "Версия 1.1.0";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
@@ -104,8 +104,9 @@
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(271, 85);
             this.labelCopyright.TabIndex = 21;
-            this.labelCopyright.Text = "Разработчики: Петрухин Николай Владимирович, Зуев Александр Игоревич, Яцевич Васи" +
-    "лий Александрович\r\n\r\nНаучный руководитель: Жмакин Анатолий Петрович";
+            this.labelCopyright.Text = "Разработчики: Петрухин Николай Владимирович, Понарин Алексей Игоревич, Зуев Алекс" +
+    "андр Игоревич, Яцевич Василий Александрович\r\n\r\nНаучный руководитель: Жмакин Анат" +
+    "олий Петрович";
             // 
             // labelCompanyName
             // 

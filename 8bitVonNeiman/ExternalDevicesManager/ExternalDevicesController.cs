@@ -46,30 +46,30 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             }
         }
 
-		public void AddExternalDevice() {
+		public void AddExternalDevice(int baseAddress, int irq) {
             // todo select proper device
-            IDeviceInput input = _devicesFactory.GetKeyboard1();
+            IDeviceInput input = _devicesFactory.GetKeyboard1(baseAddress, irq);
             _devices.Add(input);
 
             input.OpenForm();
 		}
 
-        public void AddDisplay() {
-            IDeviceInput input = _devicesFactory.GetDisplay();
+        public void AddDisplay(int baseAddress) {
+            IDeviceInput input = _devicesFactory.GetDisplay(baseAddress);
             _devices.Add(input);
 
             input.OpenForm();
         }
 
-        public void AddTimer2() {
-            IDeviceInput input = _devicesFactory.GetTimer2();
+        public void AddTimer2(int baseAddress, int irq) {
+            IDeviceInput input = _devicesFactory.GetTimer2(baseAddress, irq);
             _devices.Add(input);
 
             input.OpenForm();
         }
 
-        public void AddTimer5() {
-            IDeviceInput input = _devicesFactory.GetTimer5();
+        public void AddTimer5(int baseAddress, int irq) {
+            IDeviceInput input = _devicesFactory.GetTimer5(baseAddress, irq);
             _devices.Add(input);
 
             input.OpenForm();
@@ -83,9 +83,17 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             input.OpenForm();
         }
 
-        public void AddKeypadAndIndication()
+        public void AddKeypadAndIndication(int baseAddress, int irq)
         {
-            IDeviceInput input = _devicesFactory.GetKeypadAndIndication();
+            IDeviceInput input = _devicesFactory.GetKeypadAndIndication(baseAddress, irq);
+            _devices.Add(input);
+
+            input.OpenForm();
+        }
+
+        public void AddGraphicDisplay(int baseAddress)
+        {
+            IDeviceInput input = _devicesFactory.GetGraphicDisplay(baseAddress);
             _devices.Add(input);
 
             input.OpenForm();

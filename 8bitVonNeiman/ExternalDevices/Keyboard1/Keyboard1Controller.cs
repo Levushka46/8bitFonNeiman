@@ -29,9 +29,11 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1 {
 
         private UpdateFormDelegate _updateFormDelegate;
 
-        public Keyboard1Controller(IDeviceOutput output) {
+        public Keyboard1Controller(IDeviceOutput output, int baseAddress, int irq) {
             _output = output;
             _updateFormDelegate = new UpdateFormDelegate(UpdateForm);
+            _baseAddress = baseAddress * 0x10;
+            _irq = (byte)irq;
         }
 
         public override void OpenForm() {

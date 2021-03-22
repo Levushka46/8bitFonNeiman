@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using _8bitVonNeiman.Common;
@@ -141,7 +140,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
 
         public void ShowDeviceParameters(int baseAddress, byte irq)
         {
-            baseAddressLabel.Text = baseAddress.ToString();
+            baseAddressLabel.Text = "0x" + Convert.ToString(baseAddress, 16);
             interruptionVectorLabel.Text = irq.ToString();
         }
 

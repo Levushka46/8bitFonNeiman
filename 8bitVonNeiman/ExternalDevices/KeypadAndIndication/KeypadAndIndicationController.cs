@@ -1,5 +1,4 @@
 ﻿using _8bitVonNeiman.Common;
-using System;
 using System.Collections.Generic;
 using _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View;
 
@@ -9,9 +8,6 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
     {
         private KeypadAndIndicationForm _form;
         private readonly IDeviceOutput _output;
-
-        //todo: удаление лишнего кода
-        //todo: чистка формы и файла с Настройками формы 
 
         private int _baseAddress = 40;
         private byte _irq = 4;
@@ -36,9 +32,11 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
         //буфер матричной клавиатуры
         Queue<ExtendedBitArray> _keyBuffer = new Queue<ExtendedBitArray>();
 
-        public KeypadAndIndicationController(IDeviceOutput output)
+        public KeypadAndIndicationController(IDeviceOutput output, int baseAddress, int irq)
         {
             _output = output;
+            _baseAddress = baseAddress * 0x10;
+            _irq = (byte)irq;
         }
 
         public override void OpenForm()
@@ -88,7 +86,7 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication
 
         public override bool HasMemory(int address)
         {
-            return _baseAddress <= address && address <= _baseAddress + 5;
+            return _baseAddress <= address && address <= _baseAddress + 4; 
         }
 
         public override void SetMemory(ExtendedBitArray memory, int address)

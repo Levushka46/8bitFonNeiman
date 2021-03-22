@@ -414,7 +414,8 @@ namespace _8bitVonNeiman.Debug {
 
             // Команды ввода-вывода
             if (highBin == "11000000" || highBin == "11000001") {
-                string address = lowCommand.NumValue().ToString();
+                //string address = lowCommand.NumValue().ToString();
+                string address = "0x" + lowCommand.ToHexString();
                 return address;
             }
 

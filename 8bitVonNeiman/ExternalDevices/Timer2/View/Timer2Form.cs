@@ -33,7 +33,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2.View {
         }
 
         public void ShowDeviceParameters(int baseAddress, byte irq) {
-            baseAddressLabel.Text = baseAddress.ToString();
+            baseAddressLabel.Text = "0x" + Convert.ToString(baseAddress, 16);
             interruptionVectorLabel.Text = irq.ToString();
         }
 
