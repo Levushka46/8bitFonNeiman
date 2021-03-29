@@ -247,6 +247,9 @@
     <EmbeddedResource Include="ExternalDevices\Display\View\DisplayForm.resx">
       <DependentUpon>DisplayForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\GraphicDisplay\Palette\View\PaletteForm.resx">
+      <DependentUpon>PaletteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\GraphicDisplay\View\GraphicDisplayForm.resx">
       <DependentUpon>GraphicDisplayForm.cs</DependentUpon>
     </EmbeddedResource>

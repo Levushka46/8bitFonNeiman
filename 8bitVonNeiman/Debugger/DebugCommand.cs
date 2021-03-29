@@ -401,15 +401,15 @@ namespace _8bitVonNeiman.Debug {
             // Битовые команды
             if (highBin.StartsWith("100")) {
                 string bit = (highCommand.NumValue() & 0b111).ToString();
-                string address = lowCommand.NumValue().ToString();
-                return string.Format("{0}, {1}", address, bit);
+                string address = "0x" + lowCommand.ToHexString();//lowCommand.NumValue().ToString();
+                return $"{address}, {bit}";
             }
             if (highBin.StartsWith("101")) {
                 string bit = (highCommand.NumValue() & 0b111).ToString();
                 ExtendedBitArray addr = new ExtendedBitArray(lowCommand);
-                addr.And(new ExtendedBitArray("0111111"));
-                string address = addr.NumValue().ToString();
-                return string.Format("{0}, {1}", address, bit);
+                //addr.And(new ExtendedBitArray("0111111")); //зачем этот AND ???
+                string address = "0x" + addr.ToHexString();//addr.NumValue().ToString();
+                return $"{address}, {bit}";
             }
 
             // Команды ввода-вывода
