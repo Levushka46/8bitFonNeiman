@@ -476,7 +476,7 @@
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.PaletteDataGridView);
             this.Name = "PaletteForm";
-            this.Text = "Form1";
+            this.Text = "Палитра";
             this.AutoSizeChanged += new System.EventHandler(this.PaletteForm_AutoSizeChanged);
             this.Deactivate += new System.EventHandler(this.PaletteForm_Deactivate);
             ((System.ComponentModel.ISupportInitialize)(this.PaletteDataGridView)).EndInit();
