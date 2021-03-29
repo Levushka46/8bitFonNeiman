@@ -9,6 +9,7 @@ namespace _8bitFonNeimanTest {
     /// Сводное описание для ExtendedByteArrayTest
     /// </summary>
     [TestClass]
+    [Ignore]
     public class ExtendedBitArrayTest {
 
         private TestContext testContextInstance;

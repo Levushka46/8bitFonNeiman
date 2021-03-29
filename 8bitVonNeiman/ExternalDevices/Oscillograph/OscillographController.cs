@@ -4,7 +4,7 @@ using System;
 
 namespace _8bitVonNeiman.ExternalDevices.Oscillograph
 {
-    class OscillographController : IDeviceInput, IOscillographFormOutput
+    public class OscillographController : IDeviceInput, IOscillographFormOutput
     {
         private OscillographForm _form;
         private readonly IDeviceOutput _output;

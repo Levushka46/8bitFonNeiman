@@ -5,6 +5,7 @@ using _8bitVonNeiman.Compiler.Model;
 
 namespace _8bitFonNeimanTest {
     [TestClass]
+    [Ignore]
     public class CommandsTest {
 
         private void Test(List<string> inputs, List<string[]> args, List<string> outputs, CompilerEnvironment env = null) {

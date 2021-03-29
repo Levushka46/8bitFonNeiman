@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -56,6 +57,7 @@
     <Compile Include="CompilerSupportTest.cs" />
     <Compile Include="CompilerTest.cs" />
     <Compile Include="ExtendedBitArrayTest.cs" />
+    <Compile Include="ExternalDevicesTest.cs" />
     <Compile Include="FlagsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InterruptionControllerTest.cs" />

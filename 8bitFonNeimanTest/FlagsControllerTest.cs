@@ -10,6 +10,7 @@ using _8bitVonNeiman.Cpu;
 namespace _8bitFonNeimanTest {
 
     [TestClass]
+    [Ignore]
     public class FlagsControllerTest {
 
         private void Check(List<string> inputs, List<ExtendedBitArray> args, List<ExtendedBitArray> prevStates,

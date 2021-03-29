@@ -4,6 +4,7 @@ using _8bitVonNeiman.InterruptionController;
 
 namespace _8bitFonNeimanTest {
     [TestClass]
+    [Ignore]
     public class InterruptionControllerTest {
         [TestMethod]
         public void TestHasNoInterruptionByDefault() {

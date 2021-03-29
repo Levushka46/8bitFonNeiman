@@ -111,7 +111,14 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
 
         private void IsValid(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar <= 47 || e.KeyChar >= 56) && e.KeyChar != 8) e.Handled = true;
+            if ((e.KeyChar <= 47 || e.KeyChar >= 56) && e.KeyChar != 8) 
+                e.Handled = true;
+        }
+
+        //открытый метод для проведения тестирования
+        public void IsValidTest(object sender, KeyPressEventArgs e)
+        {
+            IsValid(sender, e);
         }
     }
 }

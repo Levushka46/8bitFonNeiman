@@ -8,6 +8,7 @@ using _8bitVonNeiman.Compiler.Model;
 namespace _8bitFonNeimanTest {
 
     [TestClass]
+    [Ignore]
     public class CompilerSupportTest {
 
         [TestMethod]
