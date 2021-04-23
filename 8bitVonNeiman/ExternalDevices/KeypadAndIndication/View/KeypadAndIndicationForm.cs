@@ -223,5 +223,11 @@ namespace _8bitVonNeiman.ExternalDevices.KeypadAndIndication.View
         {
             _output.Key(15);
         }
+
+        private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm("7seg");
+            form.Show();
+        }
     }
 }
