@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using _8bitVonNeiman.Common;
 using _8bitVonNeiman.Controller;
 using _8bitVonNeiman.ExternalDevices;
 using _8bitVonNeiman.ExternalDevices.Display;
@@ -35,6 +37,44 @@ namespace _8bitFonNeimanTest
             IDeviceInput oscillographController = devicesFactory.GetOscillograph();
             
             Assert.IsInstanceOfType(oscillographController, typeof(OscillographController));
+        }
+
+        [TestMethod]
+        public void KeypadAndIndicationCreateTest()
+        {
+            IDeviceManagerFormOutput deviceManagerForm = new ExternalDevicesController(_externalDevice);
+
+            deviceManagerForm.AddKeypadAndIndication(1,1);
+
+            Assert.IsNotNull(deviceManagerForm);
+        }
+
+        [TestMethod]
+        public void KeypadAndIndicationControllerCreateTest()
+        {
+            IDeviceOutput deviceOutput = new ExternalDevicesController(_externalDevice);
+            DevicesFactory devicesFactory = new DevicesFactory(deviceOutput);
+
+            IDeviceInput keypadAndIndicationController = devicesFactory.GetKeypadAndIndication(1,1);
+
+            Assert.IsInstanceOfType(keypadAndIndicationController, typeof(KeypadAndIndicationController));
+        }
+
+        [TestMethod]
+        public void KeypadAndIndicationSetAndGetMemoryTest()
+        {
+            IDeviceOutput deviceOutput = new ExternalDevicesController(_externalDevice);
+            DevicesFactory devicesFactory = new DevicesFactory(deviceOutput);
+
+            
+            int[] mas = {0x10,0x12,0x13};
+            ExtendedBitArray extendedBitArray = new ExtendedBitArray(1);
+            IDeviceInput keypadAndIndicationController = devicesFactory.GetKeypadAndIndication(0x1, 1);
+            foreach (var m in mas)
+            {
+                keypadAndIndicationController.SetMemory(extendedBitArray, m);
+                Assert.AreEqual(extendedBitArray, keypadAndIndicationController.GetMemory(m));
+            }
         }
 
         [TestMethod]
