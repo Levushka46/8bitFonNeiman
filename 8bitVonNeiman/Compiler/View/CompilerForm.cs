@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using _8bitVonNeiman.Common;
 using ScintillaNET;
 
 namespace _8bitVonNeiman.Compiler.View {
@@ -120,6 +121,12 @@ namespace _8bitVonNeiman.Compiler.View {
 
         private void saveAsButton_Click(object sender, EventArgs e) {
             _output.SaveAsButtonClicked(scintilla.Text);
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm("Compiler");
+            form.Show();
         }
     }
 }

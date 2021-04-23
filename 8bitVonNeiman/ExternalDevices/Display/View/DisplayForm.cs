@@ -53,5 +53,11 @@ namespace _8bitVonNeiman.ExternalDevices.Display.View {
         private void DisplayForm_FormClosed(object sender, FormClosedEventArgs e) {
             _output.FormClosed();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm("S_Displ");
+            form.Show();
+        }
     }
 }

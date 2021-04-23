@@ -36,6 +36,7 @@ namespace _8bitVonNeiman.Compiler.View {
             this.saveAsButton = new System.Windows.Forms.Button();
             this.filenameLabel = new System.Windows.Forms.Label();
             this.scintilla = new ScintillaNET.Scintilla();
+            this.HelpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // outputRichTextBox
@@ -151,11 +152,22 @@ namespace _8bitVonNeiman.Compiler.View {
             this.scintilla.TextChanged += new System.EventHandler(this.scintilla_TextChanged);
             this.scintilla.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scintilla_KeyDown);
             // 
+            // HelpButton
+            // 
+            this.HelpButton.Location = new System.Drawing.Point(210, 5);
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.Size = new System.Drawing.Size(62, 23);
+            this.HelpButton.TabIndex = 1001;
+            this.HelpButton.Text = "Помощь";
+            this.HelpButton.UseVisualStyleBackColor = true;
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
+            // 
             // CompilerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 587);
+            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.scintilla);
             this.Controls.Add(this.filenameLabel);
             this.Controls.Add(this.saveAsButton);
@@ -187,5 +199,6 @@ namespace _8bitVonNeiman.Compiler.View {
         private System.Windows.Forms.Button saveAsButton;
         private System.Windows.Forms.Label filenameLabel;
         private Scintilla scintilla;
+        private System.Windows.Forms.Button HelpButton;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
+using _8bitVonNeiman.Common;
 
 namespace _8bitVonNeiman.Controller.View {
     public partial class ComponentsForm : Form {
@@ -42,6 +44,20 @@ namespace _8bitVonNeiman.Controller.View {
         private void aboutButton_Click(object sender, EventArgs e) {
             AboutBox about = new AboutBox();
             about.ShowDialog();
+        }
+
+        private void ComponentsForm_Load(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath;
+            filename = Path.GetFullPath(
+                Path.Combine(filename, ".\\fN8.pdf"));
+            //webBrowser1.Navigate(filename);
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm("fN8");
+            form.Show();
         }
     }
 }

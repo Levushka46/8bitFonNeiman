@@ -62,5 +62,11 @@ namespace _8bitVonNeiman.ExternalDevices.Keyboard1.View {
         private void Keyboard1Form_FormClosed(object sender, FormClosedEventArgs e) {
             _output.FormClosed();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm("Klava");
+            form.Show();
+        }
     }
 }

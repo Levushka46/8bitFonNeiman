@@ -45,6 +45,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.resetButton = new System.Windows.Forms.Button();
             this.captureButton = new System.Windows.Forms.Button();
+            this.HelpButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -269,7 +270,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(38, 226);
+            this.resetButton.Location = new System.Drawing.Point(38, 209);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 39;
@@ -287,11 +288,22 @@
             this.captureButton.UseVisualStyleBackColor = true;
             this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
             // 
+            // HelpButton
+            // 
+            this.HelpButton.Location = new System.Drawing.Point(38, 238);
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.Size = new System.Drawing.Size(75, 23);
+            this.HelpButton.TabIndex = 1004;
+            this.HelpButton.Text = "Помощь";
+            this.HelpButton.UseVisualStyleBackColor = true;
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
+            // 
             // Timer2Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 269);
+            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.captureButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.panel1);
@@ -344,5 +356,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button captureButton;
+        private System.Windows.Forms.Button HelpButton;
     }
 }

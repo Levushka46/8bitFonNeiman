@@ -30,6 +30,7 @@
             this.externalDevicesManagerButton = new System.Windows.Forms.Button();
             this.openAllButton = new System.Windows.Forms.Button();
             this.aboutButton = new System.Windows.Forms.Button();
+            this.HelpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // editorButton
@@ -94,7 +95,7 @@
             // 
             // aboutButton
             // 
-            this.aboutButton.Location = new System.Drawing.Point(12, 157);
+            this.aboutButton.Location = new System.Drawing.Point(12, 187);
             this.aboutButton.Name = "aboutButton";
             this.aboutButton.Size = new System.Drawing.Size(176, 23);
             this.aboutButton.TabIndex = 6;
@@ -102,11 +103,22 @@
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
             // 
+            // HelpButton
+            // 
+            this.HelpButton.Location = new System.Drawing.Point(12, 157);
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.Size = new System.Drawing.Size(176, 23);
+            this.HelpButton.TabIndex = 7;
+            this.HelpButton.Text = "Помощь";
+            this.HelpButton.UseVisualStyleBackColor = true;
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
+            // 
             // ComponentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(203, 201);
+            this.ClientSize = new System.Drawing.Size(204, 222);
+            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.aboutButton);
             this.Controls.Add(this.openAllButton);
             this.Controls.Add(this.externalDevicesManagerButton);
@@ -119,6 +131,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ЭВМ";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ComponentsForm_FormClosed);
+            this.Load += new System.EventHandler(this.ComponentsForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -132,6 +145,7 @@
 		private System.Windows.Forms.Button externalDevicesManagerButton;
         private System.Windows.Forms.Button openAllButton;
         private System.Windows.Forms.Button aboutButton;
+        private System.Windows.Forms.Button HelpButton;
     }
 }
 

@@ -48,5 +48,11 @@ namespace _8bitVonNeiman.ExternalDevices.Timer2.View {
         private void captureButton_Click(object sender, EventArgs e) {
             _output.CaptureButtonClicked();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm("Timer_2");
+            form.Show();
+        }
     }
 }
