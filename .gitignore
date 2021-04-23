@@ -24,6 +24,7 @@ _UpgradeReport_Files/
 # Directories #
 ###############
 obj/
+#bin/
 TestResults/
 ###################
 # Web publish log #
@@ -44,9 +45,9 @@ TestResults/
 *.gz
 *.iso
 *.jar
-*.rar
+#*.rar
 *.tar
-*.zip
+#*.zip
 ######################
 # Logs and databases #
 ######################

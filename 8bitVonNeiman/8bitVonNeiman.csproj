@@ -71,6 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ExtendedBitArray.cs" />
+    <Compile Include="Common\HelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\HelpForm.Designer.cs">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\MicroLibrary.cs" />
     <Compile Include="Compiler\CompilationErrorExcepton.cs" />
     <Compile Include="Compiler\ICompilerControllerOutput.cs" />
@@ -180,7 +186,6 @@
     <Compile Include="ExternalDevices\Oscillograph\View\OscillographForm.Designer.cs">
       <DependentUpon>OscillographForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExternalDevices\OutPin.cs" />
     <Compile Include="ExternalDevices\KeypadAndIndication\KeypadAndIndicationController.cs" />
     <Compile Include="ExternalDevices\KeypadAndIndication\View\IKeypadAndIndicationFormOutput.cs" />
     <Compile Include="ExternalDevices\KeypadAndIndication\View\KeypadAndIndicationForm.cs">
@@ -226,6 +231,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Common\HelpForm.resx">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compiler\View\CompilerForm.resx">
       <DependentUpon>CompilerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,7 +290,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="bin\Release\Help\fN8.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
