@@ -15,6 +15,7 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
         private readonly IExternalDevicesControllerOutput _output;
         private readonly DevicesFactory _devicesFactory;
         private ISet<IDeviceInput> _devices = new HashSet<IDeviceInput>();
+        public ISet<IDeviceInput> Devices => _devices;
 
         public ExternalDevicesController(IExternalDevicesControllerOutput output) {
             _devicesFactory = new DevicesFactory(this);

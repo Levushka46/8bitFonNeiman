@@ -23,5 +23,7 @@ namespace _8bitVonNeiman.ExternalDevices {
         }
 
         public abstract void UpdateUI();
+        public virtual bool OutputPinValue { get; }
+        public virtual int BaseAddress { get; }
     }
 }

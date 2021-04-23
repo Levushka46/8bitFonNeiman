@@ -8,7 +8,8 @@ using _8bitVonNeiman.Common.MicroLibrary;
 using _8bitVonNeiman.ExternalDevices.Timer5.View;
 
 namespace _8bitVonNeiman.ExternalDevices.Timer5 {
-    public class Timer5Controller : IDeviceInput, ITimer5FormOutput {
+    public class Timer5Controller : IDeviceInput, ITimer5FormOutput
+    {
         private static readonly double UPDATE_PERIOD_MILLIS = 100.0;
 
         private Timer5Form _form;
@@ -16,6 +17,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
 
         private int _baseAddress = 30;
         private byte _irq = 3;
+        public override int BaseAddress => _baseAddress;
 
         private ExtendedBitArray _tcntH = new ExtendedBitArray();
         private ExtendedBitArray _tcntL = new ExtendedBitArray();
@@ -32,6 +34,7 @@ namespace _8bitVonNeiman.ExternalDevices.Timer5 {
         private ExtendedBitArray _hBuffer = new ExtendedBitArray();
 
         private bool outputPinValue;
+        public override bool OutputPinValue => outputPinValue;
 
         private bool dec;
         private ExtendedBitArray[] upperLimit;

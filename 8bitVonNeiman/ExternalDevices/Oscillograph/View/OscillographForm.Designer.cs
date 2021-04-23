@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.graph1Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.graph2Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.frequency1TrackBar = new System.Windows.Forms.TrackBar();
@@ -47,6 +47,8 @@
             this.frequency2Numeric = new System.Windows.Forms.NumericUpDown();
             this.ClearButton1 = new System.Windows.Forms.Button();
             this.ClearButton2 = new System.Windows.Forms.Button();
+            this.Channel1comboBox = new System.Windows.Forms.ComboBox();
+            this.Channel2comboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.graph1Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graph2Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frequency1TrackBar)).BeginInit();
@@ -57,32 +59,32 @@
             // 
             // graph1Chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.graph1Chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.graph1Chart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.graph1Chart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.graph1Chart.Legends.Add(legend3);
             this.graph1Chart.Location = new System.Drawing.Point(12, 12);
             this.graph1Chart.Name = "graph1Chart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Канал 1";
-            this.graph1Chart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Канал 1";
+            this.graph1Chart.Series.Add(series3);
             this.graph1Chart.Size = new System.Drawing.Size(700, 100);
             this.graph1Chart.TabIndex = 0;
             this.graph1Chart.Text = "chart1";
             // 
             // graph2Chart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.graph2Chart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.graph2Chart.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.graph2Chart.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.graph2Chart.Legends.Add(legend4);
             this.graph2Chart.Location = new System.Drawing.Point(12, 193);
             this.graph2Chart.Name = "graph2Chart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Канал 2";
-            this.graph2Chart.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Канал 2";
+            this.graph2Chart.Series.Add(series4);
             this.graph2Chart.Size = new System.Drawing.Size(700, 100);
             this.graph2Chart.TabIndex = 1;
             this.graph2Chart.Text = "chart1";
@@ -137,7 +139,7 @@
             // 
             this.frequency1Numeric.Location = new System.Drawing.Point(16, 118);
             this.frequency1Numeric.Name = "frequency1Numeric";
-            this.frequency1Numeric.Size = new System.Drawing.Size(73, 22);
+            this.frequency1Numeric.Size = new System.Drawing.Size(73, 20);
             this.frequency1Numeric.TabIndex = 28;
             this.frequency1Numeric.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
@@ -145,7 +147,7 @@
             // 
             this.frequency2Numeric.Location = new System.Drawing.Point(12, 299);
             this.frequency2Numeric.Name = "frequency2Numeric";
-            this.frequency2Numeric.Size = new System.Drawing.Size(73, 22);
+            this.frequency2Numeric.Size = new System.Drawing.Size(73, 20);
             this.frequency2Numeric.TabIndex = 29;
             this.frequency2Numeric.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
@@ -169,11 +171,29 @@
             this.ClearButton2.UseVisualStyleBackColor = true;
             this.ClearButton2.Click += new System.EventHandler(this.ClearButton2_Click);
             // 
+            // Channel1comboBox
+            // 
+            this.Channel1comboBox.FormattingEnabled = true;
+            this.Channel1comboBox.Location = new System.Drawing.Point(95, 117);
+            this.Channel1comboBox.Name = "Channel1comboBox";
+            this.Channel1comboBox.Size = new System.Drawing.Size(150, 21);
+            this.Channel1comboBox.TabIndex = 32;
+            // 
+            // Channel2comboBox
+            // 
+            this.Channel2comboBox.FormattingEnabled = true;
+            this.Channel2comboBox.Location = new System.Drawing.Point(95, 298);
+            this.Channel2comboBox.Name = "Channel2comboBox";
+            this.Channel2comboBox.Size = new System.Drawing.Size(150, 21);
+            this.Channel2comboBox.TabIndex = 33;
+            // 
             // OscillographForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 376);
+            this.Controls.Add(this.Channel2comboBox);
+            this.Controls.Add(this.Channel1comboBox);
             this.Controls.Add(this.ClearButton2);
             this.Controls.Add(this.ClearButton1);
             this.Controls.Add(this.frequency2Numeric);
@@ -212,5 +232,7 @@
         private System.Windows.Forms.NumericUpDown frequency2Numeric;
         private System.Windows.Forms.Button ClearButton1;
         private System.Windows.Forms.Button ClearButton2;
+        private System.Windows.Forms.ComboBox Channel1comboBox;
+        private System.Windows.Forms.ComboBox Channel2comboBox;
     }
 }

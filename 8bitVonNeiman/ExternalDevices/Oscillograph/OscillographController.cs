@@ -1,6 +1,9 @@
 ﻿using _8bitVonNeiman.Common;
 using _8bitVonNeiman.ExternalDevices.Oscillograph.View;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using _8bitVonNeiman.ExternalDevices.Timer5;
 
 namespace _8bitVonNeiman.ExternalDevices.Oscillograph
 {
@@ -11,14 +14,15 @@ namespace _8bitVonNeiman.ExternalDevices.Oscillograph
         private delegate void UpdateFormDelegate();
         private UpdateFormDelegate _updateFormDelegate;
 
-        private int _baseAddress = 100;
-        //private byte _irq = 10;
+        private int _baseAddress = 0;
+
+        public List<IDeviceInput> ConnectedDevices { get; } = new List<IDeviceInput>();
 
         public OscillographController(IDeviceOutput output)
         {
             _output = output;
             _updateFormDelegate = new UpdateFormDelegate(UpdateForm);
-
+            ConnectedDevices.AddRange(_output.Devices.Where(x => x.GetType() == typeof(Timer5Controller)));
         }
         public override void OpenForm()
         {

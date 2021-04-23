@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -16,14 +17,16 @@ namespace _8bitVonNeiman.ExternalDevices.Oscillograph.View
 			InitializeComponent();
 			SetInitialSettings(graph1Chart, Color.Blue, frequency1TrackBar, frequency1Numeric, 1000);
 			SetInitialSettings(graph2Chart, Color.Green, frequency2TrackBar, frequency2Numeric, 1000);
+            GetListConnectedDevices();
 		}
 
 		private const int ScrollingPoints = 20;//количество точек до скрола
-		public List<int> Сhannel1 = new List<int>(); //значения первого канала
-		public List<int> Channel2 = new List<int>(); //значения второго канала
+        private List<int> _сhannel1 = new List<int>(); //значения первого канала
+        private List<int> _channel2 = new List<int>(); //значения второго канала
+		private Dictionary<string, IDeviceInput> _listConnectDevices = new Dictionary<string, IDeviceInput>();
 
-		//первоначальные настройки компонентов
-		public void SetInitialSettings(Chart chart, Color color, TrackBar trackBar, NumericUpDown Numeric, int frequency)
+        //первоначальные настройки компонентов
+		private void SetInitialSettings(Chart chart, Color color, TrackBar trackBar, NumericUpDown numeric, int frequency)
 		{
 			//граф
 			chart.Series[0].ChartType = SeriesChartType.StepLine;   //тип графа
@@ -49,12 +52,29 @@ namespace _8bitVonNeiman.ExternalDevices.Oscillograph.View
 			trackBar.Minimum = 100;                 //минимум
 			trackBar.Maximum = 1000;                //максимум
 			trackBar.Value = frequency;             //начальная частота
-			Numeric.Minimum = trackBar.Minimum;
-			Numeric.Maximum = trackBar.Maximum;
-			Numeric.Value = frequency;
+			numeric.Minimum = trackBar.Minimum;
+			numeric.Maximum = trackBar.Maximum;
+			numeric.Value = frequency;
+        }
+
+        private void GetListConnectedDevices()
+        {
+            try
+            {
+                foreach (var d in _output.ConnectedDevices)
+                {
+                    _listConnectDevices.Add("Таймер 5 - 0x" + Convert.ToString(d.BaseAddress, 16), d);
+                }
+                foreach (var d in _listConnectDevices)
+                {
+                    Channel1comboBox.Items.Add(d.Key);
+                    Channel2comboBox.Items.Add(d.Key);
+				}
+            }
+            catch { MessageBox.Show("Обнаружены устройства с одинаковыми адресами!\nОпределение списка устройств невозможно!"); }
 		}
 
-		private void OscillographForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void OscillographForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			_output.FormClosed(); //закрытие формы методом интерфейса
 		}
@@ -109,36 +129,51 @@ namespace _8bitVonNeiman.ExternalDevices.Oscillograph.View
 		//очистка каналов
 		private void ClearButton1_Click(object sender, EventArgs e)
 		{
-			Сhannel1.Clear();
+			_сhannel1.Clear();
 			graph1Chart.Series[0].Points.Clear();
 		}
 		private void ClearButton2_Click(object sender, EventArgs e)
 		{
-			Channel2.Clear();
+			_channel2.Clear();
 			graph2Chart.Series[0].Points.Clear();
 		}
 
 		//вывод значений
 		private void timer1_Tick(object sender, EventArgs e)
 		{
-			Сhannel1.Add((OutPin.outputPinValueTimer5) ? 1 : 0);
-			//начать скролл при выходе за границу
-			graph1Chart.Series[0].Points.AddXY(Сhannel1.Count, Сhannel1.Last());
-			if (Сhannel1.Count > graph1Chart.ChartAreas[0].AxisX.ScaleView.Size)
-			{
-				graph1Chart.ChartAreas[0].AxisX.ScaleView.Scroll(Сhannel1.Count);//скролл
-			}
-
+            try
+            {
+                _сhannel1.Add(_listConnectDevices[Channel1comboBox.Text].OutputPinValue ? 1 : 0);
+                //начать скролл при выходе за границу
+                graph1Chart.Series[0].Points.AddXY(_сhannel1.Count, _сhannel1.Last());
+                if (_сhannel1.Count > graph1Chart.ChartAreas[0].AxisX.ScaleView.Size)
+                {
+                    graph1Chart.ChartAreas[0].AxisX.ScaleView.Scroll(_сhannel1.Count); //скролл
+                }
+            }
+			catch
+            {
+                button1Start_Click(sender, e);
+                MessageBox.Show("Не обнаружен источник данных Канала 1!");
+            }
 		}
 		private void timer2_Tick(object sender, EventArgs e)
 		{
-			Channel2.Add((OutPin.outputPinValueTimer5) ? 1 : 0);
-			//начать скролл при выходе за границу
-			graph2Chart.Series[0].Points.AddXY(Channel2.Count, Channel2.Last());
-			if (Channel2.Count > graph2Chart.ChartAreas[0].AxisX.ScaleView.Size)
-			{
-				graph2Chart.ChartAreas[0].AxisX.ScaleView.Scroll(Channel2.Count);//скролл
-			}
+            try
+            {
+				_channel2.Add(_listConnectDevices[Channel2comboBox.Text].OutputPinValue ? 1 : 0);
+			    //начать скролл при выходе за границу
+			    graph2Chart.Series[0].Points.AddXY(_channel2.Count, _channel2.Last());
+			    if (_channel2.Count > graph2Chart.ChartAreas[0].AxisX.ScaleView.Size)
+			    {
+				    graph2Chart.ChartAreas[0].AxisX.ScaleView.Scroll(_channel2.Count);//скролл
+			    }
+            }
+            catch
+            {
+                button2Start_Click(sender, e);
+                MessageBox.Show("Не обнаружен источник данных Канала 2!");
+            }
 		}
-	}
+    }
 }
