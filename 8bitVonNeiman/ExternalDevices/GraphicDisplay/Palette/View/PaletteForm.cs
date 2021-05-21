@@ -191,5 +191,10 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette.View
         {
             _output.PaletteFormClosed();
         }
+
+        private void ColorAPictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
