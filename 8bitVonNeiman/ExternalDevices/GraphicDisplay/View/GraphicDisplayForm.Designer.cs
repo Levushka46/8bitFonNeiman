@@ -38,7 +38,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.drBinTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.GraphicMemoryDataGridView = new System.Windows.Forms.DataGridView();
             this.DrawButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
@@ -47,15 +46,11 @@
             this.baseAddressLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.SaveButton = new System.Windows.Forms.Button();
-            this.SaveAsButton = new System.Windows.Forms.Button();
-            this.LoadButton = new System.Windows.Forms.Button();
             this.arHBinTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.PaletteButton = new System.Windows.Forms.Button();
-            this.ClearGraphicMemory = new System.Windows.Forms.Button();
+            this.VideomemoryButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Screen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GraphicMemoryDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +58,7 @@
             // 
             this.Screen.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Screen.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.Screen.Location = new System.Drawing.Point(522, 120);
+            this.Screen.Location = new System.Drawing.Point(12, 65);
             this.Screen.Name = "Screen";
             this.Screen.Size = new System.Drawing.Size(512, 256);
             this.Screen.TabIndex = 0;
@@ -73,7 +68,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(1197, 88);
+            this.label5.Location = new System.Drawing.Point(786, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 20);
             this.label5.TabIndex = 34;
@@ -83,7 +78,7 @@
             // 
             this.crBinTextBox.BackColor = System.Drawing.Color.White;
             this.crBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.crBinTextBox.Location = new System.Drawing.Point(1098, 152);
+            this.crBinTextBox.Location = new System.Drawing.Point(687, 129);
             this.crBinTextBox.Name = "crBinTextBox";
             this.crBinTextBox.ReadOnly = true;
             this.crBinTextBox.Size = new System.Drawing.Size(93, 26);
@@ -96,7 +91,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(1197, 155);
+            this.label6.Location = new System.Drawing.Point(786, 132);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 20);
             this.label6.TabIndex = 32;
@@ -106,7 +101,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(1074, 120);
+            this.label3.Location = new System.Drawing.Point(663, 97);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(18, 20);
             this.label3.TabIndex = 31;
@@ -117,7 +112,7 @@
             this.arLBinTextBox.BackColor = System.Drawing.Color.White;
             this.arLBinTextBox.CausesValidation = false;
             this.arLBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.arLBinTextBox.Location = new System.Drawing.Point(1099, 82);
+            this.arLBinTextBox.Location = new System.Drawing.Point(688, 59);
             this.arLBinTextBox.Name = "arLBinTextBox";
             this.arLBinTextBox.ReadOnly = true;
             this.arLBinTextBox.Size = new System.Drawing.Size(93, 26);
@@ -130,7 +125,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(1074, 88);
+            this.label1.Location = new System.Drawing.Point(663, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 20);
             this.label1.TabIndex = 29;
@@ -140,7 +135,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(1198, 117);
+            this.label4.Location = new System.Drawing.Point(787, 94);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 20);
             this.label4.TabIndex = 28;
@@ -150,7 +145,7 @@
             // 
             this.drBinTextBox.BackColor = System.Drawing.Color.White;
             this.drBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.drBinTextBox.Location = new System.Drawing.Point(1099, 117);
+            this.drBinTextBox.Location = new System.Drawing.Point(688, 94);
             this.drBinTextBox.Name = "drBinTextBox";
             this.drBinTextBox.ReadOnly = true;
             this.drBinTextBox.Size = new System.Drawing.Size(93, 26);
@@ -163,33 +158,15 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(951, 88);
+            this.label2.Location = new System.Drawing.Point(540, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 20);
             this.label2.TabIndex = 26;
             this.label2.Text = "1";
             // 
-            // GraphicMemoryDataGridView
-            // 
-            this.GraphicMemoryDataGridView.AllowUserToAddRows = false;
-            this.GraphicMemoryDataGridView.AllowUserToDeleteRows = false;
-            this.GraphicMemoryDataGridView.AllowUserToResizeColumns = false;
-            this.GraphicMemoryDataGridView.AllowUserToResizeRows = false;
-            this.GraphicMemoryDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.GraphicMemoryDataGridView.BackgroundColor = System.Drawing.Color.White;
-            this.GraphicMemoryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GraphicMemoryDataGridView.Location = new System.Drawing.Point(26, 85);
-            this.GraphicMemoryDataGridView.Name = "GraphicMemoryDataGridView";
-            this.GraphicMemoryDataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.GraphicMemoryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GraphicMemoryDataGridView.Size = new System.Drawing.Size(490, 438);
-            this.GraphicMemoryDataGridView.TabIndex = 35;
-            this.GraphicMemoryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GraphicMemoryDataGridView_CellEndEdit_1);
-            // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(287, 56);
+            this.DrawButton.Location = new System.Drawing.Point(211, 36);
             this.DrawButton.Name = "DrawButton";
             this.DrawButton.Size = new System.Drawing.Size(91, 23);
             this.DrawButton.TabIndex = 36;
@@ -205,7 +182,7 @@
             this.panel1.Controls.Add(this.baseAddressLabel);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(1038, 216);
+            this.panel1.Location = new System.Drawing.Point(627, 193);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(212, 87);
             this.panel1.TabIndex = 37;
@@ -270,42 +247,12 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Базовый адрес";
             // 
-            // SaveButton
-            // 
-            this.SaveButton.Location = new System.Drawing.Point(19, 56);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveButton.TabIndex = 38;
-            this.SaveButton.Text = "Сохранить";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // SaveAsButton
-            // 
-            this.SaveAsButton.Location = new System.Drawing.Point(100, 56);
-            this.SaveAsButton.Name = "SaveAsButton";
-            this.SaveAsButton.Size = new System.Drawing.Size(103, 23);
-            this.SaveAsButton.TabIndex = 39;
-            this.SaveAsButton.Text = "Сохранить как";
-            this.SaveAsButton.UseVisualStyleBackColor = true;
-            this.SaveAsButton.Click += new System.EventHandler(this.SaveAsButton_Click);
-            // 
-            // LoadButton
-            // 
-            this.LoadButton.Location = new System.Drawing.Point(206, 56);
-            this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(75, 23);
-            this.LoadButton.TabIndex = 40;
-            this.LoadButton.Text = "Загрузить";
-            this.LoadButton.UseVisualStyleBackColor = true;
-            this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
-            // 
             // arHBinTextBox
             // 
             this.arHBinTextBox.BackColor = System.Drawing.Color.White;
             this.arHBinTextBox.CausesValidation = false;
             this.arHBinTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.arHBinTextBox.Location = new System.Drawing.Point(975, 85);
+            this.arHBinTextBox.Location = new System.Drawing.Point(564, 62);
             this.arHBinTextBox.Name = "arHBinTextBox";
             this.arHBinTextBox.ReadOnly = true;
             this.arHBinTextBox.Size = new System.Drawing.Size(93, 26);
@@ -318,7 +265,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(1074, 152);
+            this.label9.Location = new System.Drawing.Point(663, 129);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(18, 20);
             this.label9.TabIndex = 42;
@@ -326,40 +273,35 @@
             // 
             // PaletteButton
             // 
-            this.PaletteButton.Location = new System.Drawing.Point(384, 56);
+            this.PaletteButton.Location = new System.Drawing.Point(392, 36);
             this.PaletteButton.Name = "PaletteButton";
             this.PaletteButton.Size = new System.Drawing.Size(92, 23);
             this.PaletteButton.TabIndex = 43;
             this.PaletteButton.Text = "Палитра";
             this.PaletteButton.UseVisualStyleBackColor = true;
             this.PaletteButton.Click += new System.EventHandler(this.PaletteButton_Click);
-            this.PaletteButton.ChangeUICues += new System.Windows.Forms.UICuesEventHandler(this.PaletteButton_ChangeUICues);
             // 
-            // ClearGraphicMemory
+            // VideomemoryButton
             // 
-            this.ClearGraphicMemory.Location = new System.Drawing.Point(482, 56);
-            this.ClearGraphicMemory.Name = "ClearGraphicMemory";
-            this.ClearGraphicMemory.Size = new System.Drawing.Size(80, 23);
-            this.ClearGraphicMemory.TabIndex = 44;
-            this.ClearGraphicMemory.Text = "Очистить";
-            this.ClearGraphicMemory.UseVisualStyleBackColor = true;
-            this.ClearGraphicMemory.Click += new System.EventHandler(this.ClearGraphicMemory_Click);
+            this.VideomemoryButton.Location = new System.Drawing.Point(43, 36);
+            this.VideomemoryButton.Name = "VideomemoryButton";
+            this.VideomemoryButton.Size = new System.Drawing.Size(91, 23);
+            this.VideomemoryButton.TabIndex = 45;
+            this.VideomemoryButton.Text = "Видеопамять";
+            this.VideomemoryButton.UseVisualStyleBackColor = true;
+            this.VideomemoryButton.Click += new System.EventHandler(this.VideomemoryButton_Click);
             // 
             // GraphicDisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1257, 535);
-            this.Controls.Add(this.ClearGraphicMemory);
+            this.ClientSize = new System.Drawing.Size(869, 383);
+            this.Controls.Add(this.VideomemoryButton);
             this.Controls.Add(this.PaletteButton);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.arHBinTextBox);
-            this.Controls.Add(this.LoadButton);
-            this.Controls.Add(this.SaveAsButton);
-            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.DrawButton);
-            this.Controls.Add(this.GraphicMemoryDataGridView);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.crBinTextBox);
             this.Controls.Add(this.label6);
@@ -373,9 +315,7 @@
             this.Name = "GraphicDisplayForm";
             this.Text = "Графический дисплей";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GraphicDisplayForm_FormClosed);
-            this.Click += new System.EventHandler(this.GraphicDisplayForm_Click);
             ((System.ComponentModel.ISupportInitialize)(this.Screen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GraphicMemoryDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -395,21 +335,17 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox drBinTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView GraphicMemoryDataGridView;
         private System.Windows.Forms.Button DrawButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label interruptionVectorLabel;
         private System.Windows.Forms.Label baseAddressLabel;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.Button SaveAsButton;
-        private System.Windows.Forms.Button LoadButton;
         private System.Windows.Forms.TextBox arHBinTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button PaletteButton;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button ClearGraphicMemory;
+        private System.Windows.Forms.Button VideomemoryButton;
     }
 }

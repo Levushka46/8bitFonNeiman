@@ -1,18 +1,20 @@
-﻿using System;
+﻿using _8bitVonNeiman.Common;
+using System;
 using System.Collections.Generic;
-using _8bitVonNeiman.Common;
 using System.IO;
 using System.Windows.Forms;
 
 namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 {
-    class GraphicMemoryFileHandler
+    class VideomemoryFileHandler
     {
+
         private string _lastFilePath;
 
-        public Dictionary<int, ExtendedBitArray> LoadMemory()
+        public ExtendedBitArray[] LoadMemory()
         {
             var openFileDialog = new OpenFileDialog();
+
             openFileDialog.Filter = "Graphic Memory files (*.gmem8)|*.gmem8|All files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -21,37 +23,74 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                 {
                     string text;
                     byte value;
-                    Dictionary<int, ExtendedBitArray> memory = new Dictionary<int, ExtendedBitArray>();
+                    ExtendedBitArray[] memory = new ExtendedBitArray[4096];
+
                     int i = 0;
                     while (true)
                     {
+
+
+
                         text = sr.ReadLine();
                         if (text == null)
                         {
                             break;
                         }
+
+                        if (i >= 4096)
+
+                        {
+
+                            MessageBox.Show("Неверный формат файла. В файле должно быть 4096 чисел");
+                            return null;
+                        }
+
                         try
                         {
                             value = Convert.ToByte(text);
-                            if (value != 0)
-                            {
-                                memory[i] = new ExtendedBitArray(value);
-                            }
+
+
+
+
+                            memory[i] = new ExtendedBitArray(value);
+
+
                         }
                         catch
                         {
-                            MessageBox.Show("Неверный формат файла. Проверьте, что в нем находятся только числа от 0 до 255 по одному в строке.");
+
+
+                            MessageBox.Show("Неверный формат файла. Проверьте, что в нем находятся только числа от 0 до 255");
                             return null;
                         }
                         i++;
                     }
+
+
+                    if (i != 4096)
+
+                    {
+                        MessageBox.Show("Неверный формат файла. В файле должно быть 4096 чисел");
+                        return null;
+                    }
+
+
                     return memory;
+
+
                 }
+
+
+
+
+
             }
+
             return null;
+
         }
 
-        public void Save(Dictionary<int, ExtendedBitArray> memory)
+        public void Save(ExtendedBitArray[] memory)
         {
             if (_lastFilePath == null)
             {
@@ -63,7 +102,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             }
         }
 
-        public void SaveAs(Dictionary<int, ExtendedBitArray> memory)
+        public void SaveAs(ExtendedBitArray[] memory)
         {
             var saveFileDialog = new SaveFileDialog();
 
@@ -86,18 +125,18 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             }
         }
 
-        private void Save(Dictionary<int, ExtendedBitArray> memory, string path)
+        private void Save(ExtendedBitArray[] memory, string path)
         {
-            var count = Convert.ToInt32(Math.Pow(2, Constants.FarAddressBitsCount));
+            var count = Convert.ToInt32(Math.Pow(2, 12));
             var memoryArray = new List<string>(count);
-            for (int i = 0; i < count; i++)
-            {
-                memoryArray.Add("0");
-            }
+
             foreach (var pair in memory)
             {
-                memoryArray[pair.Key] = pair.Value.NumValue().ToString();
+
+                memoryArray.Add(pair.NumValue().ToString());
             }
+
+
 
             var text = string.Join(Environment.NewLine, memoryArray);
 

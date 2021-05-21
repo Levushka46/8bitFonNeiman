@@ -152,7 +152,6 @@
     </Compile>
     <Compile Include="ExternalDevices\Display\View\IDisplayFormOutput.cs" />
     <Compile Include="ExternalDevices\GraphicDisplay\GraphicDisplayController.cs" />
-    <Compile Include="ExternalDevices\GraphicDisplay\GraphicMemoryFileHandler.cs" />
     <Compile Include="ExternalDevices\GraphicDisplay\Palette\PaletteFileHandler.cs" />
     <Compile Include="ExternalDevices\GraphicDisplay\Palette\View\IPaletteFormOutput.cs" />
     <Compile Include="ExternalDevices\GraphicDisplay\Palette\View\PaletteForm.cs">
@@ -161,6 +160,12 @@
     <Compile Include="ExternalDevices\GraphicDisplay\Palette\View\PaletteForm.Designer.cs">
       <DependentUpon>PaletteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalDevices\GraphicDisplay\Videomemory\VideomemoryFileHandler.cs" />
+    <Compile Include="ExternalDevices\GraphicDisplay\Videomemory\View\IVideomemoryFormOutput.cs" />
+    <Compile Include="ExternalDevices\GraphicDisplay\Videomemory\View\VideomemoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\GraphicDisplay\Videomemory\View\VideomemoryForm.Designer.cs" />
     <Compile Include="ExternalDevices\GraphicDisplay\View\GraphicDisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +263,7 @@
     <EmbeddedResource Include="ExternalDevices\GraphicDisplay\Palette\View\PaletteForm.resx">
       <DependentUpon>PaletteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\GraphicDisplay\Videomemory\View\VideomemoryForm.resx" />
     <EmbeddedResource Include="ExternalDevices\GraphicDisplay\View\GraphicDisplayForm.resx">
       <DependentUpon>GraphicDisplayForm.cs</DependentUpon>
     </EmbeddedResource>
