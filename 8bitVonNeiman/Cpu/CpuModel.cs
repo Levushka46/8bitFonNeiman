@@ -1459,8 +1459,8 @@ namespace _8bitVonNeiman.Cpu {
 
         private void _perform_mul() {
             int result = _acc.NumValue() * _rdb.NumValue();
-            _registers[0] = new ExtendedBitArray(result & 0xFF);
-            _registers[1] = new ExtendedBitArray((result >> 8) & 0xFF);
+            _registers[6] = new ExtendedBitArray(result & 0xFF);
+            _registers[7] = new ExtendedBitArray((result >> 8) & 0xFF);
         }
     }
 }
