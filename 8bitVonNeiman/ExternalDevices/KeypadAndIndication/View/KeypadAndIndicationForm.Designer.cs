@@ -32,6 +32,7 @@
             this.sevenSegment1 = new DmitryBrant.CustomControls.SevenSegment();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sevenSegment2 = new DmitryBrant.CustomControls.SevenSegment();
             this.sevenSegment3 = new DmitryBrant.CustomControls.SevenSegment();
             this.sevenSegment4 = new DmitryBrant.CustomControls.SevenSegment();
@@ -79,7 +80,6 @@
             this.bufferDataGridView = new System.Windows.Forms.DataGridView();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.keyPadPanel.SuspendLayout();
@@ -91,7 +91,7 @@
             this.sevenSegment1.ColonOn = false;
             this.sevenSegment1.ColonShow = false;
             this.sevenSegment1.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment1.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment1.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment1.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment1.CustomPattern = 0;
             this.sevenSegment1.DecimalOn = false;
@@ -125,12 +125,19 @@
             this.settingToolStripMenuItem.Text = "Настройки";
             this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
             // 
+            // HelpToolStripMenuItem
+            // 
+            this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
+            this.HelpToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.HelpToolStripMenuItem.Text = "Помощь";
+            this.HelpToolStripMenuItem.Click += new System.EventHandler(this.HelpToolStripMenuItem_Click);
+            // 
             // sevenSegment2
             // 
             this.sevenSegment2.ColonOn = false;
             this.sevenSegment2.ColonShow = false;
             this.sevenSegment2.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment2.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment2.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment2.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment2.CustomPattern = 0;
             this.sevenSegment2.DecimalOn = false;
@@ -151,7 +158,7 @@
             this.sevenSegment3.ColonOn = false;
             this.sevenSegment3.ColonShow = false;
             this.sevenSegment3.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment3.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment3.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment3.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment3.CustomPattern = 0;
             this.sevenSegment3.DecimalOn = false;
@@ -172,7 +179,7 @@
             this.sevenSegment4.ColonOn = false;
             this.sevenSegment4.ColonShow = false;
             this.sevenSegment4.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment4.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment4.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment4.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment4.CustomPattern = 0;
             this.sevenSegment4.DecimalOn = false;
@@ -193,7 +200,7 @@
             this.sevenSegment5.ColonOn = false;
             this.sevenSegment5.ColonShow = false;
             this.sevenSegment5.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment5.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment5.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment5.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment5.CustomPattern = 0;
             this.sevenSegment5.DecimalOn = false;
@@ -214,7 +221,7 @@
             this.sevenSegment6.ColonOn = false;
             this.sevenSegment6.ColonShow = false;
             this.sevenSegment6.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment6.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment6.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment6.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment6.CustomPattern = 0;
             this.sevenSegment6.DecimalOn = false;
@@ -235,7 +242,7 @@
             this.sevenSegment7.ColonOn = false;
             this.sevenSegment7.ColonShow = false;
             this.sevenSegment7.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment7.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment7.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment7.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment7.CustomPattern = 0;
             this.sevenSegment7.DecimalOn = false;
@@ -256,7 +263,7 @@
             this.sevenSegment8.ColonOn = false;
             this.sevenSegment8.ColonShow = false;
             this.sevenSegment8.ColorBackground = System.Drawing.Color.DarkGray;
-            this.sevenSegment8.ColorDark = System.Drawing.Color.Gray;
+            this.sevenSegment8.ColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(145)))), ((int)(((byte)(145)))));
             this.sevenSegment8.ColorLight = System.Drawing.Color.Red;
             this.sevenSegment8.CustomPattern = 0;
             this.sevenSegment8.DecimalOn = false;
@@ -722,13 +729,6 @@
             this.label13.Size = new System.Drawing.Size(85, 13);
             this.label13.TabIndex = 50;
             this.label13.Text = "Z        В буфере";
-            // 
-            // HelpToolStripMenuItem
-            // 
-            this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
-            this.HelpToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.HelpToolStripMenuItem.Text = "Помощь";
-            this.HelpToolStripMenuItem.Click += new System.EventHandler(this.HelpToolStripMenuItem_Click);
             // 
             // KeypadAndIndicationForm
             // 
