@@ -72,12 +72,12 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.Videomemory.View
             _output.LoadVideomemoryClicked();
         }
 
-        private void GraphicMemoryDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void VideomemoryDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            _output.VideomemoryChange(e.RowIndex, e.ColumnIndex, VideoMemoryDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString());
+            _output.VideomemoryChange(e.RowIndex, e.ColumnIndex, VideoMemoryDataGridView[e.ColumnIndex, e.RowIndex].Value);
         }
 
-        private void ClearVideoMemory_Click(object sender, EventArgs e)
+        private void ClearVideomemory_Click(object sender, EventArgs e)
         {
             _output.ClearVideomemoryClicked();
         }

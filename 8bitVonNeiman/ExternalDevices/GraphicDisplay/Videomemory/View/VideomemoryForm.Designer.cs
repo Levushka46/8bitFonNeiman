@@ -46,27 +46,27 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.VideoMemoryDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.VideoMemoryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.VideoMemoryDataGridView.Location = new System.Drawing.Point(8, 40);
+            this.VideoMemoryDataGridView.Location = new System.Drawing.Point(12, 42);
             this.VideoMemoryDataGridView.Name = "VideoMemoryDataGridView";
             this.VideoMemoryDataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.VideoMemoryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.VideoMemoryDataGridView.Size = new System.Drawing.Size(497, 346);
+            this.VideoMemoryDataGridView.Size = new System.Drawing.Size(480, 346);
             this.VideoMemoryDataGridView.TabIndex = 36;
-            this.VideoMemoryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GraphicMemoryDataGridView_CellEndEdit);
+            this.VideoMemoryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.VideomemoryDataGridView_CellEndEdit);
             // 
             // ClearVideoMemory
             // 
-            this.ClearVideoMemory.Location = new System.Drawing.Point(278, 11);
+            this.ClearVideoMemory.Location = new System.Drawing.Point(283, 13);
             this.ClearVideoMemory.Name = "ClearVideoMemory";
             this.ClearVideoMemory.Size = new System.Drawing.Size(106, 23);
             this.ClearVideoMemory.TabIndex = 48;
             this.ClearVideoMemory.Text = "Очистить память";
             this.ClearVideoMemory.UseVisualStyleBackColor = true;
-            this.ClearVideoMemory.Click += new System.EventHandler(this.ClearVideoMemory_Click);
+            this.ClearVideoMemory.Click += new System.EventHandler(this.ClearVideomemory_Click);
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(197, 11);
+            this.LoadButton.Location = new System.Drawing.Point(202, 13);
             this.LoadButton.Name = "LoadButton";
             this.LoadButton.Size = new System.Drawing.Size(75, 23);
             this.LoadButton.TabIndex = 47;
@@ -76,7 +76,7 @@
             // 
             // SaveAsButton
             // 
-            this.SaveAsButton.Location = new System.Drawing.Point(88, 11);
+            this.SaveAsButton.Location = new System.Drawing.Point(93, 12);
             this.SaveAsButton.Name = "SaveAsButton";
             this.SaveAsButton.Size = new System.Drawing.Size(103, 23);
             this.SaveAsButton.TabIndex = 46;
@@ -86,7 +86,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(7, 11);
+            this.SaveButton.Location = new System.Drawing.Point(12, 12);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 45;
@@ -98,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 389);
+            this.ClientSize = new System.Drawing.Size(506, 389);
             this.Controls.Add(this.ClearVideoMemory);
             this.Controls.Add(this.LoadButton);
             this.Controls.Add(this.SaveAsButton);

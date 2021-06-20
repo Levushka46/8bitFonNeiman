@@ -1,12 +1,13 @@
-﻿using _8bitVonNeiman.Common;
-using _8bitVonNeiman.Compiler.Model;
-using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette;
-using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette.View;
-using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Videomemory.View;
-using _8bitVonNeiman.ExternalDevices.GraphicDisplay.View;
-using System;
-using System.Drawing;
+﻿using System;
 using System.Linq;
+using _8bitVonNeiman.Common;
+using _8bitVonNeiman.Compiler.Model;
+using _8bitVonNeiman.ExternalDevices.GraphicDisplay.View;
+using System.Drawing;
+using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette.View;
+using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette;
+using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Videomemory.View;
+using System.Diagnostics;
 
 namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 {
@@ -15,11 +16,17 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
     {
 
         private ExtendedBitArray[] _videomemory = new ExtendedBitArray[4096];
+
         private VideomemoryFileHandler _fileHandler = new VideomemoryFileHandler();
+
         private PaletteFileHandler _fileHandler1 = new PaletteFileHandler();
+
         private GraphicDisplayForm _form;
+
         private readonly IDeviceOutput _output;
+
         private PaletteForm _form1;
+
         private VideomemoryForm _form2;
 
         private int _baseAddress = 50;
@@ -50,48 +57,46 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
         public override void OpenForm()
         {
 
-
             colors[0] = Color.FromArgb(255, 0, 0, 0);
 
             colors[1] = Color.FromArgb(255, 0, 0, 255);
 
             colors[2] = Color.FromArgb(255, 0, 255, 0);
 
-            colors[4] = Color.FromArgb(255, 255, 0, 0);
+            colors[3] = Color.FromArgb(255, 255, 0, 0);
 
-            colors[5] = Color.FromArgb(255, 255, 0, 255);
+            colors[5] = Color.FromArgb(255, 255, 255, 0);
 
-            colors[6] = Color.FromArgb(255, 255, 255, 0);
+            colors[6] = Color.FromArgb(255, 255, 0, 255);
 
-            colors[7] = Color.FromArgb(255, 255, 255, 255);
+            colors[7] = Color.FromArgb(255, 0, 255, 255);
 
-
-            colors[8] = Color.FromArgb(255, 127, 127, 0);
-
-            colors[9] = Color.FromArgb(255, 127, 127, 255);
-
-            colors[10] = Color.FromArgb(255, 127, 255, 127);
-
-            colors[11] = Color.FromArgb(255, 127, 255, 127);
+            colors[8] = Color.FromArgb(255, 255, 255, 255);
 
 
-            colors[12] = Color.FromArgb(255, 255, 127, 127);
+            colors[9] = Color.FromArgb(255, 127, 127, 0);
 
-            colors[13] = Color.FromArgb(255, 255, 127, 255);
+            colors[10] = Color.FromArgb(255, 127, 0, 127);
 
-            colors[14] = Color.FromArgb(255, 100, 200, 127);
+            colors[11] = Color.FromArgb(255, 0, 127, 127);
 
-            colors[15] = Color.FromArgb(255, 100, 100, 100);
+            colors[12] = Color.FromArgb(255, 127, 127, 255);
 
+            colors[13] = Color.FromArgb(255, 127, 255, 127);
+
+            colors[14] = Color.FromArgb(255, 255, 127, 127);
+
+            colors[15] = Color.FromArgb(255, 127, 127, 127);
+
+            
 
             for (int i = 0; i < 4096; i++)
                 _videomemory[i] = new ExtendedBitArray("0");
 
             if (_form == null)
+
             {
-
                 _form = new GraphicDisplayForm(this);
-
 
             }
 
@@ -104,36 +109,14 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             UpdateForm();
         }
 
-        /// Открывает форму, если она закрыта или закрывает, если открыта
+
+
         public void ChangeFormState()
-        {
-
-
-            if (_form == null)
-            {
-                _form = new GraphicDisplayForm(this);
-                _form.Show();
-
-
-
-                UpdateForm();
-            }
-            else
-            {
-                _form.Close();
-            }
-        }
-
-
-
-        public void ChangeFormState1()
         {
             if (_form1 == null)
             {
 
                 _form1.Show();
-
-
 
                 UpdateForm();
             }
@@ -148,6 +131,44 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
         {
             _form.ShowRegisters(_arL, _arH, GetDr(), _cr);
         }
+
+        public void DrawButtonClicked()
+        {
+            DrawMemory();
+            Draw();
+        }
+
+        public void Draw()
+        {
+            _form.SetScreen(Pixels);
+        }
+
+        public override void UpdateUI()
+        {
+            UpdateForm();
+        }
+
+
+        public void FormClosed()
+        {
+            _form = null;
+
+            if (_form1 != null)
+            {
+                _form1.Close();
+                _form1 = null;
+            }
+
+            if (_form2 != null)
+            {
+                _form2.Close();
+                _form2 = null;
+
+            }
+
+            _output.DeviceFormClosed(this);
+        }
+
 
         public override bool HasMemory(int address)
         {
@@ -184,13 +205,14 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             switch (address - _baseAddress)
             {
                 case 0:
+                    if(IsEnabled())
                     _arL = memory;
                     break;
                 case 1:
+                    if (IsEnabled())
                     _arH = memory;
                     break;
                 case 2:
-                    _dr = memory;
                     SetDr(memory);
                     NextAddress();
                     break;
@@ -207,21 +229,10 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             }
         }
 
-
-
         public ExtendedBitArray GetDr()
         {
 
-            if (!IsPalette())
-            {
-                int address = (256 * (_arH.NumValue() & 15) + _arL.NumValue()) & 4095;
-
-
-                return new ExtendedBitArray(_videomemory[address]);
-            }
-
-
-            else
+            if (IsPalette())
             {
                 byte palette = 0;
 
@@ -242,13 +253,17 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                         palette = colors[address / 4].B;
 
                         break;
-
-
-
                 }
 
                 return new ExtendedBitArray(palette);
 
+            }
+
+            else
+            {
+                int address = (256 * (_arH.NumValue() & 15) + _arL.NumValue()) & 4095;
+
+                return new ExtendedBitArray(_videomemory[address]);
             }
 
 
@@ -258,22 +273,9 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
         {
             if (IsEnabled())
             {
+                _dr = value;
 
-                if (!IsPalette())
-                {
-                    int address = 256 * (_arH.NumValue() & 15) + _arL.NumValue();
-
-                    SetVideomemory(_dr, address);
-                    ChangeTwoPixels(_arH, _arL);
-
-                    if (IsRedraw())
-                    {
-
-                        Draw();
-                    }
-                }
-
-                else
+                if (IsPalette())
                 {
                     int address = _arL.NumValue() & 63;
                     int colorIndex = address / 4;
@@ -294,8 +296,8 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                         case 3:
                             colors[colorIndex] = Color.FromArgb(colors[colorIndex].A, colors[colorIndex].R, colors[colorIndex].G, _dr.NumValue());
                             break;
-
                     }
+
                     if (_form1 != null)
                     {
                         _form1.SetPalette(colorIndex, colors[colorIndex]);
@@ -308,17 +310,38 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                         Draw();
                     }
                 }
+
+                else
+                {
+                    int address = 256 * (_arH.NumValue() & 15) + _arL.NumValue();
+
+                    SetVideomemory(_dr, address);
+                    ChangeTwoPixels(_arH, _arL);
+
+                    if (IsRedraw())
+                    {
+
+                        Draw();
+                    }
+                }
             }
 
 
         }
 
+        public void SetVideomemory(ExtendedBitArray memory, int address)
+        {
+            _videomemory[address] = memory;
+            int i = address / VideomemoryForm.ColumnCount;
+            int j = address % VideomemoryForm.ColumnCount;
+            if (_form2 != null)
+                _form2.SetMemory(i, j, VideomemoryHex(i, j));
+        }
+
+
         public void SetMemory(ExtendedBitArray[] memory)
         {
-
             memory.ToList().ForEach(i => _videomemory[i.NumValue()] = memory[i.NumValue()]);
-
-
         }
 
 
@@ -339,35 +362,9 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                 Draw();
             }
 
-        }
-
-        public void SaveVideomemoryClicked()
-        {
-            _fileHandler.Save(_videomemory);
-        }
-
-        public void SaveAsVideomemoryClicked()
-        {
-            _fileHandler.SaveAs(_videomemory);
-        }
-
-        public void DrawButtonClicked()
-        {
-            DrawMemory();
-            Draw();
+            UpdateForm();
 
         }
-
-        public void SetVideomemory(ExtendedBitArray memory, int address)
-        {
-
-            _videomemory[address] = memory;
-            int i = address / VideomemoryForm.ColumnCount;
-            int j = address % VideomemoryForm.ColumnCount;
-            if (_form2 != null)
-                _form2.SetMemory(i, j, MemoryHex(i, j));
-        }
-
 
         public void ShowPalette()
         {
@@ -379,15 +376,24 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         }
 
-        public void VideomemoryChange(int row, int column, string s)
+        public void VideomemoryChange(int row, int column, object o)
         {
+            if (o == null)
+
+            {
+                _form2.ShowMessage("Должно быть введено число от 0 до FF");
+                _form2.SetMemory(row, column, VideomemoryHex(row, column));
+                return;
+
+            }
+            string s = o.ToString();
+
             if (s.Length > 2)
             {
                 _form2.ShowMessage("Должно быть введено число от 0 до FF");
-                _form2.SetMemory(row, column, MemoryHex(row, column));
+                _form2.SetMemory(row, column, VideomemoryHex(row, column));
                 return;
             }
-
 
             int num;
             try
@@ -395,14 +401,14 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                 num = Convert.ToInt32(s, 16);
                 if (num > 255 || num < 0)
                 {
-                    _form2.SetMemory(row, column, MemoryHex(row, column));
+                    _form2.SetMemory(row, column, VideomemoryHex(row, column));
                     return;
                 }
             }
             catch
             {
                 _form2.ShowMessage("Должно быть введено число от 0 до FF");
-                _form2.SetMemory(row, column, MemoryHex(row, column));
+                _form2.SetMemory(row, column, VideomemoryHex(row, column));
                 return;
             }
             var bitArray = new ExtendedBitArray();
@@ -421,27 +427,133 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                 ChangeTwoPixels(row, column);
                 Draw();
             }
+
+            UpdateForm();
+        }
+
+
+   
+        private void ShowVideomemory()
+        {
+            for (int i = 0; i < VideomemoryForm.RowCount; i++)
+                for (int j = 0; j < VideomemoryForm.ColumnCount; j++)
+                {
+                    _form2.SetMemory(i, j, VideomemoryHex(i, j));
+                }
+        }
+
+
+        public void VideomemoryButtonClicked()
+        {
+            if (_form2 != null)
+
+            {
+                _form2.Close();
+
+                _form2 = null;
+            }
+
+            else
+
+            {
+                _form2 = new VideomemoryForm(this);
+
+
+                ShowVideomemory();
+
+                _form2.Show();
+            }
+
+
+        }
+
+        public string VideomemoryHex(int row, int collumn)
+        {
+            int memoryIndex = row * VideomemoryForm.ColumnCount + collumn;
+
+            return _videomemory[memoryIndex].ToHexString();
+
+        }
+
+        public void ClearVideomemoryClicked()
+        {
+            for (int i = 0; i < VideomemoryForm.RowCount; i++)
+                for (int j = 0; j < VideomemoryForm.ColumnCount; j++)
+                    SetVideomemory(new ExtendedBitArray(), 16 * i + j);
+
+            UpdateForm();
+
+            if (IsRedraw())
+            {
+                DrawMemory();
+                Draw();
+            }
+
+        }
+
+        public void VideomemoryFormClosed()
+        {
+            _form2 = null;
+        }
+
+
+        public void SaveVideomemoryClicked()
+        {
+            _fileHandler.Save(_videomemory);
+        }
+
+        public void SaveAsVideomemoryClicked()
+        {
+            _fileHandler.SaveAs(_videomemory);
+        }
+
+        public void PaletteChange(int row, int column, object A, object R, object G, object B)
+        {
+
+            if (A == null || R == null || G == null || B == null)
+            {
+                _form1.ShowMessage("Должно быть введено число от 0 до FF");
+                _form1.SetPalette(row, colors[row]);
+                return;
+            }
+
+            try
+            {
+
+                colors[row] = Color.FromArgb(Convert.ToInt32(A.ToString(), 16), Convert.ToInt32(R.ToString(), 16), Convert.ToInt32(G.ToString(), 16), Convert.ToInt32(B.ToString(), 16));
+
+            }
+
+            catch
+            {
+                _form1.ShowMessage("Должно быть введено число от 0 до FF");
+                _form1.SetPalette(row, colors[row]);
+                return;
+            }
+
+            _form1.SetPalette(row, colors[row]);
+
+            _form1.ShowColor(row, colors[row]);
+            if (IsRedraw())
+            {
+                DrawMemory();
+                Draw();
+            }
+
+            UpdateForm();
+
         }
 
         private void NextAddress()
         {
-            if (IsAutoincrement())
+            if (IsEnabled() && IsAutoincrement())
             {
                 _arL.Inc();
                 if (_arL.NumValue() == 0)
                     _arH.Inc();
                 GetDr();
 
-
             }
-        }
-
-        public string MemoryHex(int row, int collumn)
-        {
-            int memoryIndex = row * VideomemoryForm.ColumnCount + collumn;
-
-            return _videomemory[memoryIndex].ToHexString();
-
         }
 
         public string PaletteHex(int row, int column)
@@ -477,21 +589,20 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         public int[] GetCoordinates(int memory)
         {
-
-
-            return (new int[4] { 8 * memory % _form.GetScreen().Width, (8 * memory / (_form.GetScreen().Width) * 4) & 255, (8 * memory + 4) % _form.GetScreen().Width, ((8 * memory + 4) / (_form.GetScreen().Width) * 4) & 255 });
+            return (new int[4] { 8 * memory % _form.GetScreen().Width, 8 * memory / (_form.GetScreen().Width) * 4, (8 * memory + 4) % _form.GetScreen().Width, (8 * memory + 4) / (_form.GetScreen().Width) * 4 });
         }
 
 
         public void ChangeTwoPixels(ExtendedBitArray _arH, ExtendedBitArray _arL)
         {
 
+            int address = (256 * _arH.NumValue() + _arL.NumValue()) & 4095;
 
-            int address = 256 * _arH.NumValue() + _arL.NumValue();
             ExtendedBitArray data = new ExtendedBitArray(_videomemory[address]);
 
+            
             lock (new object())
-            {
+            { 
                 for (int i = 0; i < 4; i++)
                 {
                     for (int j = 0; j < 4; j++)
@@ -508,15 +619,10 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         public void ChangeTwoPixels(int row, int column)
         {
-
-
             int address = 16 * row + column;
 
-
-
-            ExtendedBitArray data = new ExtendedBitArray(_videomemory[address]);
-
-
+            ExtendedBitArray data = new ExtendedBitArray(_videomemory[address]);            
+  
             lock (new object())
             {
                 for (int i = 0; i < 4; i++)
@@ -524,6 +630,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                     for (int j = 0; j < 4; j++)
                     {
                         Pixels.SetPixel(GetCoordinates(address)[0] + j, GetCoordinates(address)[1] + i, colors[data.NumValue() & 15]);
+
                         Pixels.SetPixel(GetCoordinates(address)[2] + j, GetCoordinates(address)[3] + i, colors[data.NumValue() >> 4]);
                     }
                 }
@@ -562,64 +669,11 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         }
 
-        public void Draw()
+        public void ShowColors()
         {
-
-
-            _form.SetScreen(Pixels);
-
+            for (int i = 0; i < 16; i++)
+                _form1.ShowColor(i, colors[i]);
         }
-
-        public override void UpdateUI()
-        {
-
-            UpdateForm();
-        }
-
-
-
-        public void FormClosed()
-        {
-            _form = null;
-
-            if (_form1 != null)
-            {
-                _form1.Close();
-                _form2.Close();
-
-                _form1 = null;
-                _form2 = null;
-            }
-
-            _output.DeviceFormClosed(this);
-        }
-
-
-
-        public void ResetButtonClicked()
-        {
-            _form.ClearBuffer();
-
-
-            _cr = new ExtendedBitArray();
-            _dr = new ExtendedBitArray();
-
-            _arH = new ExtendedBitArray();
-            _arL = new ExtendedBitArray();
-
-            _form.Invoke(_updateFormDelegate);
-        }
-
-        /// Обновляет состояние формы в соответствии с текущим состоянием памяти
-        private void ShowVideomemory()
-        {
-            for (int i = 0; i < VideomemoryForm.RowCount; i++)
-                for (int j = 0; j < VideomemoryForm.ColumnCount; j++)
-                {
-                    _form2.SetMemory(i, j, MemoryHex(i, j));
-                }
-        }
-
 
 
         public bool IsEnabled()
@@ -639,25 +693,32 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         public bool IsRedraw()
         {
-            return _cr[4];
+            return _cr[3];
         }
+
+
         public void PaletteButtonClicked()
         {
             if (_form1 != null)
+
+            {
                 _form1.Close();
+                _form1 = null;
+            }
 
-            _form1 = new PaletteForm(this);
+            else
+            {
 
+                _form1 = new PaletteForm(this);
 
-            ShowPalette();
+                ShowPalette();
 
-            _form1.Show();
+                _form1.Show();
 
-            ShowColors();
+                ShowColors();
+            }
 
         }
-
-
 
         public void LoadPaletteClicked()
         {
@@ -665,7 +726,17 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             if (colors == null)
                 return;
             ShowPalette();
+
             ShowColors();
+
+            if (IsRedraw())
+            {
+                DrawMemory();
+                Draw();
+            }
+
+            UpdateForm();
+
         }
 
         public void SavePaletteClicked()
@@ -678,89 +749,133 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             _fileHandler1.SaveAs(colors);
         }
 
-
-
-
-
-        public void PaletteChange(int row, int column, string A, string R, string G, string B, string s)
-        {
-            int num;
-            try
-            {
-                num = Convert.ToInt32(s, 16);
-                if (num > 255 || num < 0)
-                {
-                    _form1.ShowMessage("Должно быть введено число от 0 до FF");
-                    _form1.SetPalette(row, colors[row]);
-                    return;
-                }
-            }
-            catch
-            {
-                _form1.ShowMessage("Должно быть введено число от 0 до FF");
-                _form1.SetPalette(row, colors[row]);
-                return;
-            }
-            if (s.Length == 1)
-            {
-                s = "0" + s;
-            }
-            s = s.ToUpper();
-
-            colors[row] = Color.FromArgb(Convert.ToInt32(A, 16), Convert.ToInt32(R, 16), Convert.ToInt32(G, 16), Convert.ToInt32(B, 16));
-
-            _form1.SetPalette(row, column, s);
-
-            _form1.ShowColor(row, colors[row]);
-            if (IsRedraw())
-                DrawMemory();
-
-        }
-
-        public void ShowColors()
-        {
-            for (int i = 0; i < 16; i++)
-                _form1.ShowColor(i, colors[i]);
-        }
-
-        public void ClearVideomemoryClicked()
-        {
-            for (int i = 0; i < VideomemoryForm.RowCount; i++)
-                for (int j = 0; j < VideomemoryForm.ColumnCount; j++)
-                    SetVideomemory(new ExtendedBitArray(), 16 * i + j);
-            DrawMemory();
-            Draw();
-
-
-
-        }
-
-
-        public void VideomemoryButtonClicked()
-        {
-            if (_form2 != null)
-                _form2.Close();
-
-            _form2 = new VideomemoryForm(this);
-
-
-            ShowVideomemory();
-
-            _form2.Show();
-
-
-        }
-
-        public void VideomemoryFormClosed()
-        {
-            _form2 = null;
-        }
-
         public void PaletteFormClosed()
         {
             _form1 = null;
         }
+
+        public void ResetDisplayButtonClicked()
+        {
+
+            _dr = new ExtendedBitArray();
+
+            _arH = new ExtendedBitArray();
+
+            _arL = new ExtendedBitArray();
+
+            _cr = new ExtendedBitArray();
+
+            colors[0] = Color.FromArgb(255, 0, 0, 0);
+
+            colors[1] = Color.FromArgb(255, 0, 0, 255);
+
+            colors[2] = Color.FromArgb(255, 0, 255, 0);
+
+            colors[3] = Color.FromArgb(255, 255, 0, 0);
+
+            colors[5] = Color.FromArgb(255, 255, 255, 0);
+
+            colors[6] = Color.FromArgb(255, 255, 0, 255);
+
+            colors[7] = Color.FromArgb(255, 0, 255, 255);
+
+            colors[8] = Color.FromArgb(255, 255, 255, 255);
+
+
+            colors[9] = Color.FromArgb(255, 127, 127, 0);
+
+            colors[10] = Color.FromArgb(255, 127, 0, 127);
+
+            colors[11] = Color.FromArgb(255, 0, 127, 127);
+
+            colors[12] = Color.FromArgb(255, 127, 127, 255);
+
+            colors[13] = Color.FromArgb(255, 127, 255, 127);
+
+            colors[14] = Color.FromArgb(255, 255, 127, 127);
+
+            colors[15] = Color.FromArgb(255, 127, 127, 127);
+
+
+            for (int i = 0; i < 4096; i++)
+                _videomemory[i] = new ExtendedBitArray("0");
+
+            if (_form2 != null)
+
+                ShowVideomemory();
+
+            if (_form1 != null)
+
+            {
+                ShowPalette();
+                ShowColors();
+
+            }
+
+            DrawMemory();
+            Draw();
+            UpdateForm();
+        }
+
+        public void ResetPaletteButtonClicked()
+        {
+            colors[0] = Color.FromArgb(255, 0, 0, 0);
+
+            colors[1] = Color.FromArgb(255, 0, 0, 255);
+
+            colors[2] = Color.FromArgb(255, 0, 255, 0);
+
+            colors[3] = Color.FromArgb(255, 255, 0, 0);
+
+            colors[5] = Color.FromArgb(255, 255, 255, 0);
+
+            colors[6] = Color.FromArgb(255, 255, 0, 255);
+
+            colors[7] = Color.FromArgb(255, 0, 255, 255);
+
+            colors[8] = Color.FromArgb(255, 255, 255, 255);
+
+
+            colors[9] = Color.FromArgb(255, 127, 127, 0);
+
+            colors[10] = Color.FromArgb(255, 127, 0, 127);
+
+            colors[11] = Color.FromArgb(255, 0, 127, 127);
+
+            colors[12] = Color.FromArgb(255, 127, 127, 255);
+
+            colors[13] = Color.FromArgb(255, 127, 255, 127);
+
+            colors[14] = Color.FromArgb(255, 255, 127, 127);
+
+            colors[15] = Color.FromArgb(255, 127, 127, 127);
+
+            ShowPalette();
+            ShowColors();
+
+            if (IsRedraw())
+            {
+                DrawMemory();
+                Draw();
+                UpdateForm();
+            }
+
+        }
+
+        public void HelpButtonClicked()
+        {
+            HelpForm form = new HelpForm("CGD");
+            form.Show();
+            //try
+            //{
+            //    Process.Start("CGD.pdf");
+            //}
+            //catch
+            //{
+            //    _form.ShowMessage("Поместите файл \"CGD.pdf\" в папку с моделью");
+
+            //}
+        }
     }
 }
-
 

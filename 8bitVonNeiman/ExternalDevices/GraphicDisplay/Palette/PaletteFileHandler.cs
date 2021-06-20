@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette
 {
@@ -13,7 +13,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette
 
         public Color[] LoadPalette()
         {
-
+         
             var openFileDialog = new OpenFileDialog();
 
             openFileDialog.Filter = "Palette files (*.pmem8)|*.pmem8|All files (*.*)|*.*";
@@ -24,61 +24,61 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette
                 {
                     string text;
                     byte value;
-                    byte A = 0;
-                    byte R = 0;
-                    byte G = 0;
-                    byte B = 0;
+                    byte A=0;
+                    byte R=0;
+                    byte G=0;
+                    byte B=0;
                     string[] colors;
-                    Color[] memory = new Color[16];
+                    Color[] memory = new Color[16];               
                     int i = 0;
-
+                   
                     text = sr.ReadLine();
 
 
                     colors = text.Split(',');
 
-                    if (colors.Length != 64)
+                    if(colors.Length!= 64)
                     {
                         MessageBox.Show("Неверный формат файла. В файле Должно быть 64 числа.");
                         return null;
                     }
 
-                    while (i < 64)
+                    while (i<64)
                     {
-
+                                        
                         try
                         {
                             value = Convert.ToByte(colors[i]);
+      
+
+                                switch (i % 4)
+                                {
+                                    case 0:
+                                        A = value;
+                                        break;
+                                    case 1:
+                                        R = value;
+                                        break;
+                                    case 2:
+                                        G = value;
+                                        break;
+                                    case 3:
+                                        B = value;
+                                 
+                                            
+                                            memory[i / 4] = Color.FromArgb(A, R, G, B);
+
+                                        
+
+                                        break;
+                                       
 
 
-                            switch (i % 4)
-                            {
-                                case 0:
-                                    A = value;
-                                    break;
-                                case 1:
-                                    R = value;
-                                    break;
-                                case 2:
-                                    G = value;
-                                    break;
-                                case 3:
-                                    B = value;
+                                }
 
-
-                                    memory[i / 4] = Color.FromArgb(A, R, G, B);
-
-
-
-                                    break;
-
-
-
+                               
                             }
-
-
-                        }
-
+                        
                         catch
                         {
                             MessageBox.Show("Неверный формат файла. Проверьте, что в нем находятся только числа от 0 до 255, разделённые запятой");
@@ -92,7 +92,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette
             return null;
         }
 
-        public void Save(Color[] colors)
+        public void Save(Color[]colors)
         {
             if (_lastFilePath == null)
             {
@@ -136,31 +136,31 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette
                 memoryArray.Add("0");
             }
 
-            for (int i = 0; i < 64; i++)
+            for(int i=0;i<64;i++)
 
             {
-                switch (i % 4)
+                switch(i % 4)
                 {
                     case 0:
-                        memoryArray[i] = memory[i / 4].A.ToString();
+                        memoryArray[i] = memory[i/4].A.ToString();
                         break;
                     case 1:
-                        memoryArray[i] = memory[i / 4].R.ToString();
+                        memoryArray[i] = memory[i/4].R.ToString();
                         break;
                     case 2:
-                        memoryArray[i] = memory[i / 4].G.ToString();
+                        memoryArray[i] = memory[i/4].G.ToString();
                         break;
                     case 3:
-                        memoryArray[i] = memory[i / 4].B.ToString();
+                        memoryArray[i] = memory[i/4].B.ToString();
                         break;
 
 
                 }
-
-
+                    
+               
             }
 
-
+   
             var text = string.Join(",", memoryArray);
 
             try

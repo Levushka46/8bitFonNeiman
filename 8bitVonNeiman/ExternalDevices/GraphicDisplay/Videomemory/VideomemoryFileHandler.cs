@@ -1,6 +1,6 @@
-﻿using _8bitVonNeiman.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using _8bitVonNeiman.Common;
 using System.IO;
 using System.Windows.Forms;
 
@@ -11,7 +11,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         private string _lastFilePath;
 
-        public ExtendedBitArray[] LoadMemory()
+        public  ExtendedBitArray[] LoadMemory()
         {
             var openFileDialog = new OpenFileDialog();
 
@@ -24,12 +24,12 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                     string text;
                     byte value;
                     ExtendedBitArray[] memory = new ExtendedBitArray[4096];
-
+            
                     int i = 0;
                     while (true)
                     {
 
-
+                 
 
                         text = sr.ReadLine();
                         if (text == null)
@@ -48,20 +48,20 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
                         try
                         {
                             value = Convert.ToByte(text);
+                       
 
-
-
-
-                            memory[i] = new ExtendedBitArray(value);
-
-
+                          
+                            
+                                memory[i] = new ExtendedBitArray(value);
+                   
+                            
                         }
                         catch
                         {
 
-
+                    
                             MessageBox.Show("Неверный формат файла. Проверьте, что в нем находятся только числа от 0 до 255");
-                            return null;
+                           return null;
                         }
                         i++;
                     }
@@ -76,11 +76,11 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
 
                     return memory;
-
+                   
 
                 }
 
-
+              
 
 
 
@@ -90,7 +90,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         }
 
-        public void Save(ExtendedBitArray[] memory)
+        public void Save (ExtendedBitArray[] memory)
         {
             if (_lastFilePath == null)
             {
@@ -102,7 +102,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
             }
         }
 
-        public void SaveAs(ExtendedBitArray[] memory)
+        public void SaveAs( ExtendedBitArray[] memory)
         {
             var saveFileDialog = new SaveFileDialog();
 

@@ -8,7 +8,7 @@
 
         void SaveAsVideomemoryClicked();
 
-        void VideomemoryChange(int row, int column, string s);
+        void VideomemoryChange(int row, int column, object s);
         void ClearVideomemoryClicked();
         void VideomemoryFormClosed();
     }

@@ -1,13 +1,20 @@
 ﻿using _8bitVonNeiman.Common;
+using _8bitVonNeiman.Compiler.Model;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.View
 {
     public partial class GraphicDisplayForm : Form
     {
-
+       
 
         public PictureBox GetScreen()
         {
@@ -16,42 +23,30 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.View
 
         public void SetScreen(Bitmap bitmap)
         {
-            //  lock (new object())
-            // {
-            Bitmap bitmap1 = new Bitmap(bitmap);
-            Screen.Image = bitmap1;
-            // }
-            System.Threading.Thread.Sleep(2);
+         
+                Bitmap bitmap1 = new Bitmap(bitmap);
+                Screen.Image = bitmap1;
+         
+           System.Threading.Thread.Sleep(1);
         }
 
 
-
-
+    
 
         private readonly IGraphicDisplayFormOutput _output;
-
+      
         public GraphicDisplayForm(IGraphicDisplayFormOutput output)
         {
-
-
+          
 
             InitializeComponent();
             _output = output;
 
-
-
-
+ 
         }
 
 
-
-        public void ClearBuffer()
-        {
-
-        }
-
-
-        public void ShowRegisters(ExtendedBitArray _arL, ExtendedBitArray _arH, ExtendedBitArray _dr, ExtendedBitArray _cr)
+        public void ShowRegisters(ExtendedBitArray _arL, ExtendedBitArray _arH, ExtendedBitArray  _dr, ExtendedBitArray _cr)
         {
             arHBinTextBox.Text = _arH.ToBinString();
             arLBinTextBox.Text = _arL.ToBinString();
@@ -66,13 +61,13 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.View
         }
 
 
-
+        
 
         public void ShowMessage(string text)
         {
             MessageBox.Show(text);
         }
-
+       
         private void PaletteButton_Click(object sender, EventArgs e)
         {
             _output.PaletteButtonClicked();
@@ -83,7 +78,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.View
             _output.DrawButtonClicked();
         }
 
-
+       
         private void GraphicDisplayForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             _output.FormClosed();
@@ -92,6 +87,16 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay.View
         private void VideomemoryButton_Click(object sender, EventArgs e)
         {
             _output.VideomemoryButtonClicked();
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            _output.ResetDisplayButtonClicked();
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            _output.HelpButtonClicked();
         }
     }
 }
