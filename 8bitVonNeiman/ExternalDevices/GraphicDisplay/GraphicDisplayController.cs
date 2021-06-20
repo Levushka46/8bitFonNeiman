@@ -7,7 +7,7 @@ using System.Drawing;
 using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette.View;
 using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Palette;
 using _8bitVonNeiman.ExternalDevices.GraphicDisplay.Videomemory.View;
-using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 {
@@ -151,7 +151,12 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         public void FormClosed()
         {
-            _form = null;
+
+            if (_form != null)
+            {
+                _form = null;
+            }
+        
 
             if (_form1 != null)
             {
@@ -546,7 +551,7 @@ namespace _8bitVonNeiman.ExternalDevices.GraphicDisplay
 
         private void NextAddress()
         {
-            if (IsEnabled() && IsAutoincrement())
+            if (IsAutoincrement())
             {
                 _arL.Inc();
                 if (_arL.NumValue() == 0)
