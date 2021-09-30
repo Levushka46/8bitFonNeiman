@@ -40,6 +40,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.resetButton = new System.Windows.Forms.Button();
             this.HelpButton = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -162,7 +163,7 @@
             this.panel1.Controls.Add(this.baseAddressLabel);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(213, 236);
+            this.panel1.Location = new System.Drawing.Point(210, 240);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(191, 69);
             this.panel1.TabIndex = 30;
@@ -209,7 +210,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(228, 204);
+            this.resetButton.Location = new System.Drawing.Point(230, 210);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 29;
@@ -219,13 +220,22 @@
             // 
             // HelpButton
             // 
-            this.HelpButton.Location = new System.Drawing.Point(309, 204);
+            this.HelpButton.Location = new System.Drawing.Point(310, 210);
             this.HelpButton.Name = "HelpButton";
             this.HelpButton.Size = new System.Drawing.Size(75, 23);
             this.HelpButton.TabIndex = 1002;
             this.HelpButton.Text = "Помощь";
             this.HelpButton.UseVisualStyleBackColor = true;
             this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(290, 195);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(24, 13);
+            this.label12.TabIndex = 1003;
+            this.label12.Text = "A E";
             // 
             // DisplayForm
             // 
@@ -245,6 +255,7 @@
             this.Controls.Add(this.drBinTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.displayTextBox);
+            this.Controls.Add(this.label12);
             this.Name = "DisplayForm";
             this.Text = "Дисплей";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DisplayForm_FormClosed);
@@ -274,5 +285,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button HelpButton;
+        private System.Windows.Forms.Label label12;
     }
 }
