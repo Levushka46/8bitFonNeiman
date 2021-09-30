@@ -89,8 +89,8 @@ namespace _8bitVonNeiman.Cpu {
         public void FormFlags(ExtendedBitArray newState, int mask, bool? overflow, string command, ExtendedBitArray arg) {
             if ((mask & 1) != 0) {
                 Z = newState.NumValue() == 0;
-                if (command == "div")
-                    Z = false;
+                //if (command == "div") //возврат функционала флага Z в DIV
+                //    Z = false;
             }
             if ((mask & 2) != 0) {
                 N = newState[Constants.WordSize - 1];
@@ -101,6 +101,11 @@ namespace _8bitVonNeiman.Cpu {
                 }
                 
                 O = _state[Constants.WordSize - 1] == _arg[Constants.WordSize - 1] && _arg[Constants.WordSize - 1] != newState[Constants.WordSize - 1];
+            }
+            if (command == "mul" || command == "div") //выключены флаги O и N в MUL и DIV
+            {
+                N = false;
+                O = false;
             }
             if ((mask & 8) != 0) {
                 int oldLow = _state.NumValue() & 15;
