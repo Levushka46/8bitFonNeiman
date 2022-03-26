@@ -185,6 +185,26 @@
     <Compile Include="ExternalDevices\Keyboard1\View\Keyboard1Form.Designer.cs">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalDevices\LCDDisplay\View\ILCDDisplayFormOutput.cs" />
+    <Compile Include="ExternalDevices\LCDDisplay\View\LCDDIsplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\LCDDisplay\View\LCDDIsplayForm.Designer.cs">
+      <DependentUpon>LCDDIsplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalDevices\LCDDisplay\LCDDisplayController.cs" />
+    <Compile Include="ExternalDevices\LCDDisplay\View\LCDDisplayMemoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\LCDDisplay\View\LCDDisplayMemoryForm.Designer.cs">
+      <DependentUpon>LCDDisplayMemoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalDevices\LCDDisplay\View\LCDDisplaySettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\LCDDisplay\View\LCDDisplaySettingsForm.Designer.cs">
+      <DependentUpon>LCDDisplaySettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExternalDevices\Oscillograph\OscillographController.cs" />
     <Compile Include="ExternalDevices\Oscillograph\View\IOscillographFormOutput.cs" />
     <Compile Include="ExternalDevices\Oscillograph\View\OscillographForm.cs">
@@ -273,6 +293,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Keyboard1\View\Keyboard1Form.resx">
       <DependentUpon>Keyboard1Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\LCDDisplay\View\LCDDIsplayForm.resx">
+      <DependentUpon>LCDDIsplayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\LCDDisplay\View\LCDDisplayMemoryForm.resx">
+      <DependentUpon>LCDDisplayMemoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\LCDDisplay\View\LCDDisplaySettingsForm.resx">
+      <DependentUpon>LCDDisplaySettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Oscillograph\View\OscillographForm.resx">
       <DependentUpon>OscillographForm.cs</DependentUpon>

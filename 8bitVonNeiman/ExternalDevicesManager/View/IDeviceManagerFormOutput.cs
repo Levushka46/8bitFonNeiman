@@ -8,5 +8,6 @@
         void AddKeypadAndIndication(int baseAddress, int irq);
         void AddGraphicDisplay(int baseAddress);
 		void FormClosed();
-	}
+        void AddLCDDisplay(int baseAddress);
+    }
 }

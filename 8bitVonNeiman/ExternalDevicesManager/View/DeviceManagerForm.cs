@@ -120,5 +120,15 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
         {
             IsValid(sender, e);
         }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddLCDDisplayButton_Click(object sender, EventArgs e)
+        {
+          _output.AddLCDDisplay(Convert.ToInt32(baseAddrLCDDisplay.Text, 16));
+        }
     }
 }

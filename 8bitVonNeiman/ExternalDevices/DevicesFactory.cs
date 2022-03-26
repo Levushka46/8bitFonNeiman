@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _8bitVonNeiman.ExternalDevices.Keyboard1;
 using _8bitVonNeiman.ExternalDevices.Display;
+using _8bitVonNeiman.ExternalDevices.LCDDisplay;
 using _8bitVonNeiman.ExternalDevices.GraphicDisplay;
 using _8bitVonNeiman.ExternalDevices.Timer2;
 using _8bitVonNeiman.ExternalDevices.Timer5;
@@ -49,6 +50,11 @@ namespace _8bitVonNeiman.ExternalDevices {
         public IDeviceInput GetGraphicDisplay(int baseAddress)
         {
             return new GraphicDisplayController(_output, baseAddress);
+        }
+
+        public IDeviceInput GetLCDDisplay(int baseAddress)
+        {
+            return new LCDDisplayController(_output, baseAddress);
         }
     }
 }

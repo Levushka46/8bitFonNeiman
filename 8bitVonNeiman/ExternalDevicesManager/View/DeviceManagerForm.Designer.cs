@@ -54,6 +54,10 @@
             this.irqGraphicDisplay = new System.Windows.Forms.TextBox();
             this.baseAddrGraphicDisplay = new System.Windows.Forms.TextBox();
             this.addGraphicDisplayButton = new System.Windows.Forms.Button();
+            this.addLCDDisplayButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.irqLCDDisplay = new System.Windows.Forms.TextBox();
+            this.baseAddrLCDDisplay = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // addDeviceButton
@@ -402,11 +406,59 @@
             this.addGraphicDisplayButton.UseVisualStyleBackColor = true;
             this.addGraphicDisplayButton.Click += new System.EventHandler(this.addGraphicDisplayButton_Click);
             // 
+            // addLCDDisplayButton
+            // 
+            this.addLCDDisplayButton.Location = new System.Drawing.Point(10, 240);
+            this.addLCDDisplayButton.Name = "addLCDDisplayButton";
+            this.addLCDDisplayButton.Size = new System.Drawing.Size(149, 23);
+            this.addLCDDisplayButton.TabIndex = 31;
+            this.addLCDDisplayButton.Text = "LCD-Display";
+            this.addLCDDisplayButton.UseVisualStyleBackColor = true;
+            this.addLCDDisplayButton.Click += new System.EventHandler(this.AddLCDDisplayButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(209, 245);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 16);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "0";
+            // 
+            // irqLCDDisplay
+            // 
+            this.irqLCDDisplay.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.irqLCDDisplay.Enabled = false;
+            this.irqLCDDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.irqLCDDisplay.Location = new System.Drawing.Point(260, 242);
+            this.irqLCDDisplay.MaxLength = 1;
+            this.irqLCDDisplay.Name = "irqLCDDisplay";
+            this.irqLCDDisplay.Size = new System.Drawing.Size(24, 22);
+            this.irqLCDDisplay.TabIndex = 33;
+            this.irqLCDDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // baseAddrLCDDisplay
+            // 
+            this.baseAddrLCDDisplay.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.baseAddrLCDDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.baseAddrLCDDisplay.Location = new System.Drawing.Point(185, 242);
+            this.baseAddrLCDDisplay.MaxLength = 1;
+            this.baseAddrLCDDisplay.Name = "baseAddrLCDDisplay";
+            this.baseAddrLCDDisplay.Size = new System.Drawing.Size(24, 22);
+            this.baseAddrLCDDisplay.TabIndex = 32;
+            this.baseAddrLCDDisplay.Text = "6";
+            this.baseAddrLCDDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // DeviceManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 251);
+            this.ClientSize = new System.Drawing.Size(317, 276);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.irqLCDDisplay);
+            this.Controls.Add(this.baseAddrLCDDisplay);
+            this.Controls.Add(this.addLCDDisplayButton);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.irqGraphicDisplay);
             this.Controls.Add(this.baseAddrGraphicDisplay);
@@ -481,5 +533,9 @@
         private System.Windows.Forms.TextBox irqGraphicDisplay;
         private System.Windows.Forms.TextBox baseAddrGraphicDisplay;
         private System.Windows.Forms.Button addGraphicDisplayButton;
+        private System.Windows.Forms.Button addLCDDisplayButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox irqLCDDisplay;
+        private System.Windows.Forms.TextBox baseAddrLCDDisplay;
     }
 }

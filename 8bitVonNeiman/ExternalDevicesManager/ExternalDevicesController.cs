@@ -62,6 +62,14 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
             input.OpenForm();
         }
 
+        public void AddLCDDisplay(int baseAddress)
+        {
+            IDeviceInput input = _devicesFactory.GetLCDDisplay(baseAddress);
+            _devices.Add(input);
+
+            input.OpenForm();
+        }
+
         public void AddTimer2(int baseAddress, int irq) {
             IDeviceInput input = _devicesFactory.GetTimer2(baseAddress, irq);
             _devices.Add(input);
