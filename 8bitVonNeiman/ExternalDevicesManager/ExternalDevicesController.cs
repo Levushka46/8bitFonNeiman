@@ -69,7 +69,13 @@ namespace _8bitVonNeiman.ExternalDevicesManager {
 
             input.OpenForm();
         }
+        public void AddSerialController(int baseAddress)
+        {
+            IDeviceInput input = _devicesFactory.GetSerialController(baseAddress);
+            _devices.Add(input);
 
+            input.OpenForm();
+        }
         public void AddTimer2(int baseAddress, int irq) {
             IDeviceInput input = _devicesFactory.GetTimer2(baseAddress, irq);
             _devices.Add(input);

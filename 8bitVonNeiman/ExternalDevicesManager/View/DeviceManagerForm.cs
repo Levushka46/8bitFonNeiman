@@ -130,5 +130,10 @@ namespace _8bitVonNeiman.ExternalDevicesManager.View {
         {
           _output.AddLCDDisplay(Convert.ToInt32(baseAddrLCDDisplay.Text, 16));
         }
+
+        private void AddSerialControllerButton_Click(object sender, EventArgs e)
+        {
+            _output.AddSerialController(Convert.ToInt32(baseAddrSerialController.Text, 16));
+        }
     }
 }

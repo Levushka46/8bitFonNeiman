@@ -227,6 +227,35 @@
     <Compile Include="ExternalDevices\KeypadAndIndication\View\KeypadAndIndicationSettingForm.Designer.cs">
       <DependentUpon>KeypadAndIndicationSettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\LCDDisplayController.cs" />
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\View\ILCDDisplayFormOutput.cs" />
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDIsplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDIsplayForm.Designer.cs">
+      <DependentUpon>LCDDIsplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDisplayMemoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDisplayMemoryForm.Designer.cs">
+      <DependentUpon>LCDDisplayMemoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDisplaySettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDisplaySettingsForm.Designer.cs">
+      <DependentUpon>LCDDisplaySettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\scController.cs" />
+    <Compile Include="ExternalDevices\SerialController\SerialInterfaceModule.cs" />
+    <Compile Include="ExternalDevices\SerialController\View\ISerialControllerFormOutput.cs" />
+    <Compile Include="ExternalDevices\SerialController\View\SerialControllerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\View\SerialControllerForm.Designer.cs">
+      <DependentUpon>SerialControllerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExternalDevices\Timer5\Timer5Controller.cs" />
     <Compile Include="ExternalDevices\Timer5\View\ITimer5FormOutput.cs" />
     <Compile Include="ExternalDevices\Timer2\Timer2Controller.cs" />
@@ -311,6 +340,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\KeypadAndIndication\View\KeypadAndIndicationSettingForm.resx">
       <DependentUpon>KeypadAndIndicationSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDIsplayForm.resx">
+      <DependentUpon>LCDDIsplayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDisplayMemoryForm.resx">
+      <DependentUpon>LCDDisplayMemoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\SerialController\LCDDisplay\View\LCDDisplaySettingsForm.resx">
+      <DependentUpon>LCDDisplaySettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\SerialController\View\SerialControllerForm.resx">
+      <DependentUpon>SerialControllerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Timer2\View\Timer2Form.resx">
       <DependentUpon>Timer2Form.cs</DependentUpon>

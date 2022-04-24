@@ -1,4 +1,4 @@
-﻿namespace _8bitVonNeiman.ExternalDevices.LCDDisplay.View
+﻿namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
 {
     partial class LCDDisplayForm
     {
@@ -274,7 +274,7 @@
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.lcdpanel);
             this.Name = "LCDDisplayForm";
-            this.Text = "LCD-Display";
+            this.Text = "LCD-Display (SERIAL)";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LCDDisplayForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

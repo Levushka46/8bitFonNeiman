@@ -11,6 +11,7 @@ using _8bitVonNeiman.ExternalDevices.Timer2;
 using _8bitVonNeiman.ExternalDevices.Timer5;
 using _8bitVonNeiman.ExternalDevices.Oscillograph;
 using _8bitVonNeiman.ExternalDevices.KeypadAndIndication;
+using _8bitVonNeiman.ExternalDevices.SerialController;
 
 namespace _8bitVonNeiman.ExternalDevices {
     public class DevicesFactory {
@@ -55,6 +56,11 @@ namespace _8bitVonNeiman.ExternalDevices {
         public IDeviceInput GetLCDDisplay(int baseAddress)
         {
             return new LCDDisplayController(_output, baseAddress);
+        }
+
+        internal IDeviceInput GetSerialController(int baseAddress)
+        {
+            return new scController(_output, baseAddress);
         }
     }
 }

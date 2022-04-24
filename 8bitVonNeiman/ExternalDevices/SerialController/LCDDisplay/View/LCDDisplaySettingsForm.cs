@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _8bitVonNeiman.ExternalDevices.LCDDisplay.View
+namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
 {
     public partial class LCDDisplaySettingsForm : Form
     {

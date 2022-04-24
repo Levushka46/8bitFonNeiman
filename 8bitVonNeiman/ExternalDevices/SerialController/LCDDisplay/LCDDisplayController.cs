@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _8bitVonNeiman.Common;
-using _8bitVonNeiman.ExternalDevices.LCDDisplay.View;
+using _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View;
 
-namespace _8bitVonNeiman.ExternalDevices.LCDDisplay
+namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay
 {
     public class LCDDisplayController : IDeviceInput, ILCDDisplayFormOutput
     {
@@ -123,6 +123,11 @@ namespace _8bitVonNeiman.ExternalDevices.LCDDisplay
             _form = null;
 
             _output.DeviceFormClosed(this);
+        }
+        public void CloseForm()
+        {
+            if(_form != null)
+            _form.Close();
         }
         public void ResetButtonClicked()
         {

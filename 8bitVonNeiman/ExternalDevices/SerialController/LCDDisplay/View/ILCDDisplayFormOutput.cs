@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _8bitVonNeiman.ExternalDevices.LCDDisplay.View
+namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
 {
     public interface ILCDDisplayFormOutput
     {

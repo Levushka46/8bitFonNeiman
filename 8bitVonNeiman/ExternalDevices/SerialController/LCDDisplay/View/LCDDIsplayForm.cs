@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using _8bitVonNeiman.Common;
 
-namespace _8bitVonNeiman.ExternalDevices.LCDDisplay.View
+namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
 {
     public partial class LCDDisplayForm : Form, LCDDisplaySettingsForm.Output, LCDDisplayMemoryForm.Output
     {

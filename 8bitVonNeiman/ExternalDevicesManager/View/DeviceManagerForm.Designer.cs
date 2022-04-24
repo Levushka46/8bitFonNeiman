@@ -58,6 +58,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.irqLCDDisplay = new System.Windows.Forms.TextBox();
             this.baseAddrLCDDisplay = new System.Windows.Forms.TextBox();
+            this.addSerialControllerButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.irqSerialController = new System.Windows.Forms.TextBox();
+            this.baseAddrSerialController = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // addDeviceButton
@@ -450,11 +454,58 @@
             this.baseAddrLCDDisplay.Text = "6";
             this.baseAddrLCDDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // addSerialControllerButton
+            // 
+            this.addSerialControllerButton.Location = new System.Drawing.Point(10, 270);
+            this.addSerialControllerButton.Name = "addSerialControllerButton";
+            this.addSerialControllerButton.Size = new System.Drawing.Size(149, 23);
+            this.addSerialControllerButton.TabIndex = 35;
+            this.addSerialControllerButton.Text = "SerialController";
+            this.addSerialControllerButton.UseVisualStyleBackColor = true;
+            this.addSerialControllerButton.Click += new System.EventHandler(this.AddSerialControllerButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(209, 274);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 16);
+            this.label5.TabIndex = 38;
+            this.label5.Text = "0";
+            // 
+            // irqSerialController
+            // 
+            this.irqSerialController.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.irqSerialController.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.irqSerialController.Location = new System.Drawing.Point(260, 271);
+            this.irqSerialController.MaxLength = 1;
+            this.irqSerialController.Name = "irqSerialController";
+            this.irqSerialController.Size = new System.Drawing.Size(24, 22);
+            this.irqSerialController.TabIndex = 37;
+            this.irqSerialController.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // baseAddrSerialController
+            // 
+            this.baseAddrSerialController.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.baseAddrSerialController.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.baseAddrSerialController.Location = new System.Drawing.Point(185, 271);
+            this.baseAddrSerialController.MaxLength = 1;
+            this.baseAddrSerialController.Name = "baseAddrSerialController";
+            this.baseAddrSerialController.Size = new System.Drawing.Size(24, 22);
+            this.baseAddrSerialController.TabIndex = 36;
+            this.baseAddrSerialController.Text = "7";
+            this.baseAddrSerialController.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // DeviceManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 276);
+            this.ClientSize = new System.Drawing.Size(317, 305);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.irqSerialController);
+            this.Controls.Add(this.baseAddrSerialController);
+            this.Controls.Add(this.addSerialControllerButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.irqLCDDisplay);
             this.Controls.Add(this.baseAddrLCDDisplay);
@@ -537,5 +588,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox irqLCDDisplay;
         private System.Windows.Forms.TextBox baseAddrLCDDisplay;
+        private System.Windows.Forms.Button addSerialControllerButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox irqSerialController;
+        private System.Windows.Forms.TextBox baseAddrSerialController;
     }
 }

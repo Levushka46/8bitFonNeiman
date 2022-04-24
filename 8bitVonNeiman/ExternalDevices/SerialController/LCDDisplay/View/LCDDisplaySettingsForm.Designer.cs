@@ -1,4 +1,4 @@
-﻿namespace _8bitVonNeiman.ExternalDevices.LCDDisplay.View
+﻿namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
 {
     partial class LCDDisplaySettingsForm
     {

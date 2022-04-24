@@ -9,5 +9,6 @@
         void AddGraphicDisplay(int baseAddress);
 		void FormClosed();
         void AddLCDDisplay(int baseAddress);
+        void AddSerialController(int baseAddress);
     }
 }
