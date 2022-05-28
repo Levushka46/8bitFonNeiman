@@ -14,7 +14,7 @@ namespace _8bitVonNeiman.ExternalDevices.SerialController.View
     public partial class SerialControllerForm : Form
     {
         private readonly ISerialControllerFormOutput _output;
-
+        private SerialControllerStepForm stepForm = new SerialControllerStepForm();
         public SerialControllerForm(ISerialControllerFormOutput output)
         {
             _output = output;
@@ -35,6 +35,19 @@ namespace _8bitVonNeiman.ExternalDevices.SerialController.View
         private void SerialControllerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             _output.FormClosed();
+        }
+
+        private void SerialControllerForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
+            stepForm.Show();
+            else if (!radioButton2.Checked)
+                    stepForm.Close();
         }
     }
 }

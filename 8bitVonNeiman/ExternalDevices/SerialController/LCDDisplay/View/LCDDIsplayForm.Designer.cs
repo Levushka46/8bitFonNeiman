@@ -97,10 +97,11 @@
             this.panel1.Controls.Add(this.baseAddressLabel);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(374, 110);
+            this.panel1.Location = new System.Drawing.Point(376, 192);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(191, 69);
             this.panel1.TabIndex = 31;
+            this.panel1.Visible = false;
             // 
             // interruptionVectorLabel
             // 
@@ -257,7 +258,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(579, 188);
+            this.ClientSize = new System.Drawing.Size(579, 184);
             this.Controls.Add(this.MemoryBtn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.arBinTextBox);

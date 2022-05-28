@@ -34,7 +34,7 @@ namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
                 memoryDataGridView.Columns[i].Width = 25;
             }
         }
-        public LCDDisplayMemoryForm()
+        public LCDDisplayMemoryForm(IDeviceOutput output)
         {
             InitializeComponent();
         }

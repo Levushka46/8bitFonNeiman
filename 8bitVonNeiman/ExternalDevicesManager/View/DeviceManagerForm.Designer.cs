@@ -477,6 +477,7 @@
             // irqSerialController
             // 
             this.irqSerialController.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.irqSerialController.Enabled = false;
             this.irqSerialController.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.irqSerialController.Location = new System.Drawing.Point(260, 271);
             this.irqSerialController.MaxLength = 1;

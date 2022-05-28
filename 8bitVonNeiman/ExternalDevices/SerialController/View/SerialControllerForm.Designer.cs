@@ -39,6 +39,8 @@
             this.baseAddressLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -159,11 +161,36 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Базовый адрес";
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(12, 102);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(146, 17);
+            this.radioButton1.TabIndex = 51;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Автоматический режим";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(12, 125);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(121, 17);
+            this.radioButton2.TabIndex = 52;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Пошаговый режим";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.RadioButton2_CheckedChanged);
+            // 
             // SerialControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 86);
+            this.ClientSize = new System.Drawing.Size(395, 149);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.scrBinTextBox);
@@ -174,6 +201,7 @@
             this.Name = "SerialControllerForm";
             this.Text = "SerialController";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SerialControllerForm_FormClosed);
+            this.Load += new System.EventHandler(this.SerialControllerForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -194,5 +222,7 @@
         private System.Windows.Forms.Label baseAddressLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="FlagsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InterruptionControllerTest.cs" />
+    <Compile Include="SerialcontrollerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\8bitVonNeiman\8bitVonNeiman.csproj">

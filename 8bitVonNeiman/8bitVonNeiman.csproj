@@ -249,12 +249,21 @@
     </Compile>
     <Compile Include="ExternalDevices\SerialController\scController.cs" />
     <Compile Include="ExternalDevices\SerialController\SerialInterfaceModule.cs" />
+    <Compile Include="ExternalDevices\SerialController\View\CNTButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ExternalDevices\SerialController\View\ISerialControllerFormOutput.cs" />
     <Compile Include="ExternalDevices\SerialController\View\SerialControllerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ExternalDevices\SerialController\View\SerialControllerForm.Designer.cs">
       <DependentUpon>SerialControllerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\View\SerialControllerStepForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalDevices\SerialController\View\SerialControllerStepForm.Designer.cs">
+      <DependentUpon>SerialControllerStepForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ExternalDevices\Timer5\Timer5Controller.cs" />
     <Compile Include="ExternalDevices\Timer5\View\ITimer5FormOutput.cs" />
@@ -352,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\SerialController\View\SerialControllerForm.resx">
       <DependentUpon>SerialControllerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalDevices\SerialController\View\SerialControllerStepForm.resx">
+      <DependentUpon>SerialControllerStepForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExternalDevices\Timer2\View\Timer2Form.resx">
       <DependentUpon>Timer2Form.cs</DependentUpon>

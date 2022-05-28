@@ -373,6 +373,10 @@ namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
             //ShowText("");
         }
 
+        public LCDDisplayForm(IDeviceOutput output)
+        {
+        }
+
         private void ShowText(string text)
         {
             byte[] textBytes = new byte[CHAR_DOTS_W * CHAR_COUNT]; //байты на вывод
@@ -499,6 +503,7 @@ namespace _8bitVonNeiman.ExternalDevices.SerialController.LCDDisplay.View
 
         private void Help_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Сейчас в вашем браузере откроется информация о ВУ LCD-Display");
             HelpForm form = new HelpForm("LCDDisplay");
             form.Show();
         }
