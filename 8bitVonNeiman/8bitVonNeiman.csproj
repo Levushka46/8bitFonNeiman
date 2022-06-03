@@ -253,6 +253,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ExternalDevices\SerialController\View\ISerialControllerFormOutput.cs" />
+    <Compile Include="ExternalDevices\SerialController\View\ISerialControllerStepFormOutput.cs" />
     <Compile Include="ExternalDevices\SerialController\View\SerialControllerForm.cs">
       <SubType>Form</SubType>
     </Compile>
