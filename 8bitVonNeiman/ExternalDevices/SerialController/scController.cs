@@ -178,15 +178,8 @@ namespace _8bitVonNeiman.ExternalDevices.SerialController
         }
         private void UpdateTranzactionFlag()
         {
-            if (tranzaction == 0)
-            {
-                _scr[6] = true;//Завершение приема
-                _scr[5] = true;//Завершение передачи
-            }
-            else{
-                _scr[6] = !tranzactionREAD;//Завершение приема
-                _scr[5] = tranzactionREAD;//Завершение передачи
-            }
+            _scr[6] = true;//Завершение приема
+            _scr[5] = true;//Завершение передачи
         }
         public void FormClosed()
         {
